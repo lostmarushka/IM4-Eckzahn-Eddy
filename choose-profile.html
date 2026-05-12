@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Profil wählen</title>
 
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -29,20 +30,20 @@
           <p class="choose-profile-subtitle">Wer putzt heute?</p>
         </header>
 
-        <!-- Profilgitter -->
+        <!-- Profilgitter: 4 Kolonnen Desktop → 3 → 2 Mobile -->
         <div class="profile-grid" role="list">
 
-          <!-- Profil: Emma -->
+          <!-- Profil: Emma | data-kinder-id = ID aus kinder-Tabelle -->
           <button
             class="profile-card"
             role="listitem"
             data-name="Emma"
-            data-img="img/profile_emma.png"
+            data-kinder-id="1"
             onclick="selectProfile(this)"
             aria-label="Profil Emma wählen"
           >
             <div class="profile-avatar profile-avatar--pink">
-              <img src="img/profile_emma.jpg" alt="Emma" />
+              <img src="img/profile_emma.jpg" alt="Emma" loading="lazy" />
             </div>
             <span class="profile-name">Emma</span>
           </button>
@@ -52,12 +53,12 @@
             class="profile-card"
             role="listitem"
             data-name="Max"
-            data-img="img/profile_max.png"
+            data-kinder-id="2"
             onclick="selectProfile(this)"
             aria-label="Profil Max wählen"
           >
             <div class="profile-avatar profile-avatar--yellow">
-              <img src="img/profile_max.jpg" alt="Max" />
+              <img src="img/profile_max.jpg" alt="Max" loading="lazy" />
             </div>
             <span class="profile-name">Max</span>
           </button>
@@ -67,18 +68,22 @@
             class="profile-card"
             role="listitem"
             data-name="Sophie"
-            data-img="img/profile_sophie.jpg"
+            data-kinder-id="3"
             onclick="selectProfile(this)"
             aria-label="Profil Sophie wählen"
           >
             <div class="profile-avatar profile-avatar--teal">
-              <img src="img/profile_sophie.jpg" alt="Sophie" />
+              <img src="img/profile_sophie.jpg" alt="Sophie" loading="lazy" />
             </div>
             <span class="profile-name">Sophie</span>
           </button>
 
           <!-- Profil hinzufügen (noch nicht aktiv) -->
-          <div class="profile-card profile-card--add" aria-label="Profil hinzufügen (nicht verfügbar)">
+          <div
+            class="profile-card profile-card--add"
+            role="listitem"
+            aria-label="Profil hinzufügen (noch nicht verfügbar)"
+          >
             <div class="profile-avatar profile-avatar--add">
               <img src="img/hinzufuegen.svg" alt="" aria-hidden="true" />
             </div>
