@@ -16,7 +16,7 @@ document.getElementById("loginForm").addEventListener("submit", async (e) => {
 
     if (result.status === "success") {
       alert("Login successful!"); //Kann später gelöscht werde, nur zum testen da
-      window.location.href = "protected.html";
+      window.location.href = "choose-profile.html";
     } else {
       alert(result.message || "Login failed.");
     }
