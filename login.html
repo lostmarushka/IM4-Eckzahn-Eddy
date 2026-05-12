@@ -1,26 +1,59 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
   <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cousine:ital,wght@0,400;0,700;1,400;1,700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+      rel="stylesheet"
+    />
+
     <link rel="stylesheet" href="css/style.css" />
   </head>
   <body>
-    <h1>Login</h1>
-
-    <form id="loginForm">
-      <div>
-        <label>Email</label>
-        <input type="email" id="email" required />
+    <main class="page-wrapper">
+      <section class="login-wrapper">
+        <div class="heading-wrapper">
+          <img src="img/zahn.svg" alt="Zahn" class="zahn"/>
+          <h1 class="title-wrapper">WILLKOMMEN ZURÜCK</h1>
       </div>
-      <div>
-        <label>Password</label>
-        <input type="password" id="password" required />
-      </div>
-      <button type="submit">Login</button>
-    </form>
 
-    <p>Don’t have an account? <a href="register.html">Register here</a>.</p>
+        <form id="loginForm" class="form-wrapper">
+          <div class="input-wrapper">
+            <label for="email">E-Mail</label>
+            <input
+              type="email"
+              id="email"
+              placeholder="eltern@beispiel.ch"
+              required
+            />
+          </div>
+
+          <div class="input-wrapper">
+            <label for="password">Passwort</label>
+            <input
+              type="password"
+              id="password"
+              placeholder="Passwort eingeben"
+              required
+            />
+          </div>
+
+          <div class="button-wrapper">
+            <button type="submit">Anmelden</button>
+          </div>
+        </form>
+
+        <p class="register-wrapper">
+          Noch kein Konto?
+          <a href="register.html">Registrieren</a>
+        </p>
+      </section>
+    </main>
 
     <script src="js/login.js"></script>
   </body>
