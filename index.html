@@ -27,7 +27,7 @@
 
           <div class="brushing-title-wrapper">
             <h1 class="title-wrapper">ZÄHNE PUTZEN</h1>
-            <p class="brushing-name">Max</p>
+            <p class="brushing-name" id="activeProfileName">–</p>
           </div>
 
           <a
@@ -111,7 +111,13 @@
     </main>
 
     <script src="js/auth.js"></script>
-    <script src="js/protected.js"></script>
     <script src="js/logout.js"></script>
+    
+    // Profilname aus URL-Parameter oder sessionStorage lesen
+    <script>
+      const params = new URLSearchParams(window.location.search);
+      const name = params.get("profil") || sessionStorage.getItem("activeProfile") || "–";
+      document.getElementById("activeProfileName").textContent = name;
+    </script>
   </body>
 </html>
