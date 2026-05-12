@@ -1,36 +1,118 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="de">
   <head>
     <meta charset="UTF-8" />
-    <title>Welcome</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Zähne putzen</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cousine:ital,wght@0,400;0,700;1,400;1,700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+      rel="stylesheet"
+    />
+
     <link rel="stylesheet" href="css/style.css" />
   </head>
   <body>
-    <h1>Welcome to IM4 Demo Page</h1>
+    <main class="page-wrapper page-wrapper-brushing">
+      <section class="login-wrapper brushing-wrapper">
+        <header class="brushing-header-wrapper">
+          <button
+            onclick="history.back()"
+            class="back-button"
+            aria-label="Zurück"
+          >
+            <img src="img/back_button.svg" alt="Zurück" />
+          </button>
 
-    <div class="navigation">
-      <ul>
-        <li><a href="login.html">Login</a></li>
-        <li><a href="register.html">Register</a></li>
-        <li>
-          <a href="protected.html">Protected Page</a> (only visible when logged
-          in)
-        </li>
-      </ul>
-    </div>
+          <div class="brushing-title-wrapper">
+            <h1 class="title-wrapper">ZÄHNE PUTZEN</h1>
+            <p class="brushing-name" id="activeProfileName">–</p>
+          </div>
 
-    <div class="info">
-      <h2>About This Site</h2>
-      <p>This is a simple authentication demo that shows:</p>
-      <ul>
-        <li>User registration</li>
-        <li>User login</li>
-        <li>Protected content that's only visible to logged-in users</li>
-      </ul>
-      <p>
-        If you try to access the protected page without being logged in, you'll
-        be redirected to the login page.
-      </p>
-    </div>
+          <a
+            href="protected.html"
+            class="circle-button-icon"
+            aria-label="Profil"
+          >
+            <img src="img/profile_button.svg" alt="" />
+          </a>
+        </header>
+
+        <div class="brushing-stage-wrapper">
+          <section class="timer-wrapper" aria-label="Timer">
+            <div class="timer-ring">
+              <div class="timer-content">
+                <p class="timer-text">2:00</p>
+
+                <div class="intro-dots-wrapper" aria-hidden="true">
+                  <img
+                    src="img/coloured_rectangles.svg"
+                    alt=""
+                    class="intro-dots"
+                  />
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <div class="brushing-character-wrapper">
+            <div class="intro-image-wrapper brushing-image-wrapper">
+              <img
+                src="img/eddy.png"
+                alt="Eddy beim Zähneputzen"
+                class="intro-image brushing-image"
+              />
+            </div>
+
+            <section class="speech-bubble-wrapper">
+              <p class="speech-bubble-text">Bereit zum Putzen?</p>
+            </section>
+          </div>
+        </div>
+
+        <div class="intro-actions-wrapper brushing-actions-wrapper">
+          <div class="button-wrapper">
+            <button type="button" class="intro-button intro-button-primary">
+              <img src="img/zahn_white.svg" alt="" class="button-icon-image" />
+              <span>Putzen starten</span>
+            </button>
+          </div>
+
+          <div class="button-wrapper">
+            <a
+              href="protected.html"
+              class="intro-button intro-button-secondary"
+            >
+              <img src="img/dot_yellow.svg" alt="" class="button-icon-image" />
+              <span>Statistiken ansehen</span>
+            </a>
+          </div>
+        </div>
+
+        <nav class="navigation" aria-label="Hilfsnavigation">
+          <ul>
+            <li><a href="login.html">Login</a></li>
+            <li><a href="register.html">Register</a></li>
+            <li>
+              <a href="protected.html">Protected Page</a> (only visible when
+              logged in)
+            </li>
+          </ul>
+        </nav>
+      </section>
+    </main>
+
+    <script src="js/auth.js"></script>
+    <script src="js/logout.js"></script>
+
+    // Profilname aus URL-Parameter oder sessionStorage lesen
+    <script>
+      const params = new URLSearchParams(window.location.search);
+      const name =
+        params.get("profil") || sessionStorage.getItem("activeProfile") || "–";
+      document.getElementById("activeProfileName").textContent = name;
+    </script>
   </body>
 </html>

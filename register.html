@@ -1,26 +1,69 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
   <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Register</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cousine:ital,wght@0,400;0,700;1,400;1,700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+      rel="stylesheet"
+    />
+
     <link rel="stylesheet" href="css/style.css" />
   </head>
   <body>
-    <h1>Register</h1>
+    <main class="page-wrapper">
+      <section class="login-wrapper">
+        <div class="heading-wrapper">
+          <img src="img/zahn.svg" alt="Zahn" class="zahn" />
+          <h1 class="title-wrapper">KONTO ERSTELLEN</h1>
+        </div>
 
-    <form id="registerForm">
-      <div>
-        <label>Email</label>
-        <input type="email" id="email" required />
-      </div>
-      <div>
-        <label>Password</label>
-        <input type="password" id="password" required />
-      </div>
-      <button type="submit">Register</button>
-    </form>
+        <form id="registerForm" class="form-wrapper">
+          <div class="input-wrapper">
+            <label for="name">Name</label>
+            <input
+              type="text"
+              id="name"
+              placeholder="Name eingeben"
+              required
+            />
+          </div>
 
-    <p>Already have an account? <a href="login.html">Login here</a>.</p>
+          <div class="input-wrapper">
+            <label for="email">E-Mail</label>
+            <input
+              type="email"
+              id="email"
+              placeholder="eltern@beispiel.ch"
+              required
+            />
+          </div>
+
+          <div class="input-wrapper">
+            <label for="password">Passwort</label>
+            <input
+              type="password"
+              id="password"
+              placeholder="Passwort erstellen"
+              required
+            />
+          </div>
+
+          <div class="button-wrapper">
+            <button type="submit">Konto erstellen</button>
+          </div>
+        </form>
+
+        <p class="register-wrapper">
+          Schon ein Konto?
+          <a href="login.html">Anmelden</a>
+        </p>
+      </section>
+    </main>
 
     <script src="js/register.js"></script>
   </body>
