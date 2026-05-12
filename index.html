@@ -111,5 +111,11 @@
     </main>
 
     <script src="js/auth.js"></script>
+    <script>
+      /* Seite beim Laden sofort auf Login-Status prüfen.
+        requireAuth() ist in auth.js definiert und leitet
+        bei 401 automatisch auf login.html weiter. */
+      requireAuth();
+    </script>
   </body>
 </html>
