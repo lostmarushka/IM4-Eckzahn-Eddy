@@ -172,7 +172,7 @@ button {
 }
 
 .intro-dots {
-  width: 34px;
+  width: 80px;
   height: auto;
 }
 
@@ -369,12 +369,45 @@ button {
   font-weight: 400;
 }
 
-/* Profilgitter: 2 Spalten */
+/* Profilgitter: auto-fill, bricht bei Platzmangel um */
 .profile-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: var(--space-md);
   width: 100%;
+}
+
+/* Jede Profilkarte: feste Mindestbreite, flex shrink erlaubt */
+.profile-card {
+  display: grid;
+  justify-items: center;
+  row-gap: var(--space-xs);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  color: var(--color-text);
+
+  /* Schlüssel: Karte wird kleiner wenn kein Platz, 
+     aber niemals schmaler als 130px (= Avatar-Breite) */
+  flex: 0 0 calc(25% - var(--space-md)); /* Desktop: 4 pro Reihe */
+  min-width: 130px;
+  max-width: 160px;
+}
+
+/* Ab 600px: 3 pro Reihe */
+@media (max-width: 600px) {
+  .profile-card {
+    flex: 0 0 calc(33.333% - var(--space-md));
+  }
+}
+
+/* Ab 420px (Mobile, 2 pro Reihe) */
+@media (max-width: 420px) {
+  .profile-card {
+    flex: 0 0 calc(50% - var(--space-md));
+  }
 }
 
 /* Einzelne Profilkarte */
@@ -395,12 +428,13 @@ button {
 
 /* Avatar-Box */
 .profile-avatar {
-  width: 130px;
-  height: 130px;
+  width: 100%;
+  max-width: 130px;
+  aspect-ratio: 1 / 1; /* bleibt immer quadratisch */
   border-radius: 20px;
   border: 4px solid transparent;
   overflow: hidden;
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  transition: transform 0.15s ease;
   background-color: var(--color-circle-dark);
 }
 
