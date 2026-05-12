@@ -1,10 +1,11 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="de">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Zähne putzen</title>
 
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -17,7 +18,11 @@
   <body>
     <main class="page-wrapper page-wrapper-brushing">
       <section class="login-wrapper brushing-wrapper">
+
+        <!-- Header: Zurück-Button | Titel + Profilname | Profil-Icon -->
         <header class="brushing-header-wrapper">
+
+          <!-- Zurück zur Profilwahl -->
           <button
             onclick="history.back()"
             class="back-button"
@@ -26,11 +31,13 @@
             <img src="img/back_button.svg" alt="Zurück" />
           </button>
 
+          <!-- Titel und aktiver Profilname (wird per JS gesetzt) -->
           <div class="brushing-title-wrapper">
             <h1 class="title-wrapper">ZÄHNE PUTZEN</h1>
             <p class="brushing-name" id="activeProfileName">–</p>
           </div>
 
+          <!-- Profil-Button rechts -->
           <a
             href="protected.html"
             class="circle-button-icon"
@@ -38,14 +45,17 @@
           >
             <img src="img/profile_button.svg" alt="" />
           </a>
+
         </header>
 
+        <!-- Hauptbereich: Timer + Charakter -->
         <div class="brushing-stage-wrapper">
+
+          <!-- Timer -->
           <section class="timer-wrapper" aria-label="Timer">
             <div class="timer-ring">
               <div class="timer-content">
                 <p class="timer-text">2:00</p>
-
                 <div class="intro-dots-wrapper" aria-hidden="true">
                   <img
                     src="img/coloured_rectangles.svg"
@@ -57,22 +67,26 @@
             </div>
           </section>
 
+          <!-- Charakter und Sprechblase -->
           <div class="brushing-character-wrapper">
             <div class="intro-image-wrapper brushing-image-wrapper">
               <img
                 src="img/eddy.png"
                 alt="Eddy beim Zähneputzen"
                 class="intro-image brushing-image"
+                loading="lazy"
               />
             </div>
-
             <section class="speech-bubble-wrapper">
               <p class="speech-bubble-text">Bereit zum Putzen?</p>
             </section>
           </div>
+
         </div>
 
+        <!-- Aktionsbuttons -->
         <div class="intro-actions-wrapper brushing-actions-wrapper">
+
           <div class="button-wrapper">
             <button type="button" class="intro-button intro-button-primary">
               <img src="img/zahn_white.svg" alt="" class="button-icon-image" />
@@ -81,38 +95,25 @@
           </div>
 
           <div class="button-wrapper">
-            <a
-              href="protected.html"
-              class="intro-button intro-button-secondary"
-            >
+            <a href="protected.html" class="intro-button intro-button-secondary">
               <img src="img/dot_yellow.svg" alt="" class="button-icon-image" />
               <span>Statistiken ansehen</span>
             </a>
           </div>
+
         </div>
 
-        <nav class="navigation" aria-label="Hilfsnavigation">
-          <ul>
-            <li><a href="login.html">Login</a></li>
-            <li><a href="register.html">Register</a></li>
-            <li>
-              <a href="protected.html">Protected Page</a> (only visible when
-              logged in)
-            </li>
-          </ul>
-        </nav>
       </section>
     </main>
 
     <script src="js/auth.js"></script>
     <script src="js/logout.js"></script>
 
-    // Profilname aus URL-Parameter oder sessionStorage lesen
+    <!-- Profilname aus sessionStorage lesen und im Header anzeigen -->
     <script>
-      const params = new URLSearchParams(window.location.search);
-      const name =
-        params.get("profil") || sessionStorage.getItem("activeProfile") || "–";
+      const name = sessionStorage.getItem("activeProfile") || "–";
       document.getElementById("activeProfileName").textContent = name;
     </script>
+
   </body>
 </html>
