@@ -48,10 +48,10 @@
   --space-2xl: 4.5rem;
 
   --content-width: 345px;
-  --content-width-web: 920px;
+  --content-width-web: 1060px;
 
-  --page-padding-x: 24px;
-  --page-padding-top: 68px;
+  --page-padding-x: 16px;
+  --page-padding-top: 48px;
   --page-padding-bottom: 40px;
 
   --title-size: 2rem;
@@ -64,7 +64,7 @@
 
   --zahn-size: 18px;
   --intro-image-width: 190px;
-  --timer-size: 230px;
+  --timer-size: 500px;
 
   --circle-button-size: 40px;
   --circle-button-icon-size: 40px;
@@ -564,9 +564,15 @@ button {
 .timer-wrapper {
   display: grid;
   justify-items: center;
+  width: 100%;
 }
 
-.timer-ring {
+.timer-wrapper > * {
+  width: min(var(--timer-size), 100%);
+  height: min(var(--timer-size), 100%);
+}
+
+/* .timer-ring {
   width: var(--timer-size);
   height: var(--timer-size);
   display: grid;
@@ -585,7 +591,7 @@ button {
       var(--color-timer-accent) 298deg 348deg,
       var(--color-timer-ring) 348deg 360deg
     );
-}
+} */
 
 .timer-ring::before {
   content: "";

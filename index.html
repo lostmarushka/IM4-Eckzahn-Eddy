@@ -22,7 +22,6 @@
         <!-- Header: Zurück-Button | Titel + Profilname | Profil-Icon -->
         <header class="brushing-header-wrapper">
 
-          <!-- Zurück zur Profilwahl -->
           <button
             onclick="history.back()"
             class="back-button"
@@ -31,13 +30,11 @@
             <img src="img/back_button.svg" alt="Zurück" />
           </button>
 
-          <!-- Titel und aktiver Profilname (wird per JS gesetzt) -->
           <div class="brushing-title-wrapper">
             <h1 class="title-wrapper">ZÄHNE PUTZEN</h1>
             <p class="brushing-name" id="activeProfileName">–</p>
           </div>
 
-          <!-- Profil-Button rechts -->
           <a
             href="protected.html"
             class="circle-button-icon"
@@ -51,10 +48,9 @@
         <!-- Hauptbereich: Timer + Charakter -->
         <div class="brushing-stage-wrapper">
 
-          <!-- Timer -->
           <section class="timer-wrapper" aria-label="Timer">
 
-            <!-- Zustand 2: Warten auf Sensor -->
+            <!-- Warte-Ring (nur während Zustand "waiting" sichtbar) -->
             <div id="state-waiting" class="brushing-state">
               <div class="waiting-ring">
                 <div class="waiting-ring-content">
@@ -67,16 +63,14 @@
               </div>
             </div>
 
-            <!-- Zustand 3: Video-Timer läuft -->
-            <div id="state-timer" class="brushing-state">
-              <div class="video-ring">
-                <video
-                  id="timer-video"
-                  src="video/timer.webm"
-                  playsinline
-                  muted
-                ></video>
-              </div>
+            <!-- Video-Ring: immer sichtbar, startet eingefroren auf Frame 0 -->
+            <div id="video-ring-wrapper" class="video-ring">
+              <video
+                id="timer-video"
+                src="video/timer.webm"
+                playsinline
+                muted
+              ></video>
             </div>
 
           </section>
@@ -101,7 +95,7 @@
         <!-- Aktionsbuttons -->
         <div class="intro-actions-wrapper brushing-actions-wrapper">
 
-          <!-- Start-Knopf (nur Zustand 1) -->
+          <!-- Start-Knopf (Zustand: idle) -->
           <div class="button-wrapper" id="btn-start-wrapper">
             <button
               type="button"
@@ -113,7 +107,7 @@
             </button>
           </div>
 
-          <!-- Sensor-Badge (Zustand 2 + 3) -->
+          <!-- Sensor-Badge (Zustand: waiting + running + paused) -->
           <div style="display:none; justify-content:center;" id="badge-row">
             <span class="sensor-badge waiting" id="sensor-badge">
               <span class="sensor-dot"></span>
@@ -121,7 +115,7 @@
             </span>
           </div>
 
-          <!-- Abbrechen (Zustand 2 + 3) -->
+          <!-- Abbrechen (Zustand: waiting + running + paused) -->
           <div class="button-wrapper" id="btn-cancel-wrapper" style="display:none">
             <button
               type="button"
@@ -147,9 +141,8 @@
       document.getElementById("activeProfileName").textContent = name;
 
       // Elemente
-      const stateStart    = document.getElementById('state-start');
       const stateWaiting  = document.getElementById('state-waiting');
-      const stateTimer    = document.getElementById('state-timer');
+      const videoRing     = document.getElementById('video-ring-wrapper');
       const video         = document.getElementById('timer-video');
       const speechText    = document.getElementById('speech-text');
       const btnStartWrap  = document.getElementById('btn-start-wrapper');
@@ -162,11 +155,14 @@
       let pollInterval = null;
       let lastValue    = null;
       let noDataStreak = 0;
-      const PAUSE_AFTER = 3; // Polls ohne neuen Wert → pausieren
+      const PAUSE_AFTER = 3;
+
+      // Video auf Frame 0 einfrieren sobald Metadaten geladen
+      video.addEventListener('loadedmetadata', () => {
+        video.currentTime = 0.001;
+      });
 
       // Sensor-Polling: api/load.php alle 800ms abfragen
-      // Ändert sich der Wert → Sensor aktiv
-      // Bleibt er PAUSE_AFTER-mal gleich → Sensor inaktiv
       async function pollSensor() {
         try {
           const res = await fetch('api/load.php', { cache: 'no-store' });
@@ -174,7 +170,7 @@
           const data = await res.json();
           const val  = data.wert ?? data.value ?? JSON.stringify(data);
           if (val !== lastValue) {
-            lastValue = val;
+            lastValue    = val;
             noDataStreak = 0;
             onSensorActive();
           } else {
@@ -202,12 +198,12 @@
 
       // UI-Übergänge
       function startBrushing() {
-        appState = 'waiting';
-        lastValue = null;
+        appState     = 'waiting';
+        lastValue    = null;
         noDataStreak = 0;
 
-        stateStart.classList.remove('active');
         stateWaiting.classList.add('active');
+        videoRing.style.display = 'none';
 
         btnStartWrap.style.display  = 'none';
         badgeRow.style.display      = 'flex';
@@ -223,7 +219,7 @@
         appState = 'running';
 
         stateWaiting.classList.remove('active');
-        stateTimer.classList.add('active');
+        videoRing.style.display = '';
 
         video.play();
         setBadge('active', 'Sensor aktiv');
@@ -248,11 +244,10 @@
         appState = 'idle';
         clearInterval(pollInterval);
         video.pause();
-        video.currentTime = 0;
+        video.currentTime = 0.001;
 
         stateWaiting.classList.remove('active');
-        stateTimer.classList.remove('active');
-        stateStart.classList.add('active');
+        videoRing.style.display = '';
 
         btnStartWrap.style.display  = 'grid';
         badgeRow.style.display      = 'none';
