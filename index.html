@@ -92,6 +92,25 @@
               <img src="img/zahn_white.svg" alt="" class="button-icon-image" />
               <span>Putzen starten</span>
             </button>
+
+            <!-- NUR ZUM TESTEN – danach entfernen -->
+            <button
+              onclick="
+                elapsed = 120;
+                finish();
+              "
+              style="
+                margin-top: 10px;
+                padding: 8px 16px;
+                background: red;
+                color: white;
+                border: none;
+                border-radius: 8px;
+                cursor: pointer;
+              "
+            >
+              🧪 Finish testen
+            </button>
           </div>
 
           <div style="display: none; justify-content: center" id="badge-row">
@@ -332,7 +351,7 @@
         await saveEvent("abgeschlossen");
         clearInterval(pollInterval);
         clearInterval(timerInterval);
-        window.location.href = "success.html";
+        window.location.href = "success.html?kid=" + activeKinderId;
       }
 
       function setBadge(type, label) {
