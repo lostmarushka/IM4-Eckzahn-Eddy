@@ -4,95 +4,57 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Profil wählen</title>
-
-    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Cousine:ital,wght@0,400;0,700;1,400;1,700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
-      rel="stylesheet"
-    />
-
+    <link href="https://fonts.googleapis.com/css2?family=Cousine:ital,wght@0,400;0,700;1,400;1,700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="css/style.css" />
   </head>
   <body>
     <main class="page-wrapper">
       <section class="login-wrapper choose-profile-wrapper">
 
-        <!-- Deko-Punkte oben -->
         <div class="intro-dots-wrapper" aria-hidden="true">
           <img src="img/coloured_dots.svg" alt="" class="intro-dots" />
         </div>
 
-        <!-- Titel -->
         <header class="choose-profile-header">
           <h1 class="title-wrapper">Profil<br>wählen</h1>
           <p class="choose-profile-subtitle">Wer putzt heute?</p>
         </header>
 
-        <!-- Profilgitter: 4 Kolonnen Desktop → 3 → 2 Mobile -->
         <div class="profile-grid" role="list">
 
-          <!-- Profil: Emma | data-kinder-id = ID aus kinder-Tabelle -->
-          <button
-            class="profile-card"
-            role="listitem"
-            data-name="Emma"
-            data-kinder-id="1"
-            onclick="selectProfile(this)"
-            aria-label="Profil Emma wählen"
-          >
+          <button class="profile-card" role="listitem" data-name="Emma" data-kinder-id="1" onclick="selectProfile(this)" aria-label="Profil Emma wählen">
             <div class="profile-avatar profile-avatar--pink">
               <img src="img/profile_emma.jpg" alt="Emma" loading="lazy" />
             </div>
             <span class="profile-name">Emma</span>
           </button>
 
-          <!-- Profil: Max -->
-          <button
-            class="profile-card"
-            role="listitem"
-            data-name="Max"
-            data-kinder-id="2"
-            onclick="selectProfile(this)"
-            aria-label="Profil Max wählen"
-          >
+          <button class="profile-card" role="listitem" data-name="Max" data-kinder-id="2" onclick="selectProfile(this)" aria-label="Profil Max wählen">
             <div class="profile-avatar profile-avatar--yellow">
               <img src="img/profile_max.jpg" alt="Max" loading="lazy" />
             </div>
             <span class="profile-name">Max</span>
           </button>
 
-          <!-- Profil: Sophie -->
-          <button
-            class="profile-card"
-            role="listitem"
-            data-name="Sophie"
-            data-kinder-id="3"
-            onclick="selectProfile(this)"
-            aria-label="Profil Sophie wählen"
-          >
+          <button class="profile-card" role="listitem" data-name="Sophie" data-kinder-id="3" onclick="selectProfile(this)" aria-label="Profil Sophie wählen">
             <div class="profile-avatar profile-avatar--teal">
               <img src="img/profile_sophie.jpg" alt="Sophie" loading="lazy" />
             </div>
             <span class="profile-name">Sophie</span>
           </button>
 
-          <!-- Profil hinzufügen (noch nicht aktiv) -->
-          <div
-            class="profile-card profile-card--add"
-            role="listitem"
-            aria-label="Profil hinzufügen (noch nicht verfügbar)"
-          >
+          <!-- Profil hinzufügen → generate-profile.html -->
+          <a href="generate-profile.html" class="profile-card" role="listitem" aria-label="Profil hinzufügen">
             <div class="profile-avatar profile-avatar--add">
               <img src="img/hinzufuegen.svg" alt="" aria-hidden="true" />
             </div>
             <span class="profile-name">Profil<br>hinzufügen</span>
-          </div>
+          </a>
 
         </div>
 
-        <!-- Aktionsbuttons -->
         <div class="choose-profile-actions">
           <a href="protected.html" class="intro-button intro-button-secondary">
             <span>⚙ Profile verwalten</span>
