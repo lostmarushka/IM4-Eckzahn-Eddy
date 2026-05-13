@@ -176,6 +176,128 @@ button { font: inherit; border: none; background: none; cursor: pointer; }
 .choose-profile-actions { display: grid; grid-template-columns: 1fr; row-gap: var(--space-sm); width: 100%; }
 .choose-profile-actions .intro-button { background-color: transparent; border: 2px solid rgba(255,255,255,0.3); font-size: 0.95rem; font-weight: 600; min-height: 50px; border-radius: var(--radius-full); display: grid; place-items: center; }
 
+/* ── Generate Profile ── */
+.gen-profile-wrapper {
+  row-gap: var(--space-lg);
+  padding-top: var(--space-sm);
+}
+
+.gen-profile-header {
+  display: grid;
+  grid-template-columns: var(--circle-button-size) 1fr;
+  align-items: start;
+  column-gap: var(--space-sm);
+}
+
+.gen-profile-title {
+  font-family: "Inter", sans-serif;
+  font-size: 2.2rem;
+  font-weight: 700;
+  line-height: 1.15;
+  text-transform: none;
+  text-align: center;
+  padding-right: var(--circle-button-size);
+}
+
+/* Avatar */
+.gen-avatar-wrapper {
+  display: grid;
+  justify-items: center;
+  row-gap: var(--space-xs);
+}
+
+.gen-avatar-img-box {
+  position: relative;
+  width: 150px;
+  height: 150px;
+}
+
+.gen-avatar-img {
+  width: 150px;
+  height: 150px;
+  border-radius: var(--radius-xl);
+  object-fit: cover;
+  border: 3px solid #ff8fc0;
+  display: block;
+}
+
+.gen-avatar-edit-btn {
+  position: absolute;
+  bottom: -8px;
+  right: -8px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #ff4fa3;
+  color: #fff;
+  display: grid;
+  place-items: center;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.3);
+  border: none;
+  cursor: pointer;
+  transition: transform 0.15s ease;
+}
+.gen-avatar-edit-btn:active { transform: scale(0.93); }
+
+.gen-avatar-label {
+  color: var(--color-text-soft);
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-top: var(--space-2xs);
+}
+
+/* Form card */
+.gen-form-card {
+  width: 100%;
+  background: var(--color-card);
+  border: 1px solid var(--color-card-border);
+  border-radius: var(--radius-xl);
+  padding: 24px 20px 28px;
+  display: grid;
+  row-gap: var(--space-md);
+}
+
+/* Input with info icon */
+.gen-input-icon-wrapper {
+  position: relative;
+  display: grid;
+}
+.gen-input-icon-wrapper input {
+  padding-right: 52px;
+}
+
+.gen-info-btn {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  background: rgba(255,255,255,0.18);
+  border: none;
+  display: grid;
+  place-items: center;
+  color: var(--color-text);
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+.gen-info-btn:hover { background: rgba(255,255,255,0.28); }
+
+.gen-info-text {
+  color: var(--color-text-soft);
+  font-size: 0.85rem;
+  line-height: 1.5;
+  margin-top: var(--space-2xs);
+}
+
+/* Submit button — pill shape */
+.gen-submit-btn {
+  border-radius: var(--radius-full) !important;
+  min-height: 62px !important;
+  font-size: 1.05rem !important;
+}
+
 /* ── Brushing Page ── */
 .page-wrapper-brushing { padding-top: var(--page-padding-top); }
 
