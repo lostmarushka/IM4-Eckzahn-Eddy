@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="de">
   <head>
     <meta charset="UTF-8" />
@@ -6,13 +6,15 @@
     <title>Zähne putzen</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Cousine:ital,wght@0,400;0,700;1,400;1,700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cousine:ital,wght@0,400;0,700;1,400;1,700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="css/style.css" />
   </head>
   <body>
     <main class="page-wrapper page-wrapper-brushing">
       <section class="login-wrapper brushing-wrapper">
-
         <header class="brushing-header-wrapper">
           <button onclick="history.back()" class="back-button" aria-label="Zurück">
             <img src="img/back_button.svg" alt="Zurück" />
@@ -27,13 +29,12 @@
         </header>
 
         <div class="brushing-stage-wrapper">
-
           <!-- Timer -->
           <section class="timer-wrapper" aria-label="Timer">
             <div class="ring-timer">
               <svg class="ring-svg" viewBox="0 0 500 500">
-                <circle class="ring-track"    cx="250" cy="250" r="220"/>
-                <circle class="ring-progress" id="ring-progress" cx="250" cy="250" r="220"/>
+                <circle class="ring-track" cx="250" cy="250" r="220" />
+                <circle class="ring-progress" id="ring-progress" cx="250" cy="250" r="220" />
               </svg>
               <div class="ring-center">
                 <p class="ring-time" id="ring-time">2:00</p>
@@ -47,18 +48,21 @@
           <!-- Charakter -->
           <div class="brushing-character-wrapper">
             <div class="intro-image-wrapper brushing-image-wrapper">
-              <img src="img/eddy.png" alt="Eddy beim Zähneputzen" class="intro-image brushing-image" loading="lazy" />
+              <img
+                src="img/eddy.png"
+                alt="Eddy beim Zähneputzen"
+                class="intro-image brushing-image"
+                loading="lazy"
+              />
             </div>
             <section class="speech-bubble-wrapper">
               <p class="speech-bubble-text" id="speech-text">Bereit zum Putzen?</p>
             </section>
           </div>
-
         </div>
 
         <!-- Aktionsbuttons -->
         <div class="intro-actions-wrapper brushing-actions-wrapper">
-
           <div class="button-wrapper" id="btn-start-wrapper">
             <button type="button" class="intro-button intro-button-primary" onclick="startBrushing()">
               <img src="img/zahn_white.svg" alt="" class="button-icon-image" />
@@ -66,7 +70,7 @@
             </button>
           </div>
 
-          <div style="display:none; justify-content:center;" id="badge-row">
+          <div style="display: none; justify-content: center" id="badge-row">
             <span class="sensor-badge waiting" id="sensor-badge">
               <span class="sensor-dot"></span>
               <span id="sensor-label">Warte auf Sensor…</span>
@@ -79,7 +83,6 @@
               <span>Abbrechen</span>
             </button>
           </div>
-
         </div>
       </section>
     </main>
@@ -107,45 +110,46 @@
       // ── Profilname laden ─────────────────────────────────────────
       (async function loadProfileName() {
         try {
-          const res  = await fetch('api/get-active-profile.php');
+          const res  = await fetch("api/get-active-profile.php");
           const data = await res.json();
           if (data.name) {
-            document.getElementById('activeProfileName').textContent = data.name;
+            document.getElementById("activeProfileName").textContent = data.name;
           }
         } catch (e) {
-          console.warn('Profilname konnte nicht geladen werden:', e);
+          console.warn("Profilname konnte nicht geladen werden:", e);
         }
       })();
 
-      const speechText    = document.getElementById('speech-text');
-      const btnStartWrap  = document.getElementById('btn-start-wrapper');
-      const badgeRow      = document.getElementById('badge-row');
-      const sensorBadge   = document.getElementById('sensor-badge');
-      const sensorLabel   = document.getElementById('sensor-label');
-      const btnCancelWrap = document.getElementById('btn-cancel-wrapper');
-      const ringProgress  = document.getElementById('ring-progress');
-      const ringTime      = document.getElementById('ring-time');
+      // ── DOM-Referenzen ───────────────────────────────────────────
+      const speechText    = document.getElementById("speech-text");
+      const btnStartWrap  = document.getElementById("btn-start-wrapper");
+      const badgeRow      = document.getElementById("badge-row");
+      const sensorBadge   = document.getElementById("sensor-badge");
+      const sensorLabel   = document.getElementById("sensor-label");
+      const btnCancelWrap = document.getElementById("btn-cancel-wrapper");
+      const ringProgress  = document.getElementById("ring-progress");
+      const ringTime      = document.getElementById("ring-time");
 
       // ── Timer-Setup ──────────────────────────────────────────────
-      const TOTAL = 120;
-      const CIRC  = 2 * Math.PI * 220;
+      const TOTAL           = 120;
+      const CIRC            = 2 * Math.PI * 220;
+      const INACTIVE_TIMEOUT = 6000; // ms ohne neues Signal → Pause
       ringProgress.style.strokeDasharray  = CIRC;
       ringProgress.style.strokeDashoffset = 0;
 
-      let appState      = 'idle';
+      let appState      = "idle";
       let pollInterval  = null;
       let timerInterval = null;
-      let lastValue     = null;
-      let noDataStreak  = 0;
+      let lastSensorId  = null;
+      let lastActiveTime = null;
       let elapsed       = 0;
-      const PAUSE_AFTER = 3;
 
-      // ── Ring ─────────────────────────────────────────────────────
+      // ── Ring-Anzeige ─────────────────────────────────────────────
       function updateRing() {
         const remaining = TOTAL - elapsed;
         const mins = Math.floor(remaining / 60);
         const secs = remaining % 60;
-        ringTime.textContent = `${mins}:${secs.toString().padStart(2,'0')}`;
+        ringTime.textContent = `${mins}:${secs.toString().padStart(2, "0")}`;
         ringProgress.style.strokeDashoffset = CIRC * (elapsed / TOTAL);
         if (remaining <= 0) finish();
       }
@@ -154,29 +158,54 @@
       async function pollSensor() {
         try {
           const res = await fetch("api/sensor-status.php", { cache: "no-store" });
-          if (!res.ok) { noDataStreak++; checkInactive(); return; }
+          if (!res.ok) { checkInactive(); return; }
           const data = await res.json();
-          const val = data.wert ?? data.value ?? JSON.stringify(data);
-          if (val !== lastValue) {
-            lastValue = val; noDataStreak = 0; onSensorActive();
-          } else { noDataStreak++; checkInactive(); }
-        } catch { noDataStreak++; checkInactive(); }
+          if (data.id !== null && data.id !== lastSensorId) {
+            lastSensorId = data.id;
+            onSensorActive();
+          } else {
+            checkInactive();
+          }
+        } catch {
+          checkInactive();
+        }
       }
 
-      function checkInactive()    { if (noDataStreak >= PAUSE_AFTER) onSensorInactive(); }
-      function onSensorActive()   { if (appState === "waiting") startTimer(); else if (appState === "paused") resumeTimer(); }
-      function onSensorInactive() { if (appState === "running") pauseTimer(); }
+      function checkInactive() {
+        if (lastActiveTime && Date.now() - lastActiveTime > INACTIVE_TIMEOUT) {
+          onSensorInactive();
+        }
+      }
+
+      function onSensorActive() {
+        lastActiveTime = Date.now();
+        if (appState === "waiting") startTimer();
+        else if (appState === "paused") resumeTimer();
+      }
+
+      function onSensorInactive() {
+        if (appState === "running") pauseTimer();
+      }
 
       // ── App-Zustände ─────────────────────────────────────────────
-      function startBrushing() {
-        appState     = "waiting";
-        lastSensorId = null;
-        noDataStreak = 0;
+      async function startBrushing() {
+        appState       = "waiting";
+        lastActiveTime = null;
         btnStartWrap.style.display  = "none";
         badgeRow.style.display      = "flex";
         btnCancelWrap.style.display = "grid";
         setBadge("waiting", "Warte auf Sensor…");
         speechText.textContent = "Los geht's!";
+
+        // Aktuelle ID als Baseline – nur neuere gelten als aktiv
+        try {
+          const res  = await fetch("api/sensor-status.php", { cache: "no-store" });
+          const data = await res.json();
+          lastSensorId = data.id;
+        } catch {
+          lastSensorId = null;
+        }
+
         pollInterval = setInterval(pollSensor, 800);
       }
 
@@ -188,10 +217,11 @@
       }
 
       function pauseTimer() {
-        appState = 'paused';
+        appState = "paused";
         clearInterval(timerInterval);
-        setBadge('paused', 'Unterbrochen…');
-        speechText.textContent = 'Weitermachen!';
+        timerInterval = null;
+        setBadge("paused", "Unterbrochen…");
+        speechText.textContent = "Weitermachen!";
       }
 
       function resumeTimer() {
@@ -205,11 +235,11 @@
         appState = "idle";
         clearInterval(pollInterval);
         clearInterval(timerInterval);
-        pollInterval  = null;
-        timerInterval = null;
-        elapsed      = 0;
-        lastSensorId = null;
-        noDataStreak = 0;
+        pollInterval   = null;
+        timerInterval  = null;
+        elapsed        = 0;
+        lastSensorId   = null;
+        lastActiveTime = null;
         updateRing();
         btnStartWrap.style.display  = "grid";
         badgeRow.style.display      = "none";
@@ -219,8 +249,9 @@
       }
 
       function finish() {
-        clearInterval(pollInterval); clearInterval(timerInterval);
-        window.location.href = 'success.html';
+        clearInterval(pollInterval);
+        clearInterval(timerInterval);
+        window.location.href = "success.html";
       }
 
       function setBadge(type, label) {
@@ -272,16 +303,13 @@
       //     dbg(`fetch OK | id=${data.id} wert=${data.wert} lastSensorId=${lastSensorId} streak=${noDataStreak}`);
       //     if (data.id !== null && data.id !== lastSensorId) {
       //       lastSensorId = data.id;
-      //       noDataStreak = 0;
       //       dbg('✅ SENSOR AKTIV → onSensorActive()');
       //       onSensorActive();
       //     } else {
-      //       noDataStreak++;
-      //       dbg(`⏸ keine neue id → streak=${noDataStreak}`);
+      //       dbg(`⏸ keine neue id → lastActive=${lastActiveTime ? Date.now()-lastActiveTime : 'null'}ms`);
       //       checkInactive();
       //     }
       //   } catch(e) {
-      //     noDataStreak++;
       //     dbg('💥 fetch error: ' + e.message);
       //     checkInactive();
       //   }
