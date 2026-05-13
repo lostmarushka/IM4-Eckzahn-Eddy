@@ -473,6 +473,192 @@ button { font: inherit; border: none; background: none; cursor: pointer; }
   cursor: pointer;
 }
 
+/* ── Success Page ───────────────────────────────────────── */
+
+.success-page-wrapper {
+  overflow: hidden;
+}
+
+.success-wrapper {
+  justify-items: center;
+  row-gap: var(--space-md);
+}
+
+/* Header */
+.success-header-wrapper {
+  display: grid;
+  justify-items: center;
+  row-gap: var(--space-sm);
+  margin-top: var(--space-sm);
+}
+
+.success-title {
+  font-size: 3.5rem;
+  text-align: center;
+}
+
+.success-stars-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+}
+
+.success-star {
+  width: 34px;
+  height: 34px;
+  object-fit: contain;
+}
+
+/* Character */
+.success-character-wrapper {
+  display: grid;
+  justify-items: center;
+}
+
+.success-image-wrapper {
+  margin: 0;
+}
+
+.success-image {
+  width: 230px;
+  image-rendering: pixelated;
+}
+
+/* Card */
+.success-card-wrapper {
+  width: 100%;
+  position: relative;
+  padding: 42px 28px 36px;
+  border: 3px solid #9fe3b0;
+  background: rgba(255, 255, 255, 0.08);
+  overflow: visible;
+}
+
+.success-card-inner {
+  display: grid;
+  row-gap: var(--space-md);
+  justify-items: center;
+}
+
+.success-card-title {
+  font-size: 2.1rem;
+}
+
+.success-card-text {
+  font-size: 1.15rem;
+  line-height: 1.6;
+  text-align: center;
+  max-width: 260px;
+}
+
+/* Rewards */
+.success-rewards-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-sm);
+  width: 100%;
+}
+
+.success-badge {
+  min-width: 140px;
+  min-height: 58px;
+  padding: 0 22px;
+  border-radius: var(--radius-full);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  font-size: 1rem;
+  font-weight: 700;
+
+  box-shadow: 0 8px 18px var(--color-shadow);
+}
+
+.success-badge-points {
+  background: #9fe3b0;
+  color: #241b39;
+}
+
+.success-badge-star {
+  background: #ffd84f;
+  color: #241b39;
+}
+
+.success-badge-icon {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+}
+
+/* Decorative corners */
+.success-corner {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background: var(--color-dot-pink);
+  transform: rotate(45deg);
+}
+
+.success-corner-top-left {
+  top: -10px;
+  left: -10px;
+}
+
+.success-corner-top-right {
+  top: -10px;
+  right: -10px;
+}
+
+.success-corner-bottom-left {
+  bottom: -10px;
+  left: 28px;
+  background: var(--color-dot-yellow);
+}
+
+.success-corner-bottom-right {
+  bottom: -10px;
+  right: 28px;
+  background: var(--color-dot-blue);
+}
+
+/* Buttons */
+.success-actions-wrapper {
+  width: 100%;
+  margin-top: var(--space-sm);
+}
+
+.success-main-button {
+  min-height: 68px;
+  border-radius: 28px;
+  font-size: 1.2rem;
+}
+
+.success-secondary-button {
+  min-height: 68px;
+  border-radius: 28px;
+  font-size: 1.2rem;
+  background-color: #6f35c9;
+}
+
+/* Responsive */
+@media (min-width: 768px) {
+  .success-title {
+    font-size: 4.2rem;
+  }
+
+  .success-image {
+    width: 260px;
+  }
+
+  .success-card-text {
+    max-width: 320px;
+  }
+}
+
 /* ── Responsive ── */
 @media (min-width: 480px) {
   :root {
