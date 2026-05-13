@@ -16,14 +16,22 @@
     <main class="page-wrapper page-wrapper-brushing">
       <section class="login-wrapper brushing-wrapper">
         <header class="brushing-header-wrapper">
-          <button onclick="history.back()" class="back-button" aria-label="Zurück">
+          <button
+            onclick="history.back()"
+            class="back-button"
+            aria-label="Zurück"
+          >
             <img src="img/back_button.svg" alt="Zurück" />
           </button>
           <div class="brushing-title-wrapper">
             <h1 class="title-wrapper">ZÄHNE PUTZEN</h1>
             <p class="brushing-name" id="activeProfileName">–</p>
           </div>
-          <a href="protected.html" class="circle-button-icon" aria-label="Profil">
+          <a
+            href="protected.html"
+            class="circle-button-icon"
+            aria-label="Profil"
+          >
             <img src="img/profile_button.svg" alt="" />
           </a>
         </header>
@@ -34,12 +42,22 @@
             <div class="ring-timer">
               <svg class="ring-svg" viewBox="0 0 500 500">
                 <circle class="ring-track" cx="250" cy="250" r="220" />
-                <circle class="ring-progress" id="ring-progress" cx="250" cy="250" r="220" />
+                <circle
+                  class="ring-progress"
+                  id="ring-progress"
+                  cx="250"
+                  cy="250"
+                  r="220"
+                />
               </svg>
               <div class="ring-center">
                 <p class="ring-time" id="ring-time">2:00</p>
                 <div class="intro-dots-wrapper" aria-hidden="true">
-                  <img src="img/coloured_rectangles.svg" alt="" class="intro-dots" />
+                  <img
+                    src="img/coloured_rectangles.svg"
+                    alt=""
+                    class="intro-dots"
+                  />
                 </div>
               </div>
             </div>
@@ -56,7 +74,9 @@
               />
             </div>
             <section class="speech-bubble-wrapper">
-              <p class="speech-bubble-text" id="speech-text">Bereit zum Putzen?</p>
+              <p class="speech-bubble-text" id="speech-text">
+                Bereit zum Putzen?
+              </p>
             </section>
           </div>
         </div>
@@ -64,7 +84,11 @@
         <!-- Aktionsbuttons -->
         <div class="intro-actions-wrapper brushing-actions-wrapper">
           <div class="button-wrapper" id="btn-start-wrapper">
-            <button type="button" class="intro-button intro-button-primary" onclick="startBrushing()">
+            <button
+              type="button"
+              class="intro-button intro-button-primary"
+              onclick="startBrushing()"
+            >
               <img src="img/zahn_white.svg" alt="" class="button-icon-image" />
               <span>Putzen starten</span>
             </button>
@@ -77,8 +101,16 @@
             </span>
           </div>
 
-          <div class="button-wrapper" id="btn-cancel-wrapper" style="display: none">
-            <button type="button" class="intro-button intro-button-secondary" onclick="openModal()">
+          <div
+            class="button-wrapper"
+            id="btn-cancel-wrapper"
+            style="display: none"
+          >
+            <button
+              type="button"
+              class="intro-button intro-button-secondary"
+              onclick="openModal()"
+            >
               <img src="img/dot_yellow.svg" alt="" class="button-icon-image" />
               <span>Abbrechen</span>
             </button>
@@ -97,8 +129,12 @@
           gespeichert, aber nicht als abgeschlossen markiert.
         </p>
         <div class="modal-buttons">
-          <button class="modal-btn-primary" onclick="closeModal()">Weiter putzen</button>
-          <button class="modal-btn-secondary" onclick="confirmCancel()">Ja, abbrechen</button>
+          <button class="modal-btn-primary" onclick="closeModal()">
+            Weiter putzen
+          </button>
+          <button class="modal-btn-secondary" onclick="confirmCancel()">
+            Ja, abbrechen
+          </button>
         </div>
       </div>
     </div>
@@ -112,10 +148,11 @@
 
       (async function loadProfileName() {
         try {
-          const res  = await fetch("api/get-active-profile.php");
+          const res = await fetch("api/get-active-profile.php");
           const data = await res.json();
           if (data.name) {
-            document.getElementById("activeProfileName").textContent = data.name;
+            document.getElementById("activeProfileName").textContent =
+              data.name;
           }
           if (data.id) {
             activeKinderId = data.id;
@@ -126,28 +163,28 @@
       })();
 
       // ── DOM-Referenzen ───────────────────────────────────────────
-      const speechText    = document.getElementById("speech-text");
-      const btnStartWrap  = document.getElementById("btn-start-wrapper");
-      const badgeRow      = document.getElementById("badge-row");
-      const sensorBadge   = document.getElementById("sensor-badge");
-      const sensorLabel   = document.getElementById("sensor-label");
+      const speechText = document.getElementById("speech-text");
+      const btnStartWrap = document.getElementById("btn-start-wrapper");
+      const badgeRow = document.getElementById("badge-row");
+      const sensorBadge = document.getElementById("sensor-badge");
+      const sensorLabel = document.getElementById("sensor-label");
       const btnCancelWrap = document.getElementById("btn-cancel-wrapper");
-      const ringProgress  = document.getElementById("ring-progress");
-      const ringTime      = document.getElementById("ring-time");
+      const ringProgress = document.getElementById("ring-progress");
+      const ringTime = document.getElementById("ring-time");
 
       // ── Timer-Setup ──────────────────────────────────────────────
-      const TOTAL            = 120;
-      const CIRC             = 2 * Math.PI * 220;
+      const TOTAL = 120;
+      const CIRC = 2 * Math.PI * 220;
       const INACTIVE_TIMEOUT = 6000;
-      ringProgress.style.strokeDasharray  = CIRC;
+      ringProgress.style.strokeDasharray = CIRC;
       ringProgress.style.strokeDashoffset = 0;
 
-      let appState       = "idle";
-      let pollInterval   = null;
-      let timerInterval  = null;
-      let lastSensorId   = null;
+      let appState = "idle";
+      let pollInterval = null;
+      let timerInterval = null;
+      let lastSensorId = null;
       let lastActiveTime = null;
-      let elapsed        = 0;
+      let elapsed = 0;
 
       // ── Ring-Anzeige ─────────────────────────────────────────────
       function updateRing() {
@@ -162,15 +199,22 @@
       // ── Event speichern ──────────────────────────────────────────
       async function saveEvent(eventType) {
         try {
-          await fetch("api/save-event.php", {
+          const res = await fetch("api/save-event.php", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
               kinder_id: activeKinderId,
-              event:     eventType,
-              dauer:     elapsed
-            })
+              event: eventType,
+              dauer: elapsed,
+            }),
           });
+          const text = await res.text();
+          console.log("saveEvent Response:", res.status, text); // ← DEBUG
+          console.log("Gesendete Daten:", {
+            kinder_id: activeKinderId,
+            event: eventType,
+            dauer: elapsed,
+          }); // ← DEBUG
         } catch (e) {
           console.warn("Event konnte nicht gespeichert werden:", e);
         }
@@ -179,8 +223,13 @@
       // ── Sensor Polling ───────────────────────────────────────────
       async function pollSensor() {
         try {
-          const res = await fetch("api/sensor-status.php", { cache: "no-store" });
-          if (!res.ok) { checkInactive(); return; }
+          const res = await fetch("api/sensor-status.php", {
+            cache: "no-store",
+          });
+          if (!res.ok) {
+            checkInactive();
+            return;
+          }
           const data = await res.json();
           if (data.id !== null && data.id !== lastSensorId) {
             lastSensorId = data.id;
@@ -211,17 +260,19 @@
 
       // ── App-Zustände ─────────────────────────────────────────────
       async function startBrushing() {
-        appState       = "waiting";
+        appState = "waiting";
         lastActiveTime = null;
-        btnStartWrap.style.display  = "none";
-        badgeRow.style.display      = "flex";
+        btnStartWrap.style.display = "none";
+        badgeRow.style.display = "flex";
         btnCancelWrap.style.display = "grid";
         setBadge("waiting", "Warte auf Sensor…");
         speechText.textContent = "Los geht's!";
 
         // Aktuelle ID als Baseline – nur neuere gelten als aktiv
         try {
-          const res  = await fetch("api/sensor-status.php", { cache: "no-store" });
+          const res = await fetch("api/sensor-status.php", {
+            cache: "no-store",
+          });
           const data = await res.json();
           lastSensorId = data.id;
         } catch {
@@ -235,7 +286,10 @@
         appState = "running";
         setBadge("active", "Sensor aktiv");
         speechText.textContent = "Weiter so! 💪";
-        timerInterval = setInterval(() => { elapsed++; updateRing(); }, 1000);
+        timerInterval = setInterval(() => {
+          elapsed++;
+          updateRing();
+        }, 1000);
       }
 
       function pauseTimer() {
@@ -250,7 +304,10 @@
         appState = "running";
         setBadge("active", "Sensor aktiv");
         speechText.textContent = "Weiter so! 💪";
-        timerInterval = setInterval(() => { elapsed++; updateRing(); }, 1000);
+        timerInterval = setInterval(() => {
+          elapsed++;
+          updateRing();
+        }, 1000);
       }
 
       async function cancelBrushing() {
@@ -258,14 +315,14 @@
         appState = "idle";
         clearInterval(pollInterval);
         clearInterval(timerInterval);
-        pollInterval   = null;
-        timerInterval  = null;
-        elapsed        = 0;
-        lastSensorId   = null;
+        pollInterval = null;
+        timerInterval = null;
+        elapsed = 0;
+        lastSensorId = null;
         lastActiveTime = null;
         updateRing();
-        btnStartWrap.style.display  = "grid";
-        badgeRow.style.display      = "none";
+        btnStartWrap.style.display = "grid";
+        badgeRow.style.display = "none";
         btnCancelWrap.style.display = "none";
         setBadge("waiting", "Warte auf Sensor…");
         speechText.textContent = "Bereit zum Putzen?";
@@ -279,7 +336,7 @@
       }
 
       function setBadge(type, label) {
-        sensorBadge.className   = "sensor-badge " + type;
+        sensorBadge.className = "sensor-badge " + type;
         sensorLabel.textContent = label;
       }
 
@@ -294,9 +351,11 @@
         closeModal();
         cancelBrushing();
       }
-      document.getElementById("cancel-modal").addEventListener("click", function (e) {
-        if (e.target === this) closeModal();
-      });
+      document
+        .getElementById("cancel-modal")
+        .addEventListener("click", function (e) {
+          if (e.target === this) closeModal();
+        });
     </script>
 
     <!-- DEBUG PANEL – danach entfernen
@@ -340,6 +399,5 @@
       // };
     </script>
     -->
-
   </body>
 </html>
