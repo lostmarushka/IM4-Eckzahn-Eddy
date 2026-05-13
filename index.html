@@ -107,13 +107,18 @@
     <script src="js/logout.js"></script>
 
     <script>
-      // ── Profilname laden ─────────────────────────────────────────
+      // ── Profilname + ID laden ────────────────────────────────────
+      let activeKinderId = null;
+
       (async function loadProfileName() {
         try {
           const res  = await fetch("api/get-active-profile.php");
           const data = await res.json();
           if (data.name) {
             document.getElementById("activeProfileName").textContent = data.name;
+          }
+          if (data.id) {
+            activeKinderId = data.id;
           }
         } catch (e) {
           console.warn("Profilname konnte nicht geladen werden:", e);
@@ -131,18 +136,18 @@
       const ringTime      = document.getElementById("ring-time");
 
       // ── Timer-Setup ──────────────────────────────────────────────
-      const TOTAL           = 120;
-      const CIRC            = 2 * Math.PI * 220;
-      const INACTIVE_TIMEOUT = 6000; // ms ohne neues Signal → Pause
+      const TOTAL            = 120;
+      const CIRC             = 2 * Math.PI * 220;
+      const INACTIVE_TIMEOUT = 6000;
       ringProgress.style.strokeDasharray  = CIRC;
       ringProgress.style.strokeDashoffset = 0;
 
-      let appState      = "idle";
-      let pollInterval  = null;
-      let timerInterval = null;
-      let lastSensorId  = null;
+      let appState       = "idle";
+      let pollInterval   = null;
+      let timerInterval  = null;
+      let lastSensorId   = null;
       let lastActiveTime = null;
-      let elapsed       = 0;
+      let elapsed        = 0;
 
       // ── Ring-Anzeige ─────────────────────────────────────────────
       function updateRing() {
@@ -152,6 +157,23 @@
         ringTime.textContent = `${mins}:${secs.toString().padStart(2, "0")}`;
         ringProgress.style.strokeDashoffset = CIRC * (elapsed / TOTAL);
         if (remaining <= 0) finish();
+      }
+
+      // ── Event speichern ──────────────────────────────────────────
+      async function saveEvent(eventType) {
+        try {
+          await fetch("api/save-event.php", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              kinder_id: activeKinderId,
+              event:     eventType,
+              dauer:     elapsed
+            })
+          });
+        } catch (e) {
+          console.warn("Event konnte nicht gespeichert werden:", e);
+        }
       }
 
       // ── Sensor Polling ───────────────────────────────────────────
@@ -231,7 +253,8 @@
         timerInterval = setInterval(() => { elapsed++; updateRing(); }, 1000);
       }
 
-      function cancelBrushing() {
+      async function cancelBrushing() {
+        await saveEvent("abgebrochen");
         appState = "idle";
         clearInterval(pollInterval);
         clearInterval(timerInterval);
@@ -248,7 +271,8 @@
         speechText.textContent = "Bereit zum Putzen?";
       }
 
-      function finish() {
+      async function finish() {
+        await saveEvent("abgeschlossen");
         clearInterval(pollInterval);
         clearInterval(timerInterval);
         window.location.href = "success.html";
