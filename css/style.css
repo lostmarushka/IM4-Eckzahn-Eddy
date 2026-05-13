@@ -244,9 +244,13 @@ button { font: inherit; border: none; background: none; cursor: pointer; }
 }
 .ring-center {
   position: absolute; inset: 0;
-  display: grid; place-items: center;
-  row-gap: var(--space-xs);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-xs);
 }
+
 .ring-time {
   font-family: "Cousine", monospace;
   font-size: clamp(2.8rem, 15vw, 5rem);
