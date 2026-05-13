@@ -1,48 +1,50 @@
 <?php
-// select-profile.php
-// Wird aufgerufen wenn ein Kind sein Profil auswählt.
-// Speichert die kinder_id in der Session.
+// generate-profile.php
+// Verarbeitet das Formular aus generate-profile.html
+// und speichert ein neues Kind in der Datenbank.
 
 session_start();
-header('Content-Type: application/json');
+require_once 'db.php';
 
-require_once '../system/config.php';
+// ── Zugriff nur für eingeloggte Benutzer ──
+if (empty($_SESSION['familien_id'])) {
+    header('Location: index.html');
+    exit;
+}
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $data = json_decode(file_get_contents("php://input"), true);
-    $kinder_id = intval($data['kinder_id'] ?? 0);
+// ── Nur POST akzeptieren ──
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    header('Location: generate-profile.html');
+    exit;
+}
 
-    if (!$kinder_id) {
-        echo json_encode(["status" => "error", "message" => "Keine kinder_id übergeben"]);
-        exit;
-    }
+// ── Name validieren ──
+$name = trim($_POST['childName'] ?? '');
 
-    // Sicherheitscheck: Gehört dieses Kind zur Familie des eingeloggten Users?
-    if (!isset($_SESSION['user_id'])) {
-        echo json_encode(["status" => "error", "message" => "Nicht eingeloggt"]);
-        exit;
-    }
+if ($name === '') {
+    header('Location: generate-profile.html?error=name');
+    exit;
+}
 
+$familien_id = (int) $_SESSION['familien_id'];
+
+// ── In Datenbank speichern ──
+try {
     $stmt = $pdo->prepare("
-        SELECT k.id FROM kinder k
-        JOIN users u ON u.familie_id = k.familie_id
-        WHERE k.id = :kinder_id AND u.id = :user_id
+        INSERT INTO kinder (Familien_ID, Name)
+        VALUES (:familien_id, :name)
     ");
+
     $stmt->execute([
-        ':kinder_id' => $kinder_id,
-        ':user_id'   => $_SESSION['user_id']
+        ':familien_id' => $familien_id,
+        ':name'        => $name,
     ]);
-    $kind = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    if (!$kind) {
-        echo json_encode(["status" => "error", "message" => "Kind nicht gefunden"]);
-        exit;
-    }
+    header('Location: choose-profile.html?success=1');
+    exit;
 
-    // Kinder-ID in Session speichern
-    $_SESSION['kinder_id'] = $kinder_id;
-
-    echo json_encode(["status" => "success"]);
-} else {
-    echo json_encode(["status" => "error", "message" => "Ungültige Anfrage"]);
+} catch (PDOException $e) {
+    error_log('generate-profile.php DB error: ' . $e->getMessage());
+    header('Location: generate-profile.html?error=db');
+    exit;
 }

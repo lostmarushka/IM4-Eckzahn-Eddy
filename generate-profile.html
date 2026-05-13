@@ -8,6 +8,29 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Cousine:ital,wght@0,400;0,700;1,400;1,700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="css/style.css" />
+    <style>
+      .gen-alert {
+        width: 100%;
+        padding: 14px 18px;
+        border-radius: var(--radius-large);
+        font-size: 0.95rem;
+        font-weight: 600;
+        line-height: 1.4;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .gen-alert--error {
+        background: rgba(255, 80, 80, 0.18);
+        border: 1.5px solid rgba(255, 80, 80, 0.45);
+        color: #fff;
+      }
+      .gen-alert--success {
+        background: rgba(80, 220, 140, 0.18);
+        border: 1.5px solid rgba(80, 220, 140, 0.45);
+        color: #fff;
+      }
+    </style>
   </head>
   <body>
     <main class="page-wrapper">
@@ -21,6 +44,9 @@
           <h1 class="title-wrapper gen-profile-title">Profil<br>hinzufügen</h1>
         </header>
 
+        <!-- Feedback-Banner -->
+        <div id="alertBox" class="gen-alert" style="display:none" role="alert" aria-live="polite"></div>
+
         <!-- Avatar -->
         <div class="gen-avatar-wrapper">
           <div class="gen-avatar-img-box" id="avatarBox">
@@ -33,27 +59,34 @@
           <p class="gen-avatar-label">Profilbild ändern</p>
         </div>
 
-        <!-- Formular -->
-        <div class="gen-form-card">
+        <!-- Formular — action zeigt auf PHP, name-Attribut überträgt den Wert -->
+        <form
+          id="profileForm"
+          action="generate-profile.php"
+          method="POST"
+          class="gen-form-card"
+          novalidate
+        >
           <div class="input-wrapper">
             <label for="childName">Name des Kindes</label>
-            <input type="text" id="childName" placeholder="Name eingeben" autocomplete="off" />
+            <input
+              type="text"
+              id="childName"
+              name="childName"
+              placeholder="Name eingeben"
+              autocomplete="off"
+            />
           </div>
-          <!-- <div class="input-wrapper">
-            <label for="brushId">Zahnbürsten-Nummer</label>
-            <div class="gen-input-icon-wrapper">
-              <input type="text" id="brushId" placeholder="z.B. TB-12345" autocomplete="off" />
-              <button type="button" class="gen-info-btn" aria-label="Info zur Zahnbürsten-Nummer" onclick="toggleInfo()">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
-              </button>
-            </div>
-            <p class="gen-info-text" id="infoText" style="display:none">Die Zahnbürsten-Nummer findest du auf der Verpackung deiner smarten Zahnbürste.</p>
-          </div> -->
-        </div>
+        </form>
 
         <!-- Submit -->
         <div class="button-wrapper">
-          <button type="button" class="intro-button intro-button-primary gen-submit-btn" onclick="saveProfile()">
+          <button
+            type="submit"
+            form="profileForm"
+            class="intro-button intro-button-primary gen-submit-btn"
+            id="submitBtn"
+          >
             Profil hinzufügen
           </button>
         </div>
@@ -63,24 +96,50 @@
 
     <script src="js/auth.js"></script>
     <script>
+      // ── Avatar Vorschau ──
       function previewAvatar(e) {
         const file = e.target.files[0];
         if (!file) return;
         document.getElementById('avatarPreview').src = URL.createObjectURL(file);
       }
 
-      function toggleInfo() {
-        const el = document.getElementById('infoText');
-        el.style.display = el.style.display === 'none' ? 'block' : 'none';
-      }
+      // ── URL-Parameter auslesen (Fehler vom PHP) ──
+      (function checkUrlParams() {
+        const params = new URLSearchParams(window.location.search);
+        const error  = params.get('error');
 
-      function saveProfile() {
+        if (error === 'name') {
+          showAlert('error', '⚠️ Bitte gib einen Namen für das Kind ein.');
+        } else if (error === 'db') {
+          showAlert('error', '⚠️ Ein Fehler ist aufgetreten. Bitte versuche es nochmal.');
+        }
+
+        // URL sauber halten ohne Reload
+        if (error) history.replaceState(null, '', window.location.pathname);
+      })();
+
+      // ── Client-seitige Validierung vor dem Absenden ──
+      document.getElementById('profileForm').addEventListener('submit', function (e) {
         const name = document.getElementById('childName').value.trim();
-        const brushId = document.getElementById('brushId').value.trim();
-        if (!name) { alert('Bitte einen Namen eingeben.'); return; }
-        // Hier später: API-Call zum Speichern
-        alert(`Profil "${name}" wurde hinzugefügt!`);
-        window.location.href = 'choose-profile.html';
+        if (!name) {
+          e.preventDefault();
+          showAlert('error', '⚠️ Bitte gib einen Namen für das Kind ein.');
+          document.getElementById('childName').focus();
+          return;
+        }
+        // Doppelklick verhindern
+        const btn = document.getElementById('submitBtn');
+        btn.disabled = true;
+        btn.textContent = 'Wird gespeichert…';
+      });
+
+      // ── Alert anzeigen ──
+      function showAlert(type, message) {
+        const box = document.getElementById('alertBox');
+        box.className = 'gen-alert gen-alert--' + type;
+        box.textContent = message;
+        box.style.display = 'flex';
+        box.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
       }
     </script>
   </body>
