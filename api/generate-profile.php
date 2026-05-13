@@ -48,3 +48,29 @@ try {
     header('Location: /generate-profile.html?error=db');
     exit;
 }
+
+// ── DEBUG: Fehler direkt anzeigen ──
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
+
+try {
+    $stmt = $pdo->prepare("
+        INSERT INTO kinder (Familien_ID, Name)
+        VALUES (:familien_id, :name)
+    ");
+
+    $stmt->execute([
+        ':familien_id' => $familien_id,
+        ':name'        => $name,
+    ]);
+
+    echo "✅ Erfolgreich! familien_id=" . $familien_id . " name=" . $name;
+    // header('Location: /choose-profile.html?success=1');
+    exit;
+
+} catch (PDOException $e) {
+    echo "❌ DB Fehler: " . $e->getMessage();
+    echo "<br>familien_id=" . $familien_id;
+    echo "<br>name=" . $name;
+    exit;
+}
