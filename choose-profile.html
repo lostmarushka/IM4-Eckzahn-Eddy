@@ -22,37 +22,12 @@
           <p class="choose-profile-subtitle">Wer putzt heute?</p>
         </header>
 
-        <div class="profile-grid" role="list">
-
-          <button class="profile-card" role="listitem" data-name="Emma" data-kinder-id="1" onclick="selectProfile(this)" aria-label="Profil Emma wählen">
-            <div class="profile-avatar profile-avatar--pink">
-              <img src="img/profile_emma.jpg" alt="Emma" loading="lazy" />
-            </div>
-            <span class="profile-name">Emma</span>
-          </button>
-
-          <button class="profile-card" role="listitem" data-name="Max" data-kinder-id="2" onclick="selectProfile(this)" aria-label="Profil Max wählen">
-            <div class="profile-avatar profile-avatar--yellow">
-              <img src="img/profile_max.jpg" alt="Max" loading="lazy" />
-            </div>
-            <span class="profile-name">Max</span>
-          </button>
-
-          <button class="profile-card" role="listitem" data-name="Sophie" data-kinder-id="3" onclick="selectProfile(this)" aria-label="Profil Sophie wählen">
-            <div class="profile-avatar profile-avatar--teal">
-              <img src="img/profile_sophie.jpg" alt="Sophie" loading="lazy" />
-            </div>
-            <span class="profile-name">Sophie</span>
-          </button>
-
-          <!-- Profil hinzufügen → generate-profile.html -->
-          <a href="generate-profile.html" class="profile-card" role="listitem" aria-label="Profil hinzufügen">
-            <div class="profile-avatar profile-avatar--add">
-              <img src="img/hinzufuegen.svg" alt="" aria-hidden="true" />
-            </div>
-            <span class="profile-name">Profil<br>hinzufügen</span>
-          </a>
-
+        <!-- Profile werden per JS befüllt -->
+        <div class="profile-grid" role="list" id="profileGrid">
+          <div class="profile-card profile-loading" aria-label="Lädt…" aria-busy="true">
+            <div class="profile-avatar"></div>
+            <span class="profile-name">…</span>
+          </div>
         </div>
 
         <div class="choose-profile-actions">
@@ -69,5 +44,61 @@
 
     <script src="js/auth.js"></script>
     <script src="js/choose-profile.js"></script>
+    <script>
+      async function loadProfiles() {
+        const grid = document.getElementById('profileGrid');
+
+        try {
+          const res  = await fetch('api/get-profiles.php');
+          const data = await res.json();
+
+          // Grid leeren (Lade-Platzhalter entfernen)
+          grid.innerHTML = '';
+
+          if (data.status === 'success') {
+            data.kinder.forEach(kind => {
+              const btn = document.createElement('button');
+              btn.className = 'profile-card';
+              btn.setAttribute('role', 'listitem');
+              btn.setAttribute('data-name', kind.name);
+              btn.setAttribute('data-kinder-id', kind.id);
+              btn.setAttribute('aria-label', 'Profil ' + kind.name + ' wählen');
+              btn.addEventListener('click', () => selectProfile(btn));
+
+              // Avatar: Bild wenn vorhanden, sonst Initiale
+              const avatarHTML = kind.avatar
+                ? `<img src="/${kind.avatar}" alt="${kind.name}" loading="lazy" />`
+                : `<span class="profile-initial">${kind.name.charAt(0).toUpperCase()}</span>`;
+
+              btn.innerHTML = `
+                <div class="profile-avatar">${avatarHTML}</div>
+                <span class="profile-name">${kind.name}</span>
+              `;
+              grid.appendChild(btn);
+            });
+          }
+
+          // "Profil hinzufügen"-Button immer am Ende
+          const addLink = document.createElement('a');
+          addLink.href = 'generate-profile.html';
+          addLink.className = 'profile-card';
+          addLink.setAttribute('role', 'listitem');
+          addLink.setAttribute('aria-label', 'Profil hinzufügen');
+          addLink.innerHTML = `
+            <div class="profile-avatar profile-avatar--add">
+              <img src="img/hinzufuegen.svg" alt="" aria-hidden="true" />
+            </div>
+            <span class="profile-name">Profil<br>hinzufügen</span>
+          `;
+          grid.appendChild(addLink);
+
+        } catch (e) {
+          console.error('Profile laden fehlgeschlagen:', e);
+          grid.innerHTML = '<p style="color:var(--color-error,red);padding:1rem;">Profile konnten nicht geladen werden.</p>';
+        }
+      }
+
+      loadProfiles();
+    </script>
   </body>
 </html>
