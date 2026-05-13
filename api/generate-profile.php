@@ -4,7 +4,7 @@
 // und speichert ein neues Kind in der Datenbank.
 
 session_start();
-require_once 'db.php';
+require_once '../system/config.php';
 
 // ── Zugriff nur für eingeloggte Benutzer ──
 if (empty($_SESSION['familien_id'])) {
