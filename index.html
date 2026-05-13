@@ -200,17 +200,17 @@
         sensorLabel.textContent = label;
       }
 
-      // ── TEST: Sensor simulieren ──────────────────────
-      // Diese 3 Zeilen entfernen wenn echter Sensor läuft
-      window.startBrushing = function() {
-        appState = 'waiting'; lastValue = null; noDataStreak = 0;
-        btnStartWrap.style.display  = 'none';
-        badgeRow.style.display      = 'flex';
-        btnCancelWrap.style.display = 'grid';
-        setBadge('active', 'Sensor aktiv');
-        speechText.textContent = "Los geht's!";
-        startTimer();
-      };
+      // // ── TEST: Sensor simulieren ──────────────────────
+      // // Diese 3 Zeilen entfernen wenn echter Sensor läuft
+      // window.startBrushing = function() {
+      //   appState = 'waiting'; lastValue = null; noDataStreak = 0;
+      //   btnStartWrap.style.display  = 'none';
+      //   badgeRow.style.display      = 'flex';
+      //   btnCancelWrap.style.display = 'grid';
+      //   setBadge('active', 'Sensor aktiv');
+      //   speechText.textContent = "Los geht's!";
+      //   startTimer();
+      // };
       // ────────────────────────────────────────────────
 
     </script>
