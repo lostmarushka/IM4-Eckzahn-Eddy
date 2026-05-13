@@ -1,39 +1,45 @@
 <?php
+// api/generate-profile.php
 session_start();
 require_once '../system/config.php';
 
-// Zugriff nur für eingeloggte Benutzer
 if (empty($_SESSION['user_id'])) {
     header('Location: /login.html');
     exit;
 }
 
-// Nur POST akzeptieren
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     header('Location: /generate-profile.html');
     exit;
 }
 
-// Name validieren
 $name = trim($_POST['childName'] ?? '');
 if ($name === '') {
     header('Location: /generate-profile.html?error=name');
     exit;
 }
 
-// Family-ID aus der Session holen – vorerst fest auf 1 setzen
-$familie_id = 1;   // <─ HIER
+// Familie vorerst fest auf 1
+$familie_id = 1;
 
-// In Datenbank speichern
+// Zufälliges Avatar-Bild aus dem img-Ordner
+$avatars = [
+    'img/profile_emma.jpg',
+    'img/profile_sophie.jpg',
+    'img/profile_max.jpg',
+    'img/profile_zuefaellig.jpg',
+];
+$avatar = $avatars[array_rand($avatars)];
+
 try {
-    $stmt = $pdo->prepare("
-        INSERT INTO kinder (familie_id, name)
-        VALUES (:familie_id, :name)
-    ");
-
+    $stmt = $pdo->prepare(
+        'INSERT INTO kinder (familie_id, name, avatar)
+         VALUES (:familie_id, :name, :avatar)'
+    );
     $stmt->execute([
         ':familie_id' => $familie_id,
         ':name'       => $name,
+        ':avatar'     => $avatar,
     ]);
 
     header('Location: /generate-profile.html?success=1');

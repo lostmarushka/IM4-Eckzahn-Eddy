@@ -1,5 +1,6 @@
 <?php
 // api/get-profiles.php
+// Gibt alle Kinder der Familie als JSON zurück (inkl. avatar)
 session_start();
 require_once '../system/config.php';
 header('Content-Type: application/json');
@@ -10,11 +11,13 @@ if (empty($_SESSION['user_id'])) {
     exit;
 }
 
-// Vorerst famille_id = 1 (gleich wie in generate-profile.php)
+// Vorerst famille_id = 1
 $familie_id = 1;
 
 try {
-    $stmt = $pdo->prepare('SELECT id, name FROM kinder WHERE familie_id = :familie_id ORDER BY id ASC');
+    $stmt = $pdo->prepare(
+        'SELECT id, name, avatar FROM kinder WHERE familie_id = :familie_id ORDER BY id ASC'
+    );
     $stmt->execute([':familie_id' => $familie_id]);
     $kinder = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
