@@ -107,13 +107,13 @@
             style="display: none"
           >
             <button
-              type="button"
-              class="intro-button intro-button-secondary"
-              onclick="cancelBrushing()"
-            >
-              <img src="img/dot_yellow.svg" alt="" class="button-icon-image" />
-              <span>Abbrechen</span>
-            </button>
+  type="button"
+  class="intro-button intro-button-secondary"
+  onclick="openModal()"
+>
+  <img src="img/dot_yellow.svg" alt="" class="button-icon-image" />
+  <span>Abbrechen</span>
+</button>
           </div>
         </div>
       </section>
@@ -122,6 +122,11 @@
     <script src="js/auth.js"></script>
     <script src="js/logout.js"></script>
     <script>
+function confirmCancel() {
+  closeModal();
+  cancelBrushing();
+}
+
       // ── Profilname aus DB laden ──────────────────────────────────
       (async function loadProfileName() {
         try {
@@ -266,22 +271,9 @@
         sensorBadge.className = "sensor-badge " + type;
         sensorLabel.textContent = label;
       }
-
-      // // ── TEST: Sensor simulieren ──────────────────────
-      // // Diese 3 Zeilen entfernen wenn echter Sensor läuft
-      // window.startBrushing = function() {
-      //   appState = 'waiting'; lastValue = null; noDataStreak = 0;
-      //   btnStartWrap.style.display  = 'none';
-      //   badgeRow.style.display      = 'flex';
-      //   btnCancelWrap.style.display = 'grid';
-      //   setBadge('active', 'Sensor aktiv');
-      //   speechText.textContent = "Los geht's!";
-      //   startTimer();
-      // };
-      // ────────────────────────────────────────────────
     </script>
 
-    <!-- DEBUG PANEL – danach entfernen -->
+    <!-- DEBUG PANEL – danach entfernen
 <div id="debug-panel" style="
   position:fixed; bottom:0; left:0; right:0;
   background:#000; color:#0f0; font:12px/1.4 monospace;
@@ -290,44 +282,84 @@
 ">
   <strong>🐛 DEBUG</strong>
   <div id="debug-log"></div>
-</div>
-<script>
-function dbg(msg) {
-  const el = document.getElementById('debug-log');
-  const t  = new Date().toISOString().slice(11,19);
-  el.innerHTML = `<div>[${t}] ${msg}</div>` + el.innerHTML;
-  // max 30 Zeilen
-  const lines = el.querySelectorAll('div');
-  if (lines.length > 30) lines[lines.length-1].remove();
-}
+</div> -->
+    <script>
+      function dbg(msg) {
+        const el = document.getElementById("debug-log");
+        const t = new Date().toISOString().slice(11, 19);
+        el.innerHTML = `<div>[${t}] ${msg}</div>` + el.innerHTML;
+        // max 30 Zeilen
+        const lines = el.querySelectorAll("div");
+        if (lines.length > 30) lines[lines.length - 1].remove();
+      }
 
-// Überschreibe pollSensor mit Debug-Version
-const _origPoll = pollSensor;
-pollSensor = async function() {
-  try {
-    const res  = await fetch('api/sensor-status.php', { cache: 'no-store' });
-    const text = await res.text();
-    let data;
-    try { data = JSON.parse(text); } catch(e) { dbg('❌ JSON parse error: ' + text); return; }
+      
 
-    dbg(`fetch OK | id=${data.id} wert=${data.wert} lastSensorId=${lastSensorId} streak=${noDataStreak}`);
+      // // Überschreibe pollSensor mit Debug-Version
+      // const _origPoll = pollSensor;
+      // pollSensor = async function() {
+      //   try {
+      //     const res  = await fetch('api/sensor-status.php', { cache: 'no-store' });
+      //     const text = await res.text();
+      //     let data;
+      //     try { data = JSON.parse(text); } catch(e) { dbg('❌ JSON parse error: ' + text); return; }
 
-    if (data.id !== null && data.id !== lastSensorId) {
-      lastSensorId = data.id;
-      noDataStreak = 0;
-      dbg('✅ SENSOR AKTIV → onSensorActive()');
-      onSensorActive();
-    } else {
-      noDataStreak++;
-      dbg(`⏸ keine neue id → streak=${noDataStreak}`);
-      checkInactive();
-    }
-  } catch(e) {
-    noDataStreak++;
-    dbg('💥 fetch error: ' + e.message);
-    checkInactive();
-  }
-};
-</script>
+      //     dbg(`fetch OK | id=${data.id} wert=${data.wert} lastSensorId=${lastSensorId} streak=${noDataStreak}`);
+
+      //     if (data.id !== null && data.id !== lastSensorId) {
+      //       lastSensorId = data.id;
+      //       noDataStreak = 0;
+      //       dbg('✅ SENSOR AKTIV → onSensorActive()');
+      //       onSensorActive();
+      //     } else {
+      //       noDataStreak++;
+      //       dbg(`⏸ keine neue id → streak=${noDataStreak}`);
+      //       checkInactive();
+      //     }
+      //   } catch(e) {
+      //     noDataStreak++;
+      //     dbg('💥 fetch error: ' + e.message);
+      //     checkInactive();
+      //   }
+      // };
+    </script>
+
+    <div id="cancel-modal">
+      <div class="modal-box">
+        <button class="modal-close" onclick="closeModal()">✕</button>
+        <h2 class="modal-title">Putzen abbrechen?</h2>
+        <p class="modal-text">
+          Bist du sicher, dass du aufhören möchtest? Dein Fortschritt wird
+          gespeichert, aber nicht als abgeschlossen markiert.
+        </p>
+        <div class="modal-buttons">
+          <button class="modal-btn-primary" onclick="closeModal()">
+            Weiter putzen
+          </button>
+          <button class="modal-btn-secondary" onclick="confirmCancel()">
+            Ja, abbrechen
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function openModal() {
+        const m = document.getElementById("cancel-modal");
+        m.style.display = "flex";
+      }
+      function closeModal() {
+        document.getElementById("cancel-modal").style.display = "none";
+      }
+      function confirmCancel() {
+        closeModal();
+        // deine Abbrechen-Logik hier
+      }
+      document
+        .getElementById("cancel-modal")
+        .addEventListener("click", function (e) {
+          if (e.target === this) closeModal();
+        });
+    </script>
   </body>
 </html>
