@@ -250,7 +250,7 @@ button { font: inherit; border: none; background: none; cursor: pointer; }
 .ring-time {
   font-family: "Cousine", monospace;
   font-size: clamp(2.8rem, 15vw, 5rem);
-  font-weight: 700; line-height: 1;
+  font-weight: 500; line-height: 1;
   color: var(--color-text);
 }
 
