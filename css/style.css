@@ -413,7 +413,7 @@ button { font: inherit; border: none; background: none; cursor: pointer; }
 }
 
 .modal-box {
-  background: white;
+  background:  #A97EFF;
   border-radius: 16px;
   padding: 28px 24px 24px;
   max-width: 340px;

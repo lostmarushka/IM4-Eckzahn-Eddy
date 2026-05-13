@@ -16,22 +16,14 @@
     <main class="page-wrapper page-wrapper-brushing">
       <section class="login-wrapper brushing-wrapper">
         <header class="brushing-header-wrapper">
-          <button
-            onclick="history.back()"
-            class="back-button"
-            aria-label="Zurück"
-          >
+          <button onclick="history.back()" class="back-button" aria-label="Zurück">
             <img src="img/back_button.svg" alt="Zurück" />
           </button>
           <div class="brushing-title-wrapper">
             <h1 class="title-wrapper">ZÄHNE PUTZEN</h1>
             <p class="brushing-name" id="activeProfileName">–</p>
           </div>
-          <a
-            href="protected.html"
-            class="circle-button-icon"
-            aria-label="Profil"
-          >
+          <a href="protected.html" class="circle-button-icon" aria-label="Profil">
             <img src="img/profile_button.svg" alt="" />
           </a>
         </header>
@@ -42,22 +34,12 @@
             <div class="ring-timer">
               <svg class="ring-svg" viewBox="0 0 500 500">
                 <circle class="ring-track" cx="250" cy="250" r="220" />
-                <circle
-                  class="ring-progress"
-                  id="ring-progress"
-                  cx="250"
-                  cy="250"
-                  r="220"
-                />
+                <circle class="ring-progress" id="ring-progress" cx="250" cy="250" r="220" />
               </svg>
               <div class="ring-center">
                 <p class="ring-time" id="ring-time">2:00</p>
                 <div class="intro-dots-wrapper" aria-hidden="true">
-                  <img
-                    src="img/coloured_rectangles.svg"
-                    alt=""
-                    class="intro-dots"
-                  />
+                  <img src="img/coloured_rectangles.svg" alt="" class="intro-dots" />
                 </div>
               </div>
             </div>
@@ -74,9 +56,7 @@
               />
             </div>
             <section class="speech-bubble-wrapper">
-              <p class="speech-bubble-text" id="speech-text">
-                Bereit zum Putzen?
-              </p>
+              <p class="speech-bubble-text" id="speech-text">Bereit zum Putzen?</p>
             </section>
           </div>
         </div>
@@ -84,11 +64,7 @@
         <!-- Aktionsbuttons -->
         <div class="intro-actions-wrapper brushing-actions-wrapper">
           <div class="button-wrapper" id="btn-start-wrapper">
-            <button
-              type="button"
-              class="intro-button intro-button-primary"
-              onclick="startBrushing()"
-            >
+            <button type="button" class="intro-button intro-button-primary" onclick="startBrushing()">
               <img src="img/zahn_white.svg" alt="" class="button-icon-image" />
               <span>Putzen starten</span>
             </button>
@@ -101,69 +77,74 @@
             </span>
           </div>
 
-          <div
-            class="button-wrapper"
-            id="btn-cancel-wrapper"
-            style="display: none"
-          >
-            <button
-  type="button"
-  class="intro-button intro-button-secondary"
-  onclick="openModal()"
->
-  <img src="img/dot_yellow.svg" alt="" class="button-icon-image" />
-  <span>Abbrechen</span>
-</button>
+          <div class="button-wrapper" id="btn-cancel-wrapper" style="display: none">
+            <button type="button" class="intro-button intro-button-secondary" onclick="openModal()">
+              <img src="img/dot_yellow.svg" alt="" class="button-icon-image" />
+              <span>Abbrechen</span>
+            </button>
           </div>
         </div>
       </section>
     </main>
 
+    <!-- Modal -->
+    <div id="cancel-modal">
+      <div class="modal-box">
+        <button class="modal-close" onclick="closeModal()">✕</button>
+        <h2 class="modal-title">Putzen abbrechen?</h2>
+        <p class="modal-text">
+          Bist du sicher, dass du aufhören möchtest? Dein Fortschritt wird
+          gespeichert, aber nicht als abgeschlossen markiert.
+        </p>
+        <div class="modal-buttons">
+          <button class="modal-btn-primary" onclick="closeModal()">Weiter putzen</button>
+          <button class="modal-btn-secondary" onclick="confirmCancel()">Ja, abbrechen</button>
+        </div>
+      </div>
+    </div>
+
     <script src="js/auth.js"></script>
     <script src="js/logout.js"></script>
-    <script>
-function confirmCancel() {
-  closeModal();
-  cancelBrushing();
-}
 
-      // ── Profilname aus DB laden ──────────────────────────────────
+    <script>
+      // ── Profilname laden ─────────────────────────────────────────
       (async function loadProfileName() {
         try {
-          const res = await fetch("api/get-active-profile.php");
+          const res  = await fetch("api/get-active-profile.php");
           const data = await res.json();
           if (data.name) {
-            document.getElementById("activeProfileName").textContent =
-              data.name;
+            document.getElementById("activeProfileName").textContent = data.name;
           }
         } catch (e) {
           console.warn("Profilname konnte nicht geladen werden:", e);
         }
       })();
-      // ─────────────────────────────────────────────────────────────
 
-      const speechText = document.getElementById("speech-text");
-      const btnStartWrap = document.getElementById("btn-start-wrapper");
-      const badgeRow = document.getElementById("badge-row");
-      const sensorBadge = document.getElementById("sensor-badge");
-      const sensorLabel = document.getElementById("sensor-label");
+      // ── DOM-Referenzen ───────────────────────────────────────────
+      const speechText    = document.getElementById("speech-text");
+      const btnStartWrap  = document.getElementById("btn-start-wrapper");
+      const badgeRow      = document.getElementById("badge-row");
+      const sensorBadge   = document.getElementById("sensor-badge");
+      const sensorLabel   = document.getElementById("sensor-label");
       const btnCancelWrap = document.getElementById("btn-cancel-wrapper");
-      const ringProgress = document.getElementById("ring-progress");
-      const ringTime = document.getElementById("ring-time");
+      const ringProgress  = document.getElementById("ring-progress");
+      const ringTime      = document.getElementById("ring-time");
 
+      // ── Timer-Setup ──────────────────────────────────────────────
       const TOTAL = 120;
-      const CIRC = 2 * Math.PI * 220;
-      ringProgress.style.strokeDasharray = CIRC;
+      const CIRC  = 2 * Math.PI * 220;
+      ringProgress.style.strokeDasharray  = CIRC;
       ringProgress.style.strokeDashoffset = 0;
 
-      let appState = "idle";
-      let pollInterval = null;
+      let appState     = "idle";
+      let pollInterval  = null;
       let timerInterval = null;
-      let lastSensorId = null;
-      let noDataStreak = 0;
-      let elapsed = 0;
+      let lastSensorId  = null;
+      let noDataStreak  = 0;
+      let elapsed       = 0;
       const PAUSE_AFTER = 3;
 
+      // ── Ring ─────────────────────────────────────────────────────
       function updateRing() {
         const remaining = TOTAL - elapsed;
         const mins = Math.floor(remaining / 60);
@@ -173,16 +154,11 @@ function confirmCancel() {
         if (remaining <= 0) finish();
       }
 
+      // ── Sensor Polling ───────────────────────────────────────────
       async function pollSensor() {
         try {
-          const res = await fetch("api/sensor-status.php", {
-            cache: "no-store",
-          });
-          if (!res.ok) {
-            noDataStreak++;
-            checkInactive();
-            return;
-          }
+          const res = await fetch("api/sensor-status.php", { cache: "no-store" });
+          if (!res.ok) { noDataStreak++; checkInactive(); return; }
           const data = await res.json();
           if (data.id !== null && data.id !== lastSensorId) {
             lastSensorId = data.id;
@@ -198,23 +174,17 @@ function confirmCancel() {
         }
       }
 
-      function checkInactive() {
-        if (noDataStreak >= PAUSE_AFTER) onSensorInactive();
-      }
-      function onSensorActive() {
-        if (appState === "waiting") startTimer();
-        else if (appState === "paused") resumeTimer();
-      }
-      function onSensorInactive() {
-        if (appState === "running") pauseTimer();
-      }
+      function checkInactive()    { if (noDataStreak >= PAUSE_AFTER) onSensorInactive(); }
+      function onSensorActive()   { if (appState === "waiting") startTimer(); else if (appState === "paused") resumeTimer(); }
+      function onSensorInactive() { if (appState === "running") pauseTimer(); }
 
+      // ── App-Zustände ─────────────────────────────────────────────
       function startBrushing() {
-        appState = "waiting";
-        lastValue = null;
+        appState     = "waiting";
+        lastSensorId = null;
         noDataStreak = 0;
-        btnStartWrap.style.display = "none";
-        badgeRow.style.display = "flex";
+        btnStartWrap.style.display  = "none";
+        badgeRow.style.display      = "flex";
         btnCancelWrap.style.display = "grid";
         setBadge("waiting", "Warte auf Sensor…");
         speechText.textContent = "Los geht's!";
@@ -225,10 +195,7 @@ function confirmCancel() {
         appState = "running";
         setBadge("active", "Sensor aktiv");
         speechText.textContent = "Weiter so! 💪";
-        timerInterval = setInterval(() => {
-          elapsed++;
-          updateRing();
-        }, 1000);
+        timerInterval = setInterval(() => { elapsed++; updateRing(); }, 1000);
       }
 
       function pauseTimer() {
@@ -242,20 +209,21 @@ function confirmCancel() {
         appState = "running";
         setBadge("active", "Sensor aktiv");
         speechText.textContent = "Weiter so! 💪";
-        timerInterval = setInterval(() => {
-          elapsed++;
-          updateRing();
-        }, 1000);
+        timerInterval = setInterval(() => { elapsed++; updateRing(); }, 1000);
       }
 
       function cancelBrushing() {
         appState = "idle";
         clearInterval(pollInterval);
         clearInterval(timerInterval);
-        elapsed = 0;
+        pollInterval  = null;
+        timerInterval = null;
+        elapsed      = 0;
+        lastSensorId = null;
+        noDataStreak = 0;
         updateRing();
-        btnStartWrap.style.display = "grid";
-        badgeRow.style.display = "none";
+        btnStartWrap.style.display  = "grid";
+        badgeRow.style.display      = "none";
         btnCancelWrap.style.display = "none";
         setBadge("waiting", "Warte auf Sensor…");
         speechText.textContent = "Bereit zum Putzen?";
@@ -268,44 +236,52 @@ function confirmCancel() {
       }
 
       function setBadge(type, label) {
-        sensorBadge.className = "sensor-badge " + type;
+        sensorBadge.className   = "sensor-badge " + type;
         sensorLabel.textContent = label;
       }
+
+      // ── Modal ────────────────────────────────────────────────────
+      function openModal() {
+        document.getElementById("cancel-modal").style.display = "flex";
+      }
+      function closeModal() {
+        document.getElementById("cancel-modal").style.display = "none";
+      }
+      function confirmCancel() {
+        closeModal();
+        cancelBrushing();
+      }
+      document.getElementById("cancel-modal").addEventListener("click", function (e) {
+        if (e.target === this) closeModal();
+      });
     </script>
 
     <!-- DEBUG PANEL – danach entfernen
-<div id="debug-panel" style="
-  position:fixed; bottom:0; left:0; right:0;
-  background:#000; color:#0f0; font:12px/1.4 monospace;
-  padding:8px 12px; z-index:9999; max-height:40vh; overflow-y:auto;
-  border-top:2px solid #0f0;
-">
-  <strong>🐛 DEBUG</strong>
-  <div id="debug-log"></div>
-</div> -->
+    <div id="debug-panel" style="
+      position:fixed; bottom:0; left:0; right:0;
+      background:#000; color:#0f0; font:12px/1.4 monospace;
+      padding:8px 12px; z-index:9999; max-height:40vh; overflow-y:auto;
+      border-top:2px solid #0f0;
+    ">
+      <strong>🐛 DEBUG</strong>
+      <div id="debug-log"></div>
+    </div>
     <script>
       function dbg(msg) {
         const el = document.getElementById("debug-log");
-        const t = new Date().toISOString().slice(11, 19);
+        const t  = new Date().toISOString().slice(11, 19);
         el.innerHTML = `<div>[${t}] ${msg}</div>` + el.innerHTML;
-        // max 30 Zeilen
         const lines = el.querySelectorAll("div");
         if (lines.length > 30) lines[lines.length - 1].remove();
       }
-
-      
-
-      // // Überschreibe pollSensor mit Debug-Version
-      // const _origPoll = pollSensor;
+      // Überschreibe pollSensor mit Debug-Version
       // pollSensor = async function() {
       //   try {
       //     const res  = await fetch('api/sensor-status.php', { cache: 'no-store' });
       //     const text = await res.text();
       //     let data;
       //     try { data = JSON.parse(text); } catch(e) { dbg('❌ JSON parse error: ' + text); return; }
-
       //     dbg(`fetch OK | id=${data.id} wert=${data.wert} lastSensorId=${lastSensorId} streak=${noDataStreak}`);
-
       //     if (data.id !== null && data.id !== lastSensorId) {
       //       lastSensorId = data.id;
       //       noDataStreak = 0;
@@ -323,43 +299,7 @@ function confirmCancel() {
       //   }
       // };
     </script>
+    -->
 
-    <div id="cancel-modal">
-      <div class="modal-box">
-        <button class="modal-close" onclick="closeModal()">✕</button>
-        <h2 class="modal-title">Putzen abbrechen?</h2>
-        <p class="modal-text">
-          Bist du sicher, dass du aufhören möchtest? Dein Fortschritt wird
-          gespeichert, aber nicht als abgeschlossen markiert.
-        </p>
-        <div class="modal-buttons">
-          <button class="modal-btn-primary" onclick="closeModal()">
-            Weiter putzen
-          </button>
-          <button class="modal-btn-secondary" onclick="confirmCancel()">
-            Ja, abbrechen
-          </button>
-        </div>
-      </div>
-    </div>
-
-    <script>
-      function openModal() {
-        const m = document.getElementById("cancel-modal");
-        m.style.display = "flex";
-      }
-      function closeModal() {
-        document.getElementById("cancel-modal").style.display = "none";
-      }
-      function confirmCancel() {
-        closeModal();
-        // deine Abbrechen-Logik hier
-      }
-      document
-        .getElementById("cancel-modal")
-        .addEventListener("click", function (e) {
-          if (e.target === this) closeModal();
-        });
-    </script>
   </body>
 </html>
