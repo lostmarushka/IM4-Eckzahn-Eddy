@@ -53,18 +53,32 @@
 
           <!-- Timer -->
           <section class="timer-wrapper" aria-label="Timer">
-            <div class="timer-ring">
-              <div class="timer-content">
-                <p class="timer-text">2:00</p>
-                <div class="intro-dots-wrapper" aria-hidden="true">
-                  <img
-                    src="img/coloured_rectangles.svg"
-                    alt=""
-                    class="intro-dots"
-                  />
+
+            <!-- Zustand 2: Warten auf Sensor -->
+            <div id="state-waiting" class="brushing-state">
+              <div class="waiting-ring">
+                <div class="waiting-ring-content">
+                  <div class="waiting-dots" aria-label="Warte auf Sensor">
+                    <span class="waiting-dot"></span>
+                    <span class="waiting-dot"></span>
+                    <span class="waiting-dot"></span>
+                  </div>
                 </div>
               </div>
             </div>
+
+            <!-- Zustand 3: Video-Timer läuft -->
+            <div id="state-timer" class="brushing-state">
+              <div class="video-ring">
+                <video
+                  id="timer-video"
+                  src="video/timer.webm"
+                  playsinline
+                  muted
+                ></video>
+              </div>
+            </div>
+
           </section>
 
           <!-- Charakter und Sprechblase -->
@@ -78,7 +92,7 @@
               />
             </div>
             <section class="speech-bubble-wrapper">
-              <p class="speech-bubble-text">Bereit zum Putzen?</p>
+              <p class="speech-bubble-text" id="speech-text">Bereit zum Putzen?</p>
             </section>
           </div>
 
@@ -87,18 +101,36 @@
         <!-- Aktionsbuttons -->
         <div class="intro-actions-wrapper brushing-actions-wrapper">
 
-          <div class="button-wrapper">
-            <button type="button" class="intro-button intro-button-primary">
+          <!-- Start-Knopf (nur Zustand 1) -->
+          <div class="button-wrapper" id="btn-start-wrapper">
+            <button
+              type="button"
+              class="intro-button intro-button-primary"
+              onclick="startBrushing()"
+            >
               <img src="img/zahn_white.svg" alt="" class="button-icon-image" />
               <span>Putzen starten</span>
             </button>
           </div>
 
-          <div class="button-wrapper">
-            <a href="protected.html" class="intro-button intro-button-secondary">
+          <!-- Sensor-Badge (Zustand 2 + 3) -->
+          <div style="display:none; justify-content:center;" id="badge-row">
+            <span class="sensor-badge waiting" id="sensor-badge">
+              <span class="sensor-dot"></span>
+              <span id="sensor-label">Warte auf Sensor…</span>
+            </span>
+          </div>
+
+          <!-- Abbrechen (Zustand 2 + 3) -->
+          <div class="button-wrapper" id="btn-cancel-wrapper" style="display:none">
+            <button
+              type="button"
+              class="intro-button intro-button-secondary"
+              onclick="cancelBrushing()"
+            >
               <img src="img/dot_yellow.svg" alt="" class="button-icon-image" />
-              <span>Statistiken ansehen</span>
-            </a>
+              <span>Abbrechen</span>
+            </button>
           </div>
 
         </div>
@@ -109,10 +141,137 @@
     <script src="js/auth.js"></script>
     <script src="js/logout.js"></script>
 
-    <!-- Profilname aus sessionStorage lesen und im Header anzeigen -->
     <script>
+      // Profilname aus sessionStorage
       const name = sessionStorage.getItem("activeProfile") || "–";
       document.getElementById("activeProfileName").textContent = name;
+
+      // Elemente
+      const stateStart    = document.getElementById('state-start');
+      const stateWaiting  = document.getElementById('state-waiting');
+      const stateTimer    = document.getElementById('state-timer');
+      const video         = document.getElementById('timer-video');
+      const speechText    = document.getElementById('speech-text');
+      const btnStartWrap  = document.getElementById('btn-start-wrapper');
+      const badgeRow      = document.getElementById('badge-row');
+      const sensorBadge   = document.getElementById('sensor-badge');
+      const sensorLabel   = document.getElementById('sensor-label');
+      const btnCancelWrap = document.getElementById('btn-cancel-wrapper');
+
+      let appState     = 'idle'; // idle | waiting | running | paused
+      let pollInterval = null;
+      let lastValue    = null;
+      let noDataStreak = 0;
+      const PAUSE_AFTER = 3; // Polls ohne neuen Wert → pausieren
+
+      // Sensor-Polling: api/load.php alle 800ms abfragen
+      // Ändert sich der Wert → Sensor aktiv
+      // Bleibt er PAUSE_AFTER-mal gleich → Sensor inaktiv
+      async function pollSensor() {
+        try {
+          const res = await fetch('api/load.php', { cache: 'no-store' });
+          if (!res.ok) { noDataStreak++; checkInactive(); return; }
+          const data = await res.json();
+          const val  = data.wert ?? data.value ?? JSON.stringify(data);
+          if (val !== lastValue) {
+            lastValue = val;
+            noDataStreak = 0;
+            onSensorActive();
+          } else {
+            noDataStreak++;
+            checkInactive();
+          }
+        } catch {
+          noDataStreak++;
+          checkInactive();
+        }
+      }
+
+      function checkInactive() {
+        if (noDataStreak >= PAUSE_AFTER) onSensorInactive();
+      }
+
+      function onSensorActive() {
+        if      (appState === 'waiting') transitionToRunning();
+        else if (appState === 'paused')  resumeVideo();
+      }
+
+      function onSensorInactive() {
+        if (appState === 'running') pauseVideo();
+      }
+
+      // UI-Übergänge
+      function startBrushing() {
+        appState = 'waiting';
+        lastValue = null;
+        noDataStreak = 0;
+
+        stateStart.classList.remove('active');
+        stateWaiting.classList.add('active');
+
+        btnStartWrap.style.display  = 'none';
+        badgeRow.style.display      = 'flex';
+        btnCancelWrap.style.display = 'grid';
+
+        setBadge('waiting', 'Warte auf Sensor…');
+        speechText.textContent = 'Los geht\'s!';
+
+        pollInterval = setInterval(pollSensor, 800);
+      }
+
+      function transitionToRunning() {
+        appState = 'running';
+
+        stateWaiting.classList.remove('active');
+        stateTimer.classList.add('active');
+
+        video.play();
+        setBadge('active', 'Sensor aktiv');
+        speechText.textContent = 'Weiter so! 💪';
+      }
+
+      function pauseVideo() {
+        appState = 'paused';
+        video.pause();
+        setBadge('paused', 'Unterbrochen…');
+        speechText.textContent = 'Weitermachen!';
+      }
+
+      function resumeVideo() {
+        appState = 'running';
+        video.play();
+        setBadge('active', 'Sensor aktiv');
+        speechText.textContent = 'Weiter so! 💪';
+      }
+
+      function cancelBrushing() {
+        appState = 'idle';
+        clearInterval(pollInterval);
+        video.pause();
+        video.currentTime = 0;
+
+        stateWaiting.classList.remove('active');
+        stateTimer.classList.remove('active');
+        stateStart.classList.add('active');
+
+        btnStartWrap.style.display  = 'grid';
+        badgeRow.style.display      = 'none';
+        btnCancelWrap.style.display = 'none';
+
+        setBadge('waiting', 'Warte auf Sensor…');
+        speechText.textContent = 'Bereit zum Putzen?';
+      }
+
+      function setBadge(type, label) {
+        sensorBadge.className   = 'sensor-badge ' + type;
+        sensorLabel.textContent = label;
+      }
+
+      // Video fertig → success.html
+      video.addEventListener('ended', () => {
+        clearInterval(pollInterval);
+        window.location.href = 'success.html';
+      });
     </script>
 
   </body>
