@@ -1,14 +1,24 @@
 <?php
 // api/generate-profile.php
-// Verarbeitet das Formular aus generate-profile.html
-// und speichert ein neues Kind in der Datenbank.
+// Nimmt das Formular aus generate-profile.html entgegen
+// und speichert ein neues Kind in der Tabelle `kinder`.
 
 session_start();
-require_once '../system/config.php';
+require_once '../system/config.php'; // DB-Verbindung
 
 // ── Zugriff nur für eingeloggte Benutzer ──
-if (empty($_SESSION['familien_id'])) {
-    header('Location: /index.html');
+if (empty($_SESSION['user_id'])) {
+    // Falls nicht eingeloggt, zurück zur Login-Seite
+    header('Location: /login.html');
+    exit;
+}
+
+// Family-ID aus der Session holen
+// (falls du sie an anderer Stelle setzt: $_SESSION['familien_id'])
+$familien_id = $_SESSION['familien_id'] ?? $_SESSION['user_id'] ?? null;
+if ($familien_id === null) {
+    // Fallback: lieber sauber abbrechen als mit NULL in die DB schreiben
+    header('Location: /generate-profile.html?error=db');
     exit;
 }
 
@@ -22,55 +32,30 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 $name = trim($_POST['childName'] ?? '');
 
 if ($name === '') {
+    // Zurück mit Fehlermeldung, wird im HTML angezeigt
     header('Location: /generate-profile.html?error=name');
     exit;
 }
 
-$familien_id = (int) $_SESSION['familien_id'];
-
 // ── In Datenbank speichern ──
+// WICHTIG: Spaltennamen wie in deiner Tabelle: ID, familie_id, name
 try {
-    $stmt = $pdo->prepare("
-        INSERT INTO kinder (Familien_ID, Name)
-        VALUES (:familien_id, :name)
-    ");
+    $stmt = $pdo->prepare(
+        'INSERT INTO kinder (familie_id, name) 
+         VALUES (:familie_id, :name)'
+    );
 
     $stmt->execute([
-        ':familien_id' => $familien_id,
-        ':name'        => $name,
+        ':familie_id' => $familien_id,
+        ':name'       => $name,
     ]);
 
-    header('Location: /choose-profile.html?success=1');
+    // Erfolgreich → Erfolgsmeldung auf generate-profile.html
+    header('Location: /generate-profile.html?success=1');
     exit;
 
 } catch (PDOException $e) {
     error_log('generate-profile.php DB error: ' . $e->getMessage());
     header('Location: /generate-profile.html?error=db');
-    exit;
-}
-
-// ── DEBUG: Fehler direkt anzeigen ──
-ini_set('display_errors', 1);
-error_reporting(E_ALL);
-
-try {
-    $stmt = $pdo->prepare("
-        INSERT INTO kinder (Familien_ID, Name)
-        VALUES (:familien_id, :name)
-    ");
-
-    $stmt->execute([
-        ':familien_id' => $familien_id,
-        ':name'        => $name,
-    ]);
-
-    echo "✅ Erfolgreich! familien_id=" . $familien_id . " name=" . $name;
-    // header('Location: /choose-profile.html?success=1');
-    exit;
-
-} catch (PDOException $e) {
-    echo "❌ DB Fehler: " . $e->getMessage();
-    echo "<br>familien_id=" . $familien_id;
-    echo "<br>name=" . $name;
     exit;
 }
