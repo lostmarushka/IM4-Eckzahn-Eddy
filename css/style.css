@@ -508,6 +508,11 @@ button { font: inherit; border: none; background: none; cursor: pointer; }
   width: 110px;
   height: 34px;
   object-fit: contain;
+  animation-delay: 0s;
+}
+
+.success-image {
+  animation-delay: 0s;
 }
 
 /* Character */
@@ -644,6 +649,19 @@ button { font: inherit; border: none; background: none; cursor: pointer; }
   background-color: #A97EFF;
   border: 2px solid #B88FFF;
   box-shadow: 0 8px 18px rgba(169, 126, 255, 0.35);
+}
+
+@keyframes eddyBounce {
+  0%   { transform: translateY(0px); animation-timing-function: ease-in; }
+  45%  { transform: translateY(-28px); animation-timing-function: ease-out; }
+  55%  { transform: translateY(-28px); animation-timing-function: ease-in; }
+  100% { transform: translateY(0px); }
+}
+
+.success-image,
+.success-stars {
+  animation: eddyBounce 0.65s ease-in-out infinite;
+  transform-origin: bottom center;
 }
 
 /* Responsive */
