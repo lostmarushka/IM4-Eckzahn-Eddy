@@ -504,8 +504,8 @@ button { font: inherit; border: none; background: none; cursor: pointer; }
   gap: 14px;
 }
 
-.success-star {
-  width: 34px;
+.success-stars {
+  width: 110px;
   height: 34px;
   object-fit: contain;
 }
@@ -641,7 +641,9 @@ button { font: inherit; border: none; background: none; cursor: pointer; }
   min-height: 68px;
   border-radius: 28px;
   font-size: 1.2rem;
-  background-color: #6f35c9;
+  background-color: #A97EFF;
+  border: 2px solid #B88FFF;
+  box-shadow: 0 8px 18px rgba(169, 126, 255, 0.35);
 }
 
 /* Responsive */
