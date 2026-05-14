@@ -19,17 +19,12 @@
   <body>
     <main class="page-wrapper page-wrapper-brushing success-page-wrapper">
       <section class="login-wrapper success-wrapper">
-
         <!-- Header -->
         <header class="success-header-wrapper">
           <h1 class="title-wrapper success-title">SUPER!</h1>
 
           <div class="success-stars-wrapper" aria-hidden="true">
-            <img
-              src="img/yellow_dots.svg"
-              alt=""
-              class="success-stars"
-            />
+            <img src="img/yellow_dots.svg" alt="" class="success-stars" />
           </div>
         </header>
 
@@ -48,9 +43,7 @@
         <!-- Success Card -->
         <section class="intro-card-wrapper success-card-wrapper">
           <div class="success-card-inner">
-            <h2 class="intro-card-title success-card-title">
-              Geschafft!
-            </h2>
+            <h2 class="intro-card-title success-card-title">Geschafft!</h2>
 
             <p class="intro-card-text success-card-text">
               Du hast 2 ganze Minuten geputzt!<br />
@@ -72,23 +65,28 @@
             <button
               type="button"
               class="intro-button intro-button-secondary success-secondary-button"
-              onclick="window.location.href='statistics.html'"
+              onclick="window.location.href = 'statistics.html'"
             >
-              Statistiken ansehen
+              <img
+                src="img/dot_yellow.svg"
+                alt=""
+                class="button-icon-image success-btn-icon"
+              />
+              <span>Statistiken</span>
             </button>
           </div>
+          <!-- ← dieses </div> fehlt bei dir! -->
 
           <div class="button-wrapper">
             <button
               type="button"
               class="intro-button intro-button-primary success-main-button"
-              onclick="window.location.href='index.html'"
+              onclick="window.location.href = 'index.html'"
             >
               Zurück zum Putzen
             </button>
           </div>
         </div>
-
       </section>
     </main>
   </body>

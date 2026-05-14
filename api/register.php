@@ -1,19 +1,27 @@
 <?php
 // register.php
+ini_set('display_errors', 0);
 session_start();
 header('Content-Type: application/json');
 
-require_once '../system/config.php';
+try {
+    require_once '../system/config.php';
+} catch (Exception $e) {
+    echo json_encode(["status" => "error", "message" => $e->getMessage()]);
+    exit;
+}
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $data = json_decode(file_get_contents("php://input"), true);
 
-    $email    = trim($data['email'] ?? '');
-    $password = trim($data['password'] ?? '');
+    $email     = trim($data['email']      ?? '');
+    $password  = trim($data['password']   ?? '');
+    $name      = trim($data['name']       ?? '');
+    $familie_id = $data['familie_id']     ?? null;
 
-    if (!$email || !$password) {
-        echo json_encode(["status" => "error", "message" => "Email and password are required"]);
+    if (!$email || !$password || !$name) {
+        echo json_encode(["status" => "error", "message" => "Email, password and name are required"]);
         exit;
     }
 
@@ -29,13 +37,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
     // Insert the new user
-    $insert = $pdo->prepare("INSERT INTO users (email, password) VALUES (:email, :pass)");
-    $insert->execute([
-        ':email' => $email,
-        ':pass'  => $hashedPassword
+    $insert = $pdo->prepare("INSERT INTO users (email, password, name, familie_id) VALUES (:email, :pass, :name, :familie_id)");
+    $result = $insert->execute([
+        ':email'      => $email,
+        ':pass'       => $hashedPassword,
+        ':name'       => $name,
+        ':familie_id' => $familie_id
     ]);
 
+    if (!$result) {
+        echo json_encode(["status" => "error", "message" => $insert->errorInfo()[2]]);
+        exit;
+    }
+
     echo json_encode(["status" => "success"]);
+
 } else {
     echo json_encode(["status" => "error", "message" => "Invalid request method"]);
 }
