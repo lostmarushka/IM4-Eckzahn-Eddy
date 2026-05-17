@@ -29,6 +29,7 @@ $avatars = [
     'img/profile_max.jpg',
     'img/profile_zuefaellig.jpg',
 ];
+
 $avatar = $avatars[array_rand($avatars)];
 
 try {
