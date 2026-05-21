@@ -100,11 +100,7 @@ Sobald der Upload abgeschlossen ist, öffnest du den **Serial Monitor** und wäh
 | logout.js| Führt zurück zum Login, kein Zugriff mehr |
 | img | Statische Inhalte zur Darstellung |^
 
-
-
-## technische Details
-
-// Hier sollte das Verständnis ersichtlich sein / Wie stehen die Dateien in Beziehung zueinander, Wie reden Die Dateien miteinander, Wie ist der Weg der Daten
+## Technische Details
 
 * **Projektstruktur / Code-Struktur:**
 Alle Codes und ihre Verlinkungen sind auf dem GitHub Repository einsehbar.  
