@@ -737,210 +737,106 @@ button { font: inherit; border: none; background: none; cursor: pointer; }
 
 /* ── Stats Overview Page ── */
 
-.stats-streak-banner {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  gap: var(--space-sm);
-  background: var(--color-card);
-  border: 1px solid var(--color-card-border);
-  border-radius: var(--radius-xl);
-  padding: 16px 20px;
-}
-
-.stats-streak-flame {
-  font-size: 2rem;
-  line-height: 1;
-  flex-shrink: 0;
-}
-
-.stats-streak-text {
-  display: flex;
-  align-items: baseline;
-  gap: 6px;
-  flex: 1;
-}
-
-.stats-streak-count {
-  font-family: "Cousine", monospace;
-  font-size: 2rem;
-  font-weight: 700;
-  color: var(--color-dot-yellow);
-  line-height: 1;
-}
-
-.stats-streak-label {
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: var(--color-text-soft);
-}
-
-.stats-streak-sub {
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: var(--color-timer-accent);
-  flex-shrink: 0;
-}
-
-/* Overview Cards */
-.stats-overview-card {
-  width: 100%;
-  display: grid;
-  row-gap: var(--space-sm);
-  padding: 22px 20px 20px;
-  border-radius: var(--radius-xl);
-  border: 1px solid var(--color-card-border);
-  background: var(--color-card);
-  text-decoration: none;
-  color: var(--color-text);
-  cursor: pointer;
-  transition: transform 0.15s ease;
-}
-
-.stats-overview-card:active {
-  transform: translateY(2px);
-}
-
-.stats-overview-card--daily {
-  border-color: rgba(255, 79, 163, 0.35);
-  background: linear-gradient(145deg, rgba(255, 79, 163, 0.12) 0%, var(--color-card) 60%);
-}
-
-.stats-overview-card--weekly {
-  border-color: rgba(159, 227, 176, 0.35);
-  background: linear-gradient(145deg, rgba(159, 227, 176, 0.1) 0%, var(--color-card) 60%);
-}
-
-.stats-overview-card-header {
+/* Score Card */
+.stats-card-title-row {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-
-.stats-overview-card-tag {
-  font-size: 0.75rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  color: var(--color-text-soft);
-  background: var(--color-circle-dark);
-  padding: 4px 10px;
-  border-radius: var(--radius-full);
+.stats-card-title-row .stats-card-title {
+  margin-bottom: 0;
 }
 
-.stats-overview-card-arrow {
-  color: var(--color-text-soft);
-}
-
-.stats-overview-card-title {
-  font-family: "Cousine", monospace;
-  font-size: 1.5rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  line-height: 1;
-}
-
-/* Mini Metric Grid */
-.stats-overview-mini-grid {
-  display: grid;
-  grid-template-columns: 1fr auto 1fr auto 1fr;
-  align-items: center;
-}
-
-.stats-overview-mini-cell {
-  display: grid;
-  justify-items: center;
-  row-gap: 3px;
-}
-
-.stats-overview-mini-value {
-  font-family: "Cousine", monospace;
-  font-size: 1.4rem;
-  font-weight: 700;
-  line-height: 1;
-  color: var(--color-text);
-}
-
-.stats-overview-mini-label {
-  font-size: 0.75rem;
-  font-weight: 600;
-  color: var(--color-text-soft);
-}
-
-.stats-overview-mini-divider {
-  width: 1px;
-  height: 40px;
-  background: var(--color-card-border);
-}
-
-/* Mini Bar Chart */
-.stats-overview-bars {
+.stats-score-display {
   display: flex;
-  align-items: flex-end;
-  gap: 4px;
-  height: 48px;
-}
-
-.stats-overview-bar {
-  flex: 1;
-  border-radius: 3px 3px 0 0;
-  background: rgba(255, 79, 163, 0.25);
-  min-height: 3px;
-}
-
-.stats-overview-bar--active {
-  background: var(--color-button-fill);
-}
-
-.stats-overview-bar--weekly {
-  background: rgba(159, 227, 176, 0.2);
-}
-
-.stats-overview-bar--weekly.stats-overview-bar--active {
-  background: var(--color-timer-accent);
-}
-
-/* Wochentag Labels */
-.stats-overview-days-labels {
-  display: flex;
-  justify-content: space-between;
-  padding: 0 1px;
-  margin-top: -2px;
-}
-
-.stats-overview-days-labels span {
-  flex: 1;
-  text-align: center;
-  font-size: 0.65rem;
-  font-weight: 600;
-  color: var(--color-placeholder);
-}
-
-/* Goal Pill */
-.stats-overview-goal-pill {
-  display: inline-flex;
+  flex-direction: column;
   align-items: center;
   gap: 8px;
+  padding: 12px 0 4px;
+}
+.stats-score-value {
+  font-family: "Cousine", monospace;
+  font-size: 5rem;
+  font-weight: 700;
+  color: var(--color-text);
+  line-height: 1;
+}
+.stats-score-sub {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-text-soft);
+}
+
+/* Diese Woche */
+.stats-week-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.stats-week-tile {
   background: var(--color-circle-dark);
-  border-radius: var(--radius-full);
-  padding: 7px 14px;
+  border-radius: var(--radius-large);
+  padding: 16px;
+  display: grid;
+  gap: 6px;
+}
+.stats-week-tile-icon {
+  width: 20px;
+  height: 20px;
+}
+.stats-week-tile-label {
   font-size: 0.85rem;
   font-weight: 600;
   color: var(--color-text-soft);
-  width: fit-content;
+}
+.stats-week-tile .stats-metric-value {
+  font-size: 2rem;
 }
 
-.stats-overview-goal-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
+/* Letzte Aktivität */
+.stats-activity-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.stats-activity-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: var(--color-circle-dark);
+  border-radius: var(--radius-large);
+  padding: 14px 16px;
+}
+.stats-activity-icon {
+  width: 22px;
+  height: 22px;
   flex-shrink: 0;
-  background: var(--color-placeholder);
 }
-
-.stats-overview-goal-dot--done {
-  background: var(--color-timer-accent);
-  box-shadow: 0 0 0 3px rgba(159, 227, 176, 0.25);
+.stats-activity-info {
+  flex: 1;
+}
+.stats-activity-date {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--color-text);
+  display: block;
+}
+.stats-activity-duration {
+  font-size: 0.85rem;
+  color: var(--color-text-soft);
+  display: block;
+}
+.stats-activity-badge {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+.stats-activity-empty {
+  color: var(--color-text-soft);
+  font-size: 0.9rem;
+  text-align: center;
+  padding: 20px 0;
 }
 
 /* Responsive */

@@ -36,103 +36,52 @@
           onclick="location.href='stats-weekly.html'">Weekly</button>
       </div>
 
-      <!-- Streak Banner -->
-      <div class="stats-streak-banner">
-        <span class="stats-streak-flame">🔥</span>
-        <div class="stats-streak-text">
-          <span class="stats-streak-count js-streak-count">–</span>
-          <span class="stats-streak-label">Tage Streak</span>
-        </div>
-        <span class="stats-streak-sub js-streak-sub">–</span>
-      </div>
+     <!-- Putz-Score Card -->
+<section class="stats-card" aria-label="Putz-Score">
+  <div class="stats-card-title-row">
+    <h2 class="stats-card-title">Putz-Score</h2>
+    <img src="img/dot_yellow.svg" alt="" class="button-icon-image" style="width:24px;height:24px;" />
+  </div>
+  <div class="stats-score-display">
+    <span class="stats-score-value js-score-value">–</span>
+    <span class="stats-score-sub js-score-sub">von 100 Punkten</span>
+  </div>
+</section>
 
-      <!-- Daily Card -->
-      <a href="stats-daily.html" class="stats-overview-card stats-overview-card--daily" aria-label="Daily Stats öffnen">
-        <div class="stats-overview-card-header">
-          <span class="stats-overview-card-tag">Heute</span>
-          <svg class="stats-overview-card-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none"
-            stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <polyline points="9 18 15 12 9 6"/>
-          </svg>
-        </div>
-        <h2 class="stats-overview-card-title">Daily Stats</h2>
-        <div class="stats-overview-mini-grid">
-          <div class="stats-overview-mini-cell">
-            <span class="stats-overview-mini-value js-daily-sessions">–</span>
-            <span class="stats-overview-mini-label">Sessions</span>
-          </div>
-          <div class="stats-overview-mini-divider"></div>
-          <div class="stats-overview-mini-cell">
-            <span class="stats-overview-mini-value js-daily-completed">–</span>
-            <span class="stats-overview-mini-label">Completed</span>
-          </div>
-          <div class="stats-overview-mini-divider"></div>
-          <div class="stats-overview-mini-cell">
-            <span class="stats-overview-mini-value js-daily-minutes">–</span>
-            <span class="stats-overview-mini-label">Min.</span>
-          </div>
-        </div>
-        <div class="stats-overview-bars" aria-hidden="true">
-          <div class="stats-overview-bar" style="height:0%"></div>
-          <div class="stats-overview-bar" style="height:0%"></div>
-          <div class="stats-overview-bar" style="height:0%"></div>
-          <div class="stats-overview-bar" style="height:0%"></div>
-          <div class="stats-overview-bar" style="height:0%"></div>
-          <div class="stats-overview-bar" style="height:0%"></div>
-          <div class="stats-overview-bar" style="height:0%"></div>
-          <div class="stats-overview-bar" style="height:0%"></div>
-        </div>
-        <div class="stats-overview-goal-pill">
-          <span class="stats-overview-goal-dot"></span>
-          <span class="js-daily-goal-text">–</span>
-        </div>
-      </a>
+<!-- Diese Woche Card -->
+<section class="stats-card" aria-label="Diese Woche">
+  <div class="stats-card-title-row">
+    <h2 class="stats-card-title">Diese Woche</h2>
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--color-timer-accent)"
+      stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/>
+    </svg>
+  </div>
+  <div class="stats-week-grid">
+    <div class="stats-week-tile">
+      <img src="img/zahn_white.svg" alt="" class="button-icon-image stats-week-tile-icon" />
+      <span class="stats-week-tile-label">Gesamt</span>
+      <span class="stats-metric-value js-week-total">0</span>
+    </div>
+    <div class="stats-week-tile">
+      <img src="img/dot_yellow.svg" alt="" class="button-icon-image stats-week-tile-icon" />
+      <span class="stats-week-tile-label">Sterne</span>
+      <span class="stats-metric-value js-week-stars">0</span>
+    </div>
+  </div>
+</section>
 
-      <!-- Weekly Card -->
-      <a href="stats-weekly.html" class="stats-overview-card stats-overview-card--weekly" aria-label="Weekly Stats öffnen">
-        <div class="stats-overview-card-header">
-          <span class="stats-overview-card-tag">Diese Woche</span>
-          <svg class="stats-overview-card-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none"
-            stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <polyline points="9 18 15 12 9 6"/>
-          </svg>
-        </div>
-        <h2 class="stats-overview-card-title">Weekly Stats</h2>
-        <div class="stats-overview-mini-grid">
-          <div class="stats-overview-mini-cell">
-            <span class="stats-overview-mini-value js-weekly-sessions">–</span>
-            <span class="stats-overview-mini-label">Sessions</span>
-          </div>
-          <div class="stats-overview-mini-divider"></div>
-          <div class="stats-overview-mini-cell">
-            <span class="stats-overview-mini-value js-weekly-completed">–</span>
-            <span class="stats-overview-mini-label">Completed</span>
-          </div>
-          <div class="stats-overview-mini-divider"></div>
-          <div class="stats-overview-mini-cell">
-            <span class="stats-overview-mini-value js-weekly-minutes">–</span>
-            <span class="stats-overview-mini-label">Min.</span>
-          </div>
-        </div>
-        <div class="stats-overview-bars stats-overview-bars--weekly" aria-hidden="true">
-          <div class="stats-overview-bar stats-overview-bar--weekly" data-day="0" style="height:0%"></div>
-          <div class="stats-overview-bar stats-overview-bar--weekly" data-day="1" style="height:0%"></div>
-          <div class="stats-overview-bar stats-overview-bar--weekly" data-day="2" style="height:0%"></div>
-          <div class="stats-overview-bar stats-overview-bar--weekly" data-day="3" style="height:0%"></div>
-          <div class="stats-overview-bar stats-overview-bar--weekly" data-day="4" style="height:0%"></div>
-          <div class="stats-overview-bar stats-overview-bar--weekly" data-day="5" style="height:0%"></div>
-          <div class="stats-overview-bar stats-overview-bar--weekly" data-day="6" style="height:0%"></div>
-        </div>
-        <div class="stats-overview-days-labels" aria-hidden="true">
-          <span>Mo</span><span>Di</span><span>Mi</span><span>Do</span><span>Fr</span><span>Sa</span><span>So</span>
-        </div>
-        <div class="stats-overview-goal-pill">
-          <span class="stats-overview-goal-dot"></span>
-          <span class="js-weekly-goal-text">–</span>
-        </div>
-      </a>
+<!-- Letzte Aktivität Card -->
+<section class="stats-card" aria-label="Letzte Aktivität">
+  <h2 class="stats-card-title">Letzte Aktivität</h2>
+  <ul class="stats-activity-list js-activity-list">
+    <li class="stats-activity-empty">Noch keine Aktivitäten</li>
+  </ul>
+</section>
 
     </div>
   </div>
+
+  <script src="js/stats.js"></script>
 </body>
 </html>
