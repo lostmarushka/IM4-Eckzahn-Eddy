@@ -36,7 +36,7 @@ Eckzahn Eddy soll ein Produkt bzw. eine Webapp rund ums Zähneputzen sein in Kom
 
 * ***Was muss ich wie bauen, verbinden, installieren?***  
 
-## Du brauchst folgende Sachen:
+ Du brauchst folgende Sachen:
 
 - 1× Steckplatte  
 - 1× Microcontroller ESP32-C6-WROOM-1  
