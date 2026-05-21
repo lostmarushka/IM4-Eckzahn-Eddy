@@ -10,13 +10,18 @@ Eckzahn Eddy soll ein Produkt bzw. eine Webapp rund ums Zähneputzen sein in Kom
 
 ### UX & Konzeption
 
-*In diesem Teil werden die gemeinsamen Schritte aus der UX-Abgabe dokumentiert, damit sich hier alles vollständig an einem Ort befindet (betrifft WebApp und Physical Computing)*
+Mit folgendem Figma-Link erhältst du einen Einblick in den UX- und Konzeptentwicklungsprozess von Eddy Eckzahn – von ersten Ideen und Wireframes bis hin zur gestalterischen Ausarbeitung.
 
 * **Figma:** (https://www.figma.com/design/7dYuJ7zHd2DgF7CtyG6XbB/im4-eckzahn-eddy?m=auto&t=oUmAeBcnwc444ZSt-1)
+
+Hier erhältst du einen Einblick in unseren geplanten User Flow und die gedachte Nutzerführung innerhalb des Projekts:
+
 * **User Flow \+ Screen Flow**
 ![Alternativtext](img/Screen%20Flow.jpg)  
 
 ### Setup
+
+Wenn du nun neugierig geworden bist, kannst du über die folgenden Links sowohl unsere Website besuchen als auch ein Video zur Nutzung der Website in Kombination mit der Zahnbürste ansehen:
 
 * **WebApp:** (https://eckzahneddy.marina-lampert.ch/login.html)  
 * **Video-Dokumentation:** [Link zum Video auf Youtube](http://link.zum.video) 
