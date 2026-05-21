@@ -713,6 +713,10 @@ button { font: inherit; border: none; background: none; cursor: pointer; }
   color: var(--color-text);
 }
 
+.stats-tabs-wrapper--three {
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
 /* ── Cards ── */
 .stats-card {
   width: 100%;
@@ -731,108 +735,212 @@ button { font: inherit; border: none; background: none; cursor: pointer; }
   color: var(--color-text);
 }
 
-/* ── Overview Grid ── */
-.stats-overview-grid {
+/* ── Stats Overview Page ── */
+
+.stats-streak-banner {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  background: var(--color-card);
+  border: 1px solid var(--color-card-border);
+  border-radius: var(--radius-xl);
+  padding: 16px 20px;
+}
+
+.stats-streak-flame {
+  font-size: 2rem;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.stats-streak-text {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  flex: 1;
+}
+
+.stats-streak-count {
+  font-family: "Cousine", monospace;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--color-dot-yellow);
+  line-height: 1;
+}
+
+.stats-streak-label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--color-text-soft);
+}
+
+.stats-streak-sub {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-timer-accent);
+  flex-shrink: 0;
+}
+
+/* Overview Cards */
+.stats-overview-card {
+  width: 100%;
+  display: grid;
+  row-gap: var(--space-sm);
+  padding: 22px 20px 20px;
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--color-card-border);
+  background: var(--color-card);
+  text-decoration: none;
+  color: var(--color-text);
+  cursor: pointer;
+  transition: transform 0.15s ease;
+}
+
+.stats-overview-card:active {
+  transform: translateY(2px);
+}
+
+.stats-overview-card--daily {
+  border-color: rgba(255, 79, 163, 0.35);
+  background: linear-gradient(145deg, rgba(255, 79, 163, 0.12) 0%, var(--color-card) 60%);
+}
+
+.stats-overview-card--weekly {
+  border-color: rgba(159, 227, 176, 0.35);
+  background: linear-gradient(145deg, rgba(159, 227, 176, 0.1) 0%, var(--color-card) 60%);
+}
+
+.stats-overview-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.stats-overview-card-tag {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--color-text-soft);
+  background: var(--color-circle-dark);
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+}
+
+.stats-overview-card-arrow {
+  color: var(--color-text-soft);
+}
+
+.stats-overview-card-title {
+  font-family: "Cousine", monospace;
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+/* Mini Metric Grid */
+.stats-overview-mini-grid {
   display: grid;
   grid-template-columns: 1fr auto 1fr auto 1fr;
   align-items: center;
 }
 
-.stats-metric-cell {
+.stats-overview-mini-cell {
   display: grid;
   justify-items: center;
-  row-gap: 6px;
-  padding: var(--space-2xs) 0;
+  row-gap: 3px;
 }
 
-.stats-metric-icon {
-  width: 44px;
-  height: 44px;
-  border-radius: var(--radius-large);
-  display: grid;
-  place-items: center;
-}
-
-.stats-metric-icon--pink   { background: rgba(255, 79, 163, 0.18);  color: var(--color-button-fill); }
-.stats-metric-icon--yellow { background: rgba(255, 216, 79, 0.18);  color: var(--color-dot-yellow); }
-.stats-metric-icon--teal   { background: rgba(159, 227, 176, 0.18); color: var(--color-timer-accent); }
-
-.stats-metric-value {
+.stats-overview-mini-value {
   font-family: "Cousine", monospace;
-  font-size: 1.8rem;
+  font-size: 1.4rem;
   font-weight: 700;
-  color: var(--color-text);
   line-height: 1;
+  color: var(--color-text);
 }
 
-.stats-metric-label {
-  font-size: 0.8rem;
+.stats-overview-mini-label {
+  font-size: 0.75rem;
   font-weight: 600;
   color: var(--color-text-soft);
-  text-align: center;
 }
 
-.stats-metric-divider {
+.stats-overview-mini-divider {
   width: 1px;
-  height: 60px;
+  height: 40px;
   background: var(--color-card-border);
 }
 
-/* ── Chart ── */
-.stats-chart-wrapper {
-  height: 180px;
-  position: relative;
+/* Mini Bar Chart */
+.stats-overview-bars {
+  display: flex;
+  align-items: flex-end;
+  gap: 4px;
+  height: 48px;
 }
 
-/* ── Goal Card ── */
-.stats-goal-card {
-  grid-template-columns: 1fr auto;
-  align-items: center;
-  column-gap: var(--space-sm);
-  row-gap: 0;
+.stats-overview-bar {
+  flex: 1;
+  border-radius: 3px 3px 0 0;
+  background: rgba(255, 79, 163, 0.25);
+  min-height: 3px;
 }
 
-.stats-goal-content {
-  display: grid;
-  row-gap: 6px;
+.stats-overview-bar--active {
+  background: var(--color-button-fill);
 }
 
-.stats-goal-text {
-  color: var(--color-text-soft);
-  font-size: var(--card-text-size);
-  line-height: 1.4;
+.stats-overview-bar--weekly {
+  background: rgba(159, 227, 176, 0.2);
 }
 
-/* Checkbox */
-.stats-goal-checkbox-wrapper {
-  cursor: pointer;
-  display: block;
-  flex-shrink: 0;
-}
-
-.stats-goal-checkbox {
-  position: absolute;
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
-
-.stats-goal-checkmark {
-  width: 40px;
-  height: 40px;
-  border-radius: var(--radius-large);
-  border: 2px solid var(--color-card-border);
-  background: var(--color-circle-dark);
-  display: grid;
-  place-items: center;
-  color: transparent;
-  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
-}
-
-.stats-goal-checkbox:checked + .stats-goal-checkmark {
+.stats-overview-bar--weekly.stats-overview-bar--active {
   background: var(--color-timer-accent);
-  border-color: var(--color-timer-accent);
-  color: #1a3d28;
+}
+
+/* Wochentag Labels */
+.stats-overview-days-labels {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 1px;
+  margin-top: -2px;
+}
+
+.stats-overview-days-labels span {
+  flex: 1;
+  text-align: center;
+  font-size: 0.65rem;
+  font-weight: 600;
+  color: var(--color-placeholder);
+}
+
+/* Goal Pill */
+.stats-overview-goal-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--color-circle-dark);
+  border-radius: var(--radius-full);
+  padding: 7px 14px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-text-soft);
+  width: fit-content;
+}
+
+.stats-overview-goal-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  background: var(--color-placeholder);
+}
+
+.stats-overview-goal-dot--done {
+  background: var(--color-timer-accent);
+  box-shadow: 0 0 0 3px rgba(159, 227, 176, 0.25);
 }
 
 /* Responsive */

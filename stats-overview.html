@@ -31,9 +31,9 @@
         <button class="stats-tab stats-tab--active" role="tab" aria-selected="true"
           onclick="location.href='stats-overview.html'">Übersicht</button>
         <button class="stats-tab" role="tab" aria-selected="false"
-          onclick="location.href='stats.html?tab=daily'">Daily</button>
+          onclick="location.href='stats-daily.html'">Daily</button>
         <button class="stats-tab" role="tab" aria-selected="false"
-          onclick="location.href='stats.html?tab=weekly'">Weekly</button>
+          onclick="location.href='stats-weekly.html'">Weekly</button>
       </div>
 
       <!-- Streak Banner -->
@@ -43,11 +43,11 @@
           <span class="stats-streak-count js-streak-count">–</span>
           <span class="stats-streak-label">Tage Streak</span>
         </div>
-        <span class="stats-streak-sub js-streak-sub"></span>
+        <span class="stats-streak-sub js-streak-sub">–</span>
       </div>
 
       <!-- Daily Card -->
-      <a href="stats.html?tab=daily" class="stats-overview-card stats-overview-card--daily" aria-label="Daily Stats öffnen">
+      <a href="stats-daily.html" class="stats-overview-card stats-overview-card--daily" aria-label="Daily Stats öffnen">
         <div class="stats-overview-card-header">
           <span class="stats-overview-card-tag">Heute</span>
           <svg class="stats-overview-card-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none"
@@ -73,23 +73,23 @@
           </div>
         </div>
         <div class="stats-overview-bars" aria-hidden="true">
-          <div class="stats-overview-bar js-daily-bar-0" style="height:0%"></div>
-          <div class="stats-overview-bar js-daily-bar-1" style="height:0%"></div>
-          <div class="stats-overview-bar js-daily-bar-2" style="height:0%"></div>
-          <div class="stats-overview-bar js-daily-bar-3" style="height:0%"></div>
-          <div class="stats-overview-bar js-daily-bar-4" style="height:0%"></div>
-          <div class="stats-overview-bar js-daily-bar-5" style="height:0%"></div>
-          <div class="stats-overview-bar js-daily-bar-6" style="height:0%"></div>
-          <div class="stats-overview-bar js-daily-bar-7" style="height:0%"></div>
+          <div class="stats-overview-bar" style="height:0%"></div>
+          <div class="stats-overview-bar" style="height:0%"></div>
+          <div class="stats-overview-bar" style="height:0%"></div>
+          <div class="stats-overview-bar" style="height:0%"></div>
+          <div class="stats-overview-bar" style="height:0%"></div>
+          <div class="stats-overview-bar" style="height:0%"></div>
+          <div class="stats-overview-bar" style="height:0%"></div>
+          <div class="stats-overview-bar" style="height:0%"></div>
         </div>
         <div class="stats-overview-goal-pill">
-          <span class="stats-overview-goal-dot js-daily-goal-dot"></span>
+          <span class="stats-overview-goal-dot"></span>
           <span class="js-daily-goal-text">–</span>
         </div>
       </a>
 
       <!-- Weekly Card -->
-      <a href="stats.html?tab=weekly" class="stats-overview-card stats-overview-card--weekly" aria-label="Weekly Stats öffnen">
+      <a href="stats-weekly.html" class="stats-overview-card stats-overview-card--weekly" aria-label="Weekly Stats öffnen">
         <div class="stats-overview-card-header">
           <span class="stats-overview-card-tag">Diese Woche</span>
           <svg class="stats-overview-card-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none"
@@ -127,17 +127,12 @@
           <span>Mo</span><span>Di</span><span>Mi</span><span>Do</span><span>Fr</span><span>Sa</span><span>So</span>
         </div>
         <div class="stats-overview-goal-pill">
-          <span class="stats-overview-goal-dot js-weekly-goal-dot"></span>
+          <span class="stats-overview-goal-dot"></span>
           <span class="js-weekly-goal-text">–</span>
         </div>
       </a>
 
     </div>
   </div>
-
-  <script>
-    window.CURRENT_USER = { id: 'USER_ID_HIER', name: 'USERNAME_HIER' };
-  </script>
-  <script src="js/stats.js"></script>
 </body>
 </html>
