@@ -2,25 +2,28 @@
 
 * **Modul:** Interaktive Medien 4 an der Fachhochschule Graubünden (FS26)  
 * **Themenfeld:** IoT-Applikation zum Thema Eltern mit kleinen Kindern  
-* **Name des Projekts:** \[Eckzahn Eddy\]   
-* **Team Physical Computing:** \[Marina Lampert, Laura Seger\]   
-* **Team WebApp:** \[Max Hutmacher, Saskia Lerf\]
+* **Name des Projekts:** Eckzahn Eddy  
+* **Team Physical Computing:** Marina Lampert, Laura Seger  
+* **Team WebApp:** Max Hutmacher, Saskia Lerf
  
-Eckzahn Eddy soll ein Produkt bzw. eine Webapp rund ums Zähneputzen sein in Kombination mit einer Zahnbürste, die über ein Touch- und Bewegungssensor verfügt. Ziel ist es, Kinder spielerisch dazu zu motivieren, ihre Zähne besser und regelmässiger zu putzen.
+Eckzahn Eddy soll ein Produkt bzw. eine Webapp rund ums Zähneputzen sein in Kombination mit einer Zahnbürste, die über ein Touch- und Lagessensor verfügt. Ziel ist es, Kinder spielerisch dazu zu motivieren, ihre Zähne besser und regelmässiger zu putzen.
 
 ### UX & Konzeption
 
-*In diesem Teil werden die gemeinsamen Schritte aus der UX-Abgabe dokumentiert, damit sich hier alles vollständig an einem Ort befindet (betrifft WebApp und Physical Computing)*
+Mit folgendem Figma-Link erhältst du einen Einblick in den UX- und Konzeptentwicklungsprozess von Eddy Eckzahn – von ersten Ideen und Wireframes bis hin zur gestalterischen Ausarbeitung.
 
-* **Figma:** [Link zum Figma](http://link.zum.figma)
-* **User Flow \+ Screen Flow** (Screenshot aus Figma)  
-* ggf. weitere Ergänzungen
-* *Welche Features waren angedacht?*
-* *Welche Features wurden nicht umgesetzt? (Warum)*
+* **Figma:** (https://www.figma.com/design/7dYuJ7zHd2DgF7CtyG6XbB/im4-eckzahn-eddy?m=auto&t=oUmAeBcnwc444ZSt-1)
+
+Hier erhältst du einen Einblick in unseren geplanten User Flow und die gedachte Nutzerführung innerhalb des Projekts:
+
+* **User Flow \+ Screen Flow**
+![Alternativtext](img/Screen%20Flow.jpg)  
 
 ### Setup
 
-* **WebApp:** [Link zur Website](https://www.figma.com/design/7dYuJ7zHd2DgF7CtyG6XbB/im4-eckzahn-eddy?m=auto&t=oUmAeBcnwc444ZSt-1)  
+Wenn du nun neugierig geworden bist, kannst du über die folgenden Links sowohl unsere Website besuchen als auch ein Video zur Nutzung der Website in Kombination mit der Zahnbürste ansehen:
+
+* **WebApp:** (https://eckzahneddy.marina-lampert.ch/login.html)  
 * **Video-Dokumentation:** [Link zum Video auf Youtube](http://link.zum.video) 
 
 #### Installationsanleitung WebApp
@@ -36,15 +39,60 @@ Eckzahn Eddy soll ein Produkt bzw. eine Webapp rund ums Zähneputzen sein in Kom
 
 #### Bauanleitung Physical Computing
 
-* ***Was muss ich wie bauen, verbinden, installieren?***  
-* *ergänze: **Komponentenplan** (betrifft Physical Computing, vgl. Slides Kapitel 15): Schaubild enthält*  
-  * *die eingesetzten Komponenten*  
-  * *die verbundenen Sensoren und Aktoren*  
-  * *die Programme (mit Dateinamen)*  
-  * *die Kommunikationswege*  
-* *ergänze: **Steckplan** (betrifft Physical Computing, vgl. Slides Kapitel 15): generiert z.B. mit Fritzing (empfohlen), Tinkercad, Wokwi*  
-  * *beachtet die [Fritzing Parts](https://github.com/Interaktive-Medien/im_physical_computing/tree/main/15_Intro_Projektdoku) extra für euch*  
-* *ggf. **Bildmaterial***
+* Du möchtest nun Eddy Eckzahn selber nachbauen? Wir zeigen dir wie es geht:) 
+
+ Du brauchst folgende Sachen:
+
+- 1× Steckplatte  
+- 1× Microcontroller ESP32-C6-WROOM-1  
+- 1× Kapazitiver Touchsensor TTB223B  
+- 1× 6DOF Lagesensor MPU6500  
+- 1× USB-Kabel  
+- 7× Jumper-Kabel (male)  
+- 4× Jumper-Kabel (female)  
+- 1× langes leitfähiges Kabel  
+- 1× Zahnbürste  
+- Klebeband  
+
+Stecke alle Komponenten wie im Steckplan beschrieben zusammen.
+Den Touchsensor haben wir an einem Ende eines langen Kabels angelötet. Das andere Ende des Kabels wurde durch die Rückseite des Bürstenkopfs geführt. Anschliessend haben wir die Kabelenden aufgefranst, sodass sie sich mit den Borsten der Zahnbürste vermischen. Dadurch wird das Kabel selbst zu einem Teil der Bürstenoberfläche der Zahnbürste.
+
+* **Steckplan**
+
+![Alternativtext](img/Steckplan.jpeg)
+![Alternativtext](img/Zahnbürste%20mit%20Sensoren.jpeg)
+
+
+Wenn dein Setup bereit ist, öffne das Arduino-Programm und füge den folgenden Code hinzu.  
+Den vollständigen Code findest du hier: [mc.ino](mc.ino)
+
+
+Anschliessend öffnest du in Arduino den Board Manager und fügst das „ESP32C6 Dev Module“ hinzu.
+Wähle danach den richtigen Port aus und lade den Code auf den Microcontroller hoch.
+Sobald der Upload abgeschlossen ist, öffnest du den **Serial Monitor** und wählst dort erneut den passenden Port aus. Voilà – nun kannst du beobachten, wie sich die Sensoren kalibrieren. Nach der Kalibrierung werden bei Bewegungen der Zahnbürste sowie bei Berührungen am Bürstenkopf die Daten erfasst und für die Speicherung in der Datenbank vorbereitet.
+
+* **Komponentenplan** (betrifft Physical Computing, vgl. Slides Kapitel 15): Schaubild enthält*
+
+| Komponente | Funktion |
+| :--- | :--- |
+| ESP32 Dev Board | Microcontroller, führt Hauptprogramm aus, kommuniziert mit WLAN |
+| Kap. Touchsensor TTB223B | Erfasst Daten im Zahnbürstenkopf (Berührung mit Zähnen) |
+| 6DOF Lagesensor MPU6500 | Erfasst Daten von der Zahnbürste (ob sich Zahnbürste bewegt, Kind Zähne putzt) |
+
+| Verbindung/Protokoll | Funktion |
+| :--- | :--- |
+| WLAN | Verbindung des ESP32 mit Webserver |
+| HTTP (POST) | Sendet JSON-Daten vom ESP32 an den Server (load.php) |
+| SQL (MySQL) | Datenübertragung zwischen PHP und Datenbank |
+
+| Datei/Modul | Funktion |
+| :--- | :--- |
+| mc.ino | Arduino-Hauptprogramm: Bewegungs- und Berührungsmessung |
+| load.php| Serverlogik: Empfängt Daten und schreibt sie in die Datenbank |
+| sensor-status.php | Serverlogik: Stellt gespeicherte Trinkdaten als JSON bereit |
+
+
+
 
 ## technische Details
 
@@ -52,12 +100,23 @@ Eckzahn Eddy soll ein Produkt bzw. eine Webapp rund ums Zähneputzen sein in Kom
 
 * **Projektstruktur / Code-Struktur:** \[*Hinweis: Der Code selbst muss im Repository liegen und im Kopfbereich jeder Datei eine kurze Zusammenfassung enthalten.*\]  
 * **Datenschnittstelle: \[***zwischen WebApp und Physical Computing*\]  
-* **ERM:** ![Alternativtext](img/ERM%20Eckzahn%20Eddy.png) 
+* **ERM:** ![Alternativtext](img/ERM%20Eckzahn%20Eddy.png)
+
+Im Mittelpunkt des Systems stehen die Entitäten User*innen, Familien, Kinder, Sensordaten und Events. Eine Userin repräsentiert eine Benutzerin der App, beispielsweise ein Elternteil oder eine erziehungsberechtigte Person. Zu jeder Userin werden Informationen wie Name, E-Mail-Adresse und Passwort gespeichert. Ausserdem ist jede Userin genau einer Familie zugeordnet. Eine Familie kann dabei mehrere User*innen besitzen.
+
+Die Entität „Familie“ dient dazu, mehrere Kinder und User*innen organisatorisch zusammenzufassen. Zu jeder Familie werden eine eindeutige ID sowie der Familienname gespeichert. Einer Familie können mehrere Kinder zugeordnet werden, während jedes Kind immer nur zu einer Familie gehört.
+
+Die Entität „Kinder“ enthält die Daten der Kinder, deren Zahnputzverhalten überwacht wird. Für jedes Kind werden eine eindeutige ID, der Name sowie die Zugehörigkeit zur Familie gespeichert. Die Kinder stehen im direkten Zusammenhang mit den von der Zahnbürste erfassten Sensordaten und Ereignissen.
+
+Die intelligenten Zahnbürsten senden kontinuierlich Sensordaten an die App. Diese werden in der Entität „Sensordaten“ gespeichert. Dazu gehören beispielsweise Zeitstempel, Aktivitätswerte sowie Informationen des Lage- oder Touchsensors. Jedes Kind kann dabei viele Sensordatensätze besitzen, während jeder einzelne Datensatz genau einem Kind zugeordnet ist. Dadurch lässt sich nachvollziehen, wie lange und wie häufig ein Kind seine Zähne putzt.
+
+Zusätzlich werden besondere Ereignisse in der Entität „Events“ gespeichert. Dazu zählen beispielsweise der Start oder das Ende eines Putzvorgangs oder andere relevante Aktionen der Zahnbürste. Zu jedem Event werden eine ID, ein Zeitstempel, die Art des Ereignisses sowie die Zuordnung zum entsprechenden Kind gespeichert. Auch hier gilt, dass ein Kind mehrere Events besitzen kann, ein Event jedoch immer nur zu einem Kind gehört.
+
 * **Authentifizierung:** \[*Erklärung*\]
 
 ## Known bugs
 
-* Was funktioniert noch nicht einwandfrei?  
+* Was funktioniert noch nicht einwandfrei?
 * Was ist uns aufgefallen bei der Entwicklung?  
 * Was könnte noch verbessert werden?
 
