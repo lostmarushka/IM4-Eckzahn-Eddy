@@ -545,30 +545,38 @@ button { font: inherit; border: none; background: none; cursor: pointer; }
   to   { transform: translateY(0);    opacity: 1; }
 }
 
-.delete-modal-icon {
-  width: 52px;
-  height: 52px;
-  border-radius: 50%;
-  background: rgba(255, 79, 163, 0.2);
-  display: grid;
-  place-items: center;
-  margin-bottom: var(--space-sm);
-  color: #ff4fa3;
-}
-
 .delete-modal-text strong {
   color: #1a0f2e;
 }
 
-#delete-modal .modal-btn-primary {
+/* Abbrechen → prominent pink (unverändert) */
+#delete-modal .modal-btn-secondary {
   background: var(--color-button-fill);
   border: 2px solid var(--color-button-border);
   color: var(--color-text);
   box-shadow: 0 8px 18px rgba(255, 79, 163, 0.35);
+  font-weight: 700;
 }
-#delete-modal .modal-btn-primary:active {
+#delete-modal .modal-btn-secondary:hover {
+  background: #e03a90;
+  border-color: var(--color-button-fill);
+}
+#delete-modal .modal-btn-secondary:active {
   transform: translateY(1px);
   background: #e03a90;
+}
+
+/* Ja, löschen → rot, bei hover dunkler */
+#delete-modal .modal-btn-primary {
+  background: transparent;
+  border: 2px solid rgba(255, 255, 255, 0.35);
+  color: var(--color-error);        /* #a12c7b — rot */
+  box-shadow: none;
+  font-weight: 600;
+}
+#delete-modal .modal-btn-primary:hover {
+  color: var(--color-error-hover);  /* #7d1e5e — dunkelrot */
+  border-color: rgba(255, 255, 255, 0.6);
 }
 
 
