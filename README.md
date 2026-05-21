@@ -98,7 +98,11 @@ Sobald der Upload abgeschlossen ist, öffnest du den **Serial Monitor** und wäh
 
 // Hier sollte das Verständnis ersichtlich sein / Wie stehen die Dateien in Beziehung zueinander, Wie reden Die Dateien miteinander, Wie ist der Weg der Daten
 
-* **Projektstruktur / Code-Struktur:** \[*Hinweis: Der Code selbst muss im Repository liegen und im Kopfbereich jeder Datei eine kurze Zusammenfassung enthalten.*\]  
+* **Projektstruktur / Code-Struktur:**
+Alle Codes und ihre Verlinkungen sind auf dem Github Repository einsehbar 
+Hier aber noch ein Beispiel: 
+[stats-overview.js](stats-overview.js)
+
 * **Datenschnittstelle: \[***zwischen WebApp und Physical Computing*\]  
 * **ERM:** ![Alternativtext](img/ERM%20Eckzahn%20Eddy.png)
 
