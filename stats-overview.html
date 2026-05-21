@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Stats Übersicht – Eckzahn Eddy</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cousine:wght@400;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div class="page-wrapper stats-page-wrapper">
+    <div class="login-wrapper stats-wrapper">
+
+      <header class="brushing-header-wrapper">
+        <button class="circle-button circle-button-light" aria-label="Zurück" onclick="history.back()">
+          <img src="img/back_button.svg" alt="Zurück" />
+        </button>
+        <div class="brushing-title-wrapper">
+          <h1 class="title-wrapper">STATISTIK</h1>
+          <p class="brushing-name js-username">–</p>
+        </div>
+        <a href="protected.html" class="circle-button-icon" aria-label="Profil">
+          <img src="img/profile_button.svg" alt="" />
+        </a>
+      </header>
+
+      <!-- Streak Banner -->
+      <div class="stats-streak-banner">
+        <span class="stats-streak-flame">🔥</span>
+        <div class="stats-streak-text">
+          <span class="stats-streak-count js-streak-count">5</span>
+          <span class="stats-streak-label">Tage Streak</span>
+        </div>
+        <span class="stats-streak-sub js-streak-sub">Weiter so!</span>
+      </div>
+
+      <!-- Daily Card -->
+      <a href="stats.html?tab=daily" class="stats-overview-card stats-overview-card--daily" aria-label="Daily Stats öffnen">
+        <div class="stats-overview-card-header">
+          <span class="stats-overview-card-tag">Heute</span>
+          <svg class="stats-overview-card-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="9 18 15 12 9 6"/>
+          </svg>
+        </div>
+        <h2 class="stats-overview-card-title">Daily Stats</h2>
+        <div class="stats-overview-mini-grid">
+          <div class="stats-overview-mini-cell">
+            <span class="stats-overview-mini-value js-daily-sessions">–</span>
+            <span class="stats-overview-mini-label">Sessions</span>
+          </div>
+          <div class="stats-overview-mini-divider"></div>
+          <div class="stats-overview-mini-cell">
+            <span class="stats-overview-mini-value js-daily-completed">–</span>
+            <span class="stats-overview-mini-label">Completed</span>
+          </div>
+          <div class="stats-overview-mini-divider"></div>
+          <div class="stats-overview-mini-cell">
+            <span class="stats-overview-mini-value js-daily-minutes">–</span>
+            <span class="stats-overview-mini-label">Min.</span>
+          </div>
+        </div>
+        <!-- Mini Bar Chart -->
+        <div class="stats-overview-bars" aria-hidden="true">
+          <div class="stats-overview-bar" style="height: 20%"></div>
+          <div class="stats-overview-bar" style="height: 0%"></div>
+          <div class="stats-overview-bar" style="height: 0%"></div>
+          <div class="stats-overview-bar" style="height: 0%"></div>
+          <div class="stats-overview-bar" style="height: 0%"></div>
+          <div class="stats-overview-bar stats-overview-bar--active js-daily-bar" style="height: 60%"></div>
+          <div class="stats-overview-bar" style="height: 0%"></div>
+          <div class="stats-overview-bar" style="height: 0%"></div>
+        </div>
+        <!-- Goal pill -->
+        <div class="stats-overview-goal-pill js-daily-goal">
+          <span class="stats-overview-goal-dot js-daily-goal-dot"></span>
+          <span class="js-daily-goal-text">Brush twice a day</span>
+        </div>
+      </a>
+
+      <!-- Weekly Card -->
+      <a href="stats.html?tab=weekly" class="stats-overview-card stats-overview-card--weekly" aria-label="Weekly Stats öffnen">
+        <div class="stats-overview-card-header">
+          <span class="stats-overview-card-tag">Diese Woche</span>
+          <svg class="stats-overview-card-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="9 18 15 12 9 6"/>
+          </svg>
+        </div>
+        <h2 class="stats-overview-card-title">Weekly Stats</h2>
+        <div class="stats-overview-mini-grid">
+          <div class="stats-overview-mini-cell">
+            <span class="stats-overview-mini-value js-weekly-sessions">–</span>
+            <span class="stats-overview-mini-label">Sessions</span>
+          </div>
+          <div class="stats-overview-mini-divider"></div>
+          <div class="stats-overview-mini-cell">
+            <span class="stats-overview-mini-value js-weekly-completed">–</span>
+            <span class="stats-overview-mini-label">Completed</span>
+          </div>
+          <div class="stats-overview-mini-divider"></div>
+          <div class="stats-overview-mini-cell">
+            <span class="stats-overview-mini-value js-weekly-minutes">–</span>
+            <span class="stats-overview-mini-label">Min.</span>
+          </div>
+        </div>
+        <!-- Mini Wochentag-Bars (Mo–So) -->
+        <div class="stats-overview-bars stats-overview-bars--weekly js-weekly-bars" aria-hidden="true">
+          <div class="stats-overview-bar stats-overview-bar--weekly" data-day="0" style="height:30%"></div>
+          <div class="stats-overview-bar stats-overview-bar--weekly" data-day="1" style="height:90%"></div>
+          <div class="stats-overview-bar stats-overview-bar--weekly" data-day="2" style="height:60%"></div>
+          <div class="stats-overview-bar stats-overview-bar--weekly" data-day="3" style="height:0%"></div>
+          <div class="stats-overview-bar stats-overview-bar--weekly stats-overview-bar--active" data-day="4" style="height:40%"></div>
+          <div class="stats-overview-bar stats-overview-bar--weekly" data-day="5" style="height:0%"></div>
+          <div class="stats-overview-bar stats-overview-bar--weekly" data-day="6" style="height:0%"></div>
+        </div>
+        <div class="stats-overview-days-labels" aria-hidden="true">
+          <span>Mo</span><span>Di</span><span>Mi</span><span>Do</span><span>Fr</span><span>Sa</span><span>So</span>
+        </div>
+        <!-- Goal pill -->
+        <div class="stats-overview-goal-pill js-weekly-goal">
+          <span class="stats-overview-goal-dot stats-overview-goal-dot--done js-weekly-goal-dot"></span>
+          <span class="js-weekly-goal-text">Brush twice a day</span>
+        </div>
+      </a>
+
+    </div>
+  </div>
+
+  <script>
+    window.CURRENT_USER = { id: 'USER_ID_HIER', name: 'USERNAME_HIER' };
+
+    window.STATS_DATA = {
+      streak: 5,
+      daily: {
+        sessions: 1, completed: 0, minutes: 0,
+        goalCompleted: false, goalText: 'Brush twice a day',
+        brushingEvents: [{ hour: 12, duration: 0.6 }]
+      },
+      weekly: {
+        sessions: 5, completed: 3, minutes: 9,
+        goalCompleted: true, goalText: 'Brush twice a day',
+        brushingEvents: [
+          { day: 0, duration: 0.3 }, { day: 1, duration: 0.9 },
+          { day: 2, duration: 0.6 }, { day: 4, duration: 0.4 },
+          { day: 6, duration: 0.3 }
+        ]
+      }
+    };
+
+    // Populate
+    document.querySelector('.js-username').textContent        = CURRENT_USER.name;
+    document.querySelector('.js-streak-count').textContent    = STATS_DATA.streak;
+    document.querySelector('.js-streak-sub').textContent      = STATS_DATA.streak >= 7 ? '🏆 Wochenziel erreicht!' : 'Weiter so!';
+
+    const d = STATS_DATA.daily;
+    document.querySelector('.js-daily-sessions').textContent  = d.sessions;
+    document.querySelector('.js-daily-completed').textContent = d.completed;
+    document.querySelector('.js-daily-minutes').textContent   = d.minutes;
+    document.querySelector('.js-daily-goal-text').textContent = d.goalText;
+    document.querySelector('.js-daily-goal-dot').classList.toggle('stats-overview-goal-dot--done', d.goalCompleted);
+
+    const w = STATS_DATA.weekly;
+    document.querySelector('.js-weekly-sessions').textContent  = w.sessions;
+    document.querySelector('.js-weekly-completed').textContent = w.completed;
+    document.querySelector('.js-weekly-minutes').textContent   = w.minutes;
+    document.querySelector('.js-weekly-goal-text').textContent = w.goalText;
+    document.querySelector('.js-weekly-goal-dot').classList.toggle('stats-overview-goal-dot--done', w.goalCompleted);
+
+    // Weekly bars dynamisch befüllen
+    const HOUR_START = 6;
+    const weeklyBars = document.querySelectorAll('.stats-overview-bar--weekly');
+    weeklyBars.forEach(bar => {
+      const day = parseInt(bar.dataset.day);
+      const event = w.brushingEvents.find(e => e.day === day);
+      const pct = event ? Math.round((event.duration / 1) * 100) : 0;
+      bar.style.height = pct + '%';
+      if (event) bar.classList.add('stats-overview-bar--active');
+    });
+  </script>
+</body>
+</html>
