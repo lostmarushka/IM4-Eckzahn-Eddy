@@ -51,6 +51,15 @@ Eckzahn Eddy soll ein Produkt bzw. eine Webapp rund ums Zähneputzen sein in Kom
 
 Stecke alle Komponenten wie im Steckplan beschrieben zusammen.
 Den Touchsensor haben wir an einem Ende eines langen Kabels angelötet. Das andere Ende des Kabels wurde durch die Rückseite des Bürstenkopfs geführt. Anschliessend haben wir die Kabelenden aufgefranst, sodass sie sich mit den Borsten der Zahnbürste vermischen. Dadurch wird das Kabel selbst zu einem Teil der Bürstenoberfläche der Zahnbürste.
+
+Wenn du dein Setup ready hast, öffne dein Arduino-Programm und füge folgenden Code hinzu. 
+Siehe 
+
+
+Anschliessend öffnest du in Arduino den Board Manager und fügst das „ESP32C6 Dev Module“ hinzu.
+Wähle danach den richtigen Port aus und lade den Code auf den Microcontroller hoch.
+Sobald der Upload abgeschlossen ist, öffnest du den **Serial Monitor** und wählst dort erneut den passenden Port aus. Voilà – nun kannst du beobachten, wie sich die Sensoren kalibrieren. Nach der Kalibrierung werden bei Bewegungen der Zahnbürste sowie bei Berührungen am Bürstenkopf die Daten erfasst und für die Speicherung in der Datenbank vorbereitet.
+
 * *ergänze: **Komponentenplan** (betrifft Physical Computing, vgl. Slides Kapitel 15): Schaubild enthält*
 
 | Komponente | Funktion |
