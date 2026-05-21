@@ -39,7 +39,7 @@ Wenn du nun neugierig geworden bist, kannst du über die folgenden Links sowohl 
 
 #### Bauanleitung Physical Computing
 
-* Du möchtest nun Eddy Eckzahn selber nachbauen? Wir zeigen dir wie es geht:) 
+Du möchtest nun Eddy Eckzahn selber nachbauen? Wir zeigen dir wie es geht:) 
 
  Du brauchst folgende Sachen:
 
