@@ -106,10 +106,12 @@ Sobald der Upload abgeschlossen ist, öffnest du den **Serial Monitor** und wäh
 
 * **Projektstruktur / Code-Struktur:**
 Alle Codes und ihre Verlinkungen sind auf dem GitHub Repository einsehbar.  
-Hier ein Beispiel:  
-[js/stats-daily.js](stats-daily.js) 
 
-* **Datenschnittstelle: \[***zwischen WebApp und Physical Computing*\]  
+* **Datenschnittstelle [zwischen WebApp und Physical Computing]:**  
+Die Datenschnittstelle zwischen Physical Computing und WebApp basiert auf der Entität "Sensordata".  
+Die Sensoren an der Zahnbürste senden ihre Messwerte (Touch- und Bewegungssensor) über WLAN an die Datenbank, wo sie in der Entität "Sensordata" gespeichert werden.  
+Das WebApp-Team greift anschließend auf diese Daten zu, liest sie aus und verarbeitet sie weiter für die Darstellung und Logik innerhalb der Webanwendung.
+
 * **ERM:** ![Alternativtext](img/ERM%20Eckzahn%20Eddy.png)
 
 Im Mittelpunkt des Systems stehen die Entitäten User*innen, Familien, Kinder, Sensordaten und Events. Eine Userin repräsentiert eine Benutzerin der App, beispielsweise ein Elternteil oder eine erziehungsberechtigte Person. Zu jeder Userin werden Informationen wie Name, E-Mail-Adresse und Passwort gespeichert. Ausserdem ist jede Userin genau einer Familie zugeordnet. Eine Familie kann dabei mehrere User*innen besitzen.
@@ -128,8 +130,7 @@ Zusätzlich werden besondere Ereignisse in der Entität „Events“ gespeichert
 
 * **Was noch nicht einwandfrei funktioniert** 
 Leider können wir die Daten nur etwas zeitverzögert auf der Website anzeigen. Wenn das Kind aufhört die Zähne zu putzen (also beide Sensoren sind in diesem Zustand nicht mehr aktiv), dann bruacht es ein paar Sekunden auf der Website, bis der Timer stehen bleibt. Wir haben leider keine Live-Übertragung der Daten 
-* Was ist uns aufgefallen bei der Entwicklung:
-----
+
 
 * **Was könnte noch verbessert werden**
 Um das Zahnputz-Erlebnis für Kinder noch spannender und motivierender zu gestalten, könnte künftig eine animierte Version von Eddy Eckzahn integriert werden. Aufgrund des begrenzten Zeitrahmens dieses Moduls konnte diese Funktion noch nicht umgesetzt werden.
