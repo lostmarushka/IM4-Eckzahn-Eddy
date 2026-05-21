@@ -53,7 +53,7 @@ Eckzahn Eddy soll ein Produkt bzw. eine Webapp rund ums Zähneputzen sein in Kom
 | :--- | :--- |
 | mc.ino | Arduino-Hauptprogramm: Bewegungs- und Berührungsmessung |
 | load.php| Serverlogik: Empfängt Daten und schreibt sie in die Datenbank |
-| sensor-data.php | Serverlogik: Stellt gespeicherte Trinkdaten als JSON bereit |
+| sensor-status.php | Serverlogik: Stellt gespeicherte Trinkdaten als JSON bereit |
 
 
 * **Steckplan**
