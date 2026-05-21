@@ -124,7 +124,7 @@ Die intelligenten Zahnbürsten senden kontinuierlich Sensordaten an die App. Die
 
 Zusätzlich werden besondere Ereignisse in der Entität „Events“ gespeichert. Dazu zählen beispielsweise der Start oder das Ende eines Putzvorgangs oder andere relevante Aktionen der Zahnbürste. Zu jedem Event werden eine ID, ein Zeitstempel, die Art des Ereignisses sowie die Zuordnung zum entsprechenden Kind gespeichert. Auch hier gilt, dass ein Kind mehrere Events besitzen kann, ein Event jedoch immer nur zu einem Kind gehört.
 
-* **Authentifizierung:** \[*Erklärung*\]
+* **Authentifizierung:** Bei der Webapp können die Eltern ein Login erstellen (Mail und Passwort) und anschliessend ihre Kinder zu ihrem Profil hinzufügen. Es besteht die Möglichkeit die Kinder aus dem Profil zu entfernen.
 
 ## Known bugs
 
