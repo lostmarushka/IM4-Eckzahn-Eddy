@@ -18,14 +18,15 @@ document
       });
       const result = await response.json();
 
+      console.log("Server response:", result);
+
       if (result.status === "success") {
-        alert("Registration successful! You can now log in.");
-        window.location.href = "choose-profile.html";
-      } else {
-        alert(result.message || "Registration failed.");
-      }
-    } catch (error) {
-      console.error("Error:", error);
-      alert("Something went wrong!");
-    }
-  });
+  window.location.href = "login.html";
+} else {
+  alert(result.message || "Registration failed.");
+}
+} catch (error) {
+  console.error("Error:", error);
+  alert("Something went wrong!");
+}
+});

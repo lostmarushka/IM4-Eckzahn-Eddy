@@ -1,15 +1,16 @@
 <?php
 // register.php
-ini_set('display_errors', 0);
 session_start();
 header('Content-Type: application/json');
 
-try {
-    require_once '../system/config.php';
-} catch (Exception $e) {
-    echo json_encode(["status" => "error", "message" => $e->getMessage()]);
-    exit;
-}
+require_once '../system/config.php';
+
+// try {
+//     require_once '../system/config.php';
+// } catch (Exception $e) {
+//     echo json_encode(["status" => "error", "message" => $e->getMessage()]);
+//     exit;
+// }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
@@ -18,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email     = trim($data['email']      ?? '');
     $password  = trim($data['password']   ?? '');
     $name      = trim($data['name']       ?? '');
-    $familie_id = $data['familie_id']     ?? null;
+    $familie_id = $data['familie_id']     ?? 1;
 
     if (!$email || !$password || !$name) {
         echo json_encode(["status" => "error", "message" => "Email, password and name are required"]);

@@ -199,6 +199,30 @@ button { font: inherit; border: none; background: none; cursor: pointer; }
   padding-right: var(--circle-button-size);
 }
 
+.gen-alert {
+        width: 100%;
+        padding: 14px 18px;
+        border-radius: var(--radius-large);
+        font-size: 0.95rem;
+        font-weight: 600;
+        line-height: 1.4;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .gen-alert--error {
+        background: rgba(255, 80, 80, 0.18);
+        border: 1.5px solid rgba(255, 80, 80, 0.45);
+        color: #fff;
+      }
+      
+      .gen-alert--success {
+        background: rgba(80, 220, 140, 0.18);
+        border: 1.5px solid rgba(80, 220, 140, 0.45);
+        color: #fff;
+      }
+
 /* Avatar */
 .gen-avatar-wrapper {
   display: grid;
