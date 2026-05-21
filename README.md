@@ -35,18 +35,19 @@ Eckzahn Eddy soll ein Produkt bzw. eine Webapp rund ums Zähneputzen sein in Kom
 #### Bauanleitung Physical Computing
 
 * ***Was muss ich wie bauen, verbinden, installieren?***  
-Du brauchst folgende Sachen: 
 
-1x Steckplatte
-1x Microcontroller ESP32-C6-WROOM-1
-1x Kap. Touchsensor TTB223B
-1x 6DOF Lagesensor MPU6500
-1x USB-Kabel
-7x Jumper Kabel (male)
-4x Jumper Kabel (female)
-1x langes Kabel (leitfähig)
-1x Zahnbürste
-Klebeband
+## Du brauchst folgende Sachen:
+
+- 1× Steckplatte  
+- 1× Microcontroller ESP32-C6-WROOM-1  
+- 1× Kapazitiver Touchsensor TTB223B  
+- 1× 6DOF Lagesensor MPU6500  
+- 1× USB-Kabel  
+- 7× Jumper-Kabel (male)  
+- 4× Jumper-Kabel (female)  
+- 1× langes leitfähiges Kabel  
+- 1× Zahnbürste  
+- Klebeband  
 
 Stecke alle Komponenten wie im Steckplan beschrieben zusammen.
 Den Touchsensor haben wir an einem Ende eines langen Kabels angelötet. Das andere Ende des Kabels wurde durch die Rückseite des Bürstenkopfs geführt. Anschliessend haben wir die Kabelenden aufgefranst, sodass sie sich mit den Borsten der Zahnbürste vermischen. Dadurch wird das Kabel selbst zu einem Teil der Bürstenoberfläche der Zahnbürste.
