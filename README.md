@@ -49,9 +49,13 @@ Eckzahn Eddy soll ein Produkt bzw. eine Webapp rund ums Zähneputzen sein in Kom
 | HTTP (POST) | Sendet JSON-Daten vom ESP32 an den Server (load.php) |
 | SQL (MySQL) | Datenübertragung zwischen PHP und Datenbank |
 
-  * *die verbundenen Sensoren und Aktoren*  
-  * *die Programme (mit Dateinamen)*  
-  * *die Kommunikationswege*  
+| Datei/Modul | Funktion |
+| :--- | :--- |
+| mc.ino | Arduino-Hauptprogramm: Bewegungs- und Berührungsmessung |
+| load.php| Serverlogik: Empfängt Daten und schreibt sie in die Datenbank |
+| sensor-data.php | Serverlogik: Stellt gespeicherte Trinkdaten als JSON bereit |
+
+
 * **Steckplan**
 ![Alternativtext](img/Steckplan.jpeg)
 ![Alternativtext](img/Zahnbürste%20mit%20Sensoren.jpeg)
