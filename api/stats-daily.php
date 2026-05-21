@@ -31,8 +31,8 @@ echo json_encode([
     'sessions'      => $sessions,
     'completed'     => $completed,
     'minutes'       => round($minutes / 60, 1),
-    'goalCompleted' => $sessions >= 2,
-    'goalText'      => 'Zweimal täglich putzen',
+    'goalCompleted' => $sessions >= 3,
+    'goalText'      => 'Dreimal täglich putzen',
     'brushingEvents'=> array_map(fn($e) => [
         'hour'     => (int)$e['hour'],
         'duration' => (float)($e['dauer'] / 120) // normalisiert auf 0–1

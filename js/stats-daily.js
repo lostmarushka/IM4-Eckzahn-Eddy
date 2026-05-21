@@ -1,7 +1,7 @@
 // js/stats-daily.js
 document.addEventListener('DOMContentLoaded', async () => {
 
-    // 1. Profilname laden (gleich wie in index.html)
+    // 1. Profilname laden
     try {
         const profileRes = await fetch('api/get-active-profile.php');
         const profileData = await profileRes.json();
@@ -11,7 +11,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     } catch (e) {
         console.warn('Profilname konnte nicht geladen werden:', e);
     }
-
 
     // 2. Echte Daten vom Backend laden
     const res  = await fetch('api/stats-daily.php');
@@ -24,9 +23,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     document.querySelector('.js-goal-text').textContent      = data.goalText;
 
     // 4. Chart bauen
-    const HOURS      = ['0','1','2','3','4','5','6','7','8','9','10','11',
-                        '12','13','14','15','16','17','18','19','20','21','22','23'];
-    const chartData  = new Array(24).fill(0);
+    const HOURS     = ['0','1','2','3','4','5','6','7','8','9','10','11',
+                       '12','13','14','15','16','17','18','19','20','21','22','23'];
+    const chartData = new Array(24).fill(0);
 
     data.brushingEvents.forEach(({ hour }) => {
         if (hour >= 0 && hour < 24) chartData[hour] = 1;
@@ -55,7 +54,14 @@ document.addEventListener('DOMContentLoaded', async () => {
             scales: {
                 x: {
                     ticks: { color: 'rgba(255,255,255,0.65)', font: { size: 11 } },
-                    grid:  { color: 'rgba(255,255,255,0.07)' }
+                    grid:  { color: 'rgba(255,255,255,0.07)' },
+                    border: { color: 'transparent' },
+                    title: {
+                        display: true,
+                        text: 'Tageszeit',
+                        color: 'rgba(255,255,255,0.5)',
+                        font: { size: 11, family: 'Inter' }
+                    }
                 },
                 y: {
                     min: 0, max: 3,
@@ -64,7 +70,14 @@ document.addEventListener('DOMContentLoaded', async () => {
                         color: 'rgba(255,255,255,0.65)',
                         callback: val => Number.isInteger(val) ? val : ''
                     },
-                    grid: { color: 'rgba(255,255,255,0.07)' }
+                    grid: { color: 'rgba(255,255,255,0.07)' },
+                    border: { color: 'transparent' },
+                    title: {
+                        display: true,
+                        text: 'Anzahl',
+                        color: 'rgba(255,255,255,0.5)',
+                        font: { size: 11, family: 'Inter' }
+                    }
                 }
             }
         }
