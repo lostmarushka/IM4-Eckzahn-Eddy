@@ -126,12 +126,12 @@ Zusätzlich werden besondere Ereignisse in der Entität „Events“ gespeichert
 
 ## Known bugs
 
-* Was noch nicht einwandfrei funktioniert: 
+* **Was noch nicht einwandfrei funktioniert** 
 Leider können wir die Daten nur etwas zeitverzögert auf der Website anzeigen. Wenn das Kind aufhört die Zähne zu putzen (also beide Sensoren sind in diesem Zustand nicht mehr aktiv), dann bruacht es ein paar Sekunden auf der Website, bis der Timer stehen bleibt. Wir haben leider keine Live-Übertragung der Daten 
 * Was ist uns aufgefallen bei der Entwicklung:
 ----
 
-* Was könnte noch verbessert werden:
+* **Was könnte noch verbessert werden**
 Um das Zahnputz-Erlebnis für Kinder noch spannender und motivierender zu gestalten, könnte künftig eine animierte Version von Eddy Eckzahn integriert werden. Aufgrund des begrenzten Zeitrahmens dieses Moduls konnte diese Funktion noch nicht umgesetzt werden.
 Die Idee dahinter wäre, dass Eddy während des Zähneputzens lebendig auf die Aktionen des Kindes reagiert. Beispielsweise könnten seine kleinen T-Rex-Arme mit der Putzdauer langsam wachsen, bis sie gross genug sind, um gemeinsam mit dem Kind die Zähne zu putzen. Hört das Kind vorzeitig auf, würden die Arme wieder schrumpfen und Eddy traurig reagieren. Wird jedoch die empfohlene Putzzeit von zwei Minuten erreicht, könnten verschiedene kleine Freudentänze oder Animationen abgespielt werden, um das Kind spielerisch zu belohnen.
 
@@ -152,4 +152,6 @@ Heute funktionieren beide Sensoren grundsätzlich gut im Zusammenspiel von Beweg
 * **KI-Einsatz:** Mit Hilfe von Figma Make konnten wir unseren Prototypen relativ schnell und effizient ausarbeiten.
 Auch der Einsatz von KI war für das Physical-Computing-Team unverzichtbar. Mithilfe von ChatGPT wurden die von den Dozierenden zur Verfügung gestellten Codes an unsere eigenen Anforderungen angepasst und entsprechend weiterentwickelt bzw. umgeschrieben.
  
-* **Fazit:** …
+* **Fazit:** Das Projekt bot uns einen spannenden Einblick in die Welt der interaktiven Medien. Besonders interessant war es, nicht nur digital am Laptop zu arbeiten, sondern auch physisch etwas mit den eigenen Händen zu bauen und dieses mit der digitalen Welt zu verbinden.Leider war die Zeit im Modul sehr begrenzt, wodurch vieles eher oberflächlich behandelt werden musste und zudem stark auf den Einsatz von KI zurückgegriffen wurde.
+Trotz dieser Einschränkungen sind wir mit dem Ergebnis zufrieden und hoffen, dass Eddy Eckzahn vielen Kindern Freude beim Zähneputzen bereiten wird.
+
