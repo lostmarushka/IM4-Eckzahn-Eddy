@@ -58,8 +58,8 @@ Den Touchsensor haben wir an einem Ende eines langen Kabels angelötet. Das ande
 ![Alternativtext](img/Zahnbürste%20mit%20Sensoren.jpeg)
 
 
-Wenn du dein Setup ready hast, öffne dein Arduino-Programm und füge folgenden Code hinzu. 
-Siehe mc.ino
+Wenn dein Setup bereit ist, öffne das Arduino-Programm und füge den folgenden Code hinzu.  
+Den vollständigen Code findest du hier: [mc.ino](mc.ino)
 
 
 Anschliessend öffnest du in Arduino den Board Manager und fügst das „ESP32C6 Dev Module“ hinzu.
