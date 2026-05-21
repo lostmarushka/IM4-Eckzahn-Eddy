@@ -72,6 +72,7 @@ Wähle danach den richtigen Port aus und lade den Code auf den Microcontroller h
 Sobald der Upload abgeschlossen ist, öffnest du den **Serial Monitor** und wählst dort erneut den passenden Port aus. Voilà – nun kannst du beobachten, wie sich die Sensoren kalibrieren. Nach der Kalibrierung werden bei Bewegungen der Zahnbürste sowie bei Berührungen am Bürstenkopf die Daten erfasst und für die Speicherung in der Datenbank vorbereitet.
 
 * **Komponentenplan** (betrifft Physical Computing, vgl. Slides Kapitel 15): Schaubild enthält*
+![Alternativtext] (img/komponentenplan.jpg)
 
 | Komponente | Funktion |
 | :--- | :--- |
