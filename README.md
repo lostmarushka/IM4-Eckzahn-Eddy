@@ -39,7 +39,7 @@ Wenn du nun neugierig geworden bist, kannst du über die folgenden Links sowohl 
 
 #### Bauanleitung Physical Computing
 
-* Du möchtest nun Eddy Eckzahn selber nachbauen? Wir zeigen dir wie es geht:) 
+Du möchtest nun Eddy Eckzahn selber nachbauen? Wir zeigen dir wie es geht:) 
 
  Du brauchst folgende Sachen:
 
@@ -91,6 +91,12 @@ Sobald der Upload abgeschlossen ist, öffnest du den **Serial Monitor** und wäh
 | load.php| Serverlogik: Empfängt Daten und schreibt sie in die Datenbank |
 | sensor-status.php | Serverlogik: Stellt gespeicherte Trinkdaten als JSON bereit |
 
+| Komponente Webapp | Funktion |
+| :--- | :--- |
+| index.html | Grundstruktur für Webseite |
+| style.php| Visuelles Styling der Webseite |
+| img | Statische Inhalte zur Darstellung |
+| img | Statische Inhalte zur Darstellung |
 
 
 
@@ -98,8 +104,14 @@ Sobald der Upload abgeschlossen ist, öffnest du den **Serial Monitor** und wäh
 
 // Hier sollte das Verständnis ersichtlich sein / Wie stehen die Dateien in Beziehung zueinander, Wie reden Die Dateien miteinander, Wie ist der Weg der Daten
 
-* **Projektstruktur / Code-Struktur:** \[*Hinweis: Der Code selbst muss im Repository liegen und im Kopfbereich jeder Datei eine kurze Zusammenfassung enthalten.*\]  
-* **Datenschnittstelle: \[***zwischen WebApp und Physical Computing*\]  
+* **Projektstruktur / Code-Struktur:**
+Alle Codes und ihre Verlinkungen sind auf dem GitHub Repository einsehbar.  
+
+* **Datenschnittstelle [zwischen WebApp und Physical Computing]:**  
+Die Datenschnittstelle zwischen Physical Computing und WebApp basiert auf der Entität "Sensordata".  
+Die Sensoren an der Zahnbürste senden ihre Messwerte (Touch- und Bewegungssensor) über WLAN an die Datenbank, wo sie in der Entität "Sensordata" gespeichert werden.  
+Das WebApp-Team greift anschließend auf diese Daten zu, liest sie aus und verarbeitet sie weiter für die Darstellung und Logik innerhalb der Webanwendung.
+
 * **ERM:** ![Alternativtext](img/ERM%20Eckzahn%20Eddy.png)
 
 Im Mittelpunkt des Systems stehen die Entitäten User*innen, Familien, Kinder, Sensordaten und Events. Eine Userin repräsentiert eine Benutzerin der App, beispielsweise ein Elternteil oder eine erziehungsberechtigte Person. Zu jeder Userin werden Informationen wie Name, E-Mail-Adresse und Passwort gespeichert. Ausserdem ist jede Userin genau einer Familie zugeordnet. Eine Familie kann dabei mehrere User*innen besitzen.
@@ -112,17 +124,41 @@ Die intelligenten Zahnbürsten senden kontinuierlich Sensordaten an die App. Die
 
 Zusätzlich werden besondere Ereignisse in der Entität „Events“ gespeichert. Dazu zählen beispielsweise der Start oder das Ende eines Putzvorgangs oder andere relevante Aktionen der Zahnbürste. Zu jedem Event werden eine ID, ein Zeitstempel, die Art des Ereignisses sowie die Zuordnung zum entsprechenden Kind gespeichert. Auch hier gilt, dass ein Kind mehrere Events besitzen kann, ein Event jedoch immer nur zu einem Kind gehört.
 
-* **Authentifizierung:** \[*Erklärung*\]
+* **Authentifizierung:** Bei der Webapp können die Eltern ein Login erstellen (Mail und Passwort) und anschliessend ihre Kinder zu ihrem Profil hinzufügen. Es besteht die Möglichkeit die Kinder aus dem Profil zu entfernen.
 
 ## Known bugs
 
-* Was funktioniert noch nicht einwandfrei?
-* Was ist uns aufgefallen bei der Entwicklung?  
-* Was könnte noch verbessert werden?
+* **Was noch nicht einwandfrei funktioniert** 
+Leider können wir die Daten nur etwas zeitverzögert auf der Website anzeigen. Wenn das Kind aufhört die Zähne zu putzen (also beide Sensoren sind in diesem Zustand nicht mehr aktiv), dann bruacht es ein paar Sekunden auf der Website, bis der Timer stehen bleibt. Wir haben leider keine Live-Übertragung der Daten 
+
+
+* **Was könnte noch verbessert werden**
+Um das Zahnputz-Erlebnis für Kinder noch spannender und motivierender zu gestalten, könnte künftig eine animierte Version von Eddy Eckzahn integriert werden. Aufgrund des begrenzten Zeitrahmens dieses Moduls konnte diese Funktion noch nicht umgesetzt werden.
+Die Idee dahinter wäre, dass Eddy während des Zähneputzens lebendig auf die Aktionen des Kindes reagiert. Beispielsweise könnten seine kleinen T-Rex-Arme mit der Putzdauer langsam wachsen, bis sie gross genug sind, um gemeinsam mit dem Kind die Zähne zu putzen. Hört das Kind vorzeitig auf, würden die Arme wieder schrumpfen und Eddy traurig reagieren. Wird jedoch die empfohlene Putzzeit von zwei Minuten erreicht, könnten verschiedene kleine Freudentänze oder Animationen abgespielt werden, um das Kind spielerisch zu belohnen.
+
+Aus Zeitgründen haben wir zudem auf die Funktionen zur Anpassung der Profilbild-Icons sowie zur Änderung der Namen bei den Profilen verzichtet. Stattdessen fügen wir nun neben dem Kinderprofil lediglich einen Löschbutton hinzu. In unserem Figma-Prototyp war ursprünglich auch vorgesehen, das Elternprofil löschen zu können. Auf diese Funktion verzichten wir jedoch ebenfalls aus Zeitgründen.
+
 
 ## Umsetzungsprozess
 
-* **Reflexion / Erfahrung / Lernfortschritt:** *Was haben wir gelernt? Würden wir es nochmal genauso machen? Was war gut, was war schlecht?*  
-* **Herausforderungen & Lösungen:** \[*Verworfene Ansätze, Fehler, Umplanungen*\]  
-* **KI-Einsatz:** *Dokumentation der verwendeten KI-Tools und deren Nutzen (KI ist nicht verboten)*  
-* **Fazit:** …
+* **Reflexion / Erfahrung / Lernfortschritt:**
+Physical Computing: Zum ersten Mal kamen wir mit Physical Computing in Kontakt. In so kurzer Zeit und ohne Vorerfahrung eine Zahnbürste mit Sensoren auszustatten, war eine sehr spannende, aber auch intensive und teilweise anstrengende Erfahrung.
+Wenn alles wie geplant funktionierte, war die Freude entsprechend gross und sehr motivierend. Gleichzeitig gab es jedoch auch einige Tiefpunkte, da wir mit den Programmen und der gesamten Umgebung zum ersten Mal gearbeitet haben und Fehler oft nicht schnell oder selbstständig finden konnten.
+Wir sind überzeugt, dass solche Prozesse mit zunehmender Erfahrung deutlich effizienter und sicherer werden. Durch mehr Übung und einfaches Ausprobieren würde die Umsetzung in Zukunft sicherlich schneller und reibungsloser verlaufen.
+
+Webapp: Wir haben zum ersten Mal Figma Make in Kombination mit dem regulären Figma verwendet und dabei den gesamten Workflow kennengelernt. Auch den GitHub Connector für Perplexity haben wir erstmals im Coding-Prozess eingesetzt. Insgesamt haben wir damit den kompletten Workflow mit KI-Unterstützung zum ersten Mal ausprobiert.
+Zudem konnten wir einen besseren Einblick in das Zusammenspiel von PHP, JavaScript und HTML gewinnen, da beide Personen im Webapp-Team während dem 3. Semester im Ausland waren und deshalb das Modul IM3 nicht besucht haben. 
+
+* **Herausforderungen & Lösungen:** 
+Physical Computing: Die erste Herausforderung bestand darin, geeignete Sensoren für unsere Zahnbürste auszuwählen. Zunächst haben wir lediglich einen Bewegungssensor in Betracht gezogen. Um jedoch zu verhindern, dass die Kinder die Zahnbürste nur schütteln, ohne tatsächlich zu putzen, entschieden wir uns zusätzlich für einen zweiten Sensor. Erst wenn beide Sensoren gleichzeitig aktiviert sind, werden die Daten aufgezeichnet.
+Als zweiten Sensor wählten wir einen Touchsensor. Dieser wurde mithilfe eines leitfähigen Kabels verlängert, sodass er im Bürstenkopf integriert werden konnte. Eine besondere Schwierigkeit bestand dabei darin, das ausgefranste Kabel so im Bürstenkopf zu verlegen, dass die Touch-Funktion zuverlässig erhalten bleibt.
+Heute funktionieren beide Sensoren grundsätzlich gut im Zusammenspiel von Bewegung und Berührung. Dennoch bleibt die Aktivierung des Touchsensors gelegentlich etwas unberechenbar, sodass es manchmal überraschend ist, ob er tatsächlich auslöst oder nicht.
+
+Webapp: Bei der Implementierung der Sensoren des Physical-Computing-Teams wurde versucht, eine Verbindung zwischen Hardware und Webapp herzustellen. Dabei bestand die Herausforderung darin, die Sensordaten korrekt in die bestehende Codebasis einzubinden und diese zuverlässig im System verfügbar zu machen. Gleichzeitig musste sichergestellt werden, dass die Struktur im Code trotz der vielen Dateien nicht verloren geht und die einzelnen Komponenten nachvollziehbar miteinander verknüpft bleiben. Dabei lag der Fokus vor allem auf der Fehleranalyse und dem schrittweisen Zusammenführen der unterschiedlichen Systeme.
+
+* **KI-Einsatz:** Mit Hilfe von Figma Make konnten wir unseren Prototypen relativ schnell und effizient ausarbeiten.
+Auch der Einsatz von KI war für das Physical-Computing-Team unverzichtbar. Mithilfe von ChatGPT wurden die von den Dozierenden zur Verfügung gestellten Codes an unsere eigenen Anforderungen angepasst und entsprechend weiterentwickelt bzw. umgeschrieben.
+ 
+* **Fazit:** Das Projekt bot uns einen spannenden Einblick in die Welt der interaktiven Medien. Besonders interessant war es, nicht nur digital am Laptop zu arbeiten, sondern auch physisch etwas mit den eigenen Händen zu bauen und dieses mit der digitalen Welt zu verbinden. Leider war die Zeit im Modul sehr begrenzt, wodurch vieles eher oberflächlich behandelt werden musste und zudem stark auf den Einsatz von KI zurückgegriffen wurde.
+Trotz dieser Einschränkungen sind wir mit dem Ergebnis zufrieden und hoffen, dass Eddy Eckzahn vielen Kindern Freude beim Zähneputzen bereiten wird.
+
