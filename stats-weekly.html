@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Weekly Stats – Eckzahn Eddy</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cousine:wght@400;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/stats.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body data-page="stats-weekly">
+  <div class="page-wrapper stats-page-wrapper">
+    <div class="login-wrapper stats-wrapper">
+
+      <header class="brushing-header-wrapper">
+        <button class="circle-button circle-button-light" aria-label="Zurück" onclick="history.back()">
+          <img src="img/back_button.svg" alt="Zurück" />
+        </button>
+        <div class="brushing-title-wrapper">
+          <h1 class="title-wrapper">STATISTIK</h1>
+          <p class="brushing-name js-username">–</p>
+        </div>
+        <a href="protected.html" class="circle-button-icon" aria-label="Profil">
+          <img src="img/profile_button.svg" alt="" />
+        </a>
+      </header>
+
+      <!-- Tabs -->
+      <div class="stats-tabs-wrapper stats-tabs-wrapper--three" role="tablist">
+        <button class="stats-tab" role="tab" aria-selected="false"
+          onclick="location.href='stats-overview.html'">Übersicht</button>
+        <button class="stats-tab" role="tab" aria-selected="false"
+          onclick="location.href='stats-daily.html'">Daily</button>
+        <button class="stats-tab stats-tab--active" role="tab" aria-selected="true">Weekly</button>
+      </div>
+
+      <!-- Overview Card -->
+      <section class="stats-card" aria-label="Übersicht">
+        <h2 class="stats-card-title">This Week's Overview</h2>
+        <div class="stats-overview-grid">
+
+          <div class="stats-metric-cell">
+            <div class="stats-metric-icon stats-metric-icon--pink" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/>
+              </svg>
+            </div>
+            <span class="stats-metric-value js-stat-sessions">–</span>
+            <span class="stats-metric-label">Sessions</span>
+          </div>
+
+          <div class="stats-metric-divider" aria-hidden="true"></div>
+
+          <div class="stats-metric-cell">
+            <div class="stats-metric-icon stats-metric-icon--yellow" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17 5.8 21.3l2.4-7.4L2 9.4h7.6z"/>
+              </svg>
+            </div>
+            <span class="stats-metric-value js-stat-completed">–</span>
+            <span class="stats-metric-label">Completed</span>
+          </div>
+
+          <div class="stats-metric-divider" aria-hidden="true"></div>
+
+          <div class="stats-metric-cell">
+            <div class="stats-metric-icon stats-metric-icon--teal" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="3" width="7" height="10" rx="2"/><line x1="6.5" y1="13" x2="6.5" y2="21"/>
+              </svg>
+            </div>
+            <span class="stats-metric-value js-stat-minutes">–</span>
+            <span class="stats-metric-label">Minutes</span>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- Chart Card -->
+      <section class="stats-card" aria-label="Brushing Times">
+        <h2 class="stats-card-title">Brushing Times This Week</h2>
+        <div class="stats-chart-wrapper">
+          <canvas class="js-chart-canvas" aria-label="Brushing Times Chart" role="img"></canvas>
+        </div>
+      </section>
+
+      <!-- Goal Card -->
+      <section class="stats-card stats-goal-card" aria-label="Goal">
+        <div class="stats-goal-content">
+          <h2 class="stats-card-title">Weekly Goal</h2>
+          <p class="stats-goal-text js-goal-text">–</p>
+        </div>
+        <label class="stats-goal-checkbox-wrapper" aria-label="Ziel erreicht">
+          <input type="checkbox" class="stats-goal-checkbox js-goal-checkbox" aria-checked="false" disabled />
+          <span class="stats-goal-checkmark" aria-hidden="true">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="20 6 9 17 4 12"/>
+            </svg>
+          </span>
+        </label>
+      </section>
+
+    </div>
+  </div>
+
+  <script src="js/stats-weekly.js"></script>
+</body>
+</html>
