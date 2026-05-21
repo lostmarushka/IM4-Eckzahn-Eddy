@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="de">
   <head>
     <meta charset="UTF-8" />
@@ -6,21 +6,30 @@
     <title>Profil wählen</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Cousine:ital,wght@0,400;0,700;1,400;1,700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cousine:ital,wght@0,400;0,700;1,400;1,700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="css/style.css" />
   </head>
   <body>
     <main class="page-wrapper">
       <section class="login-wrapper choose-profile-wrapper">
-
         <div class="intro-dots-wrapper" aria-hidden="true">
           <img src="img/coloured_dots.svg" alt="" class="intro-dots" />
         </div>
 
         <header class="choose-profile-header">
-          <h1 class="title-wrapper">Profil<br>wählen</h1>
-          <p class="choose-profile-subtitle">Wer putzt heute?</p>
-        </header>
+  <a href="login.html" class="circle-button" aria-label="Zurück">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+         stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+         stroke-linejoin="round" aria-hidden="true">
+      <path d="M19 12H5M12 5l-7 7 7 7"/>
+    </svg>
+  </a>
+  <h1 class="title-wrapper">Profil<br>wählen</h1>
+  <p class="choose-profile-subtitle">Wer putzt heute?</p>
+</header>
 
         <!-- ✅ id="profileGrid" MUSS vorhanden sein – JS füllt dieses Element -->
         <div class="profile-grid" role="list" id="profileGrid">
@@ -28,14 +37,20 @@
         </div>
 
         <div class="choose-profile-actions">
-          <a href="protected.html" class="intro-button intro-button-secondary">
-            <span>⚙ Profile verwalten</span>
-          </a>
-          <a href="api/logout.php" class="intro-button intro-button-secondary">
-            <span>→ Abmelden</span>
+          <a
+            href="edit-profile.html"
+            class="intro-button intro-button-secondary"
+          >
+            <img
+              src="img/edit-profile.svg"
+              alt=""
+              width="20"
+              height="20"
+              aria-hidden="true"
+            />
+            <span>Profile verwalten</span>
           </a>
         </div>
-
       </section>
     </main>
 
@@ -43,23 +58,23 @@
     <script src="js/choose-profile.js"></script>
     <script>
       async function loadProfiles() {
-        const grid = document.getElementById('profileGrid');
+        const grid = document.getElementById("profileGrid");
 
         try {
-          const res  = await fetch('api/get-profiles.php');
+          const res = await fetch("api/get-profiles.php");
           const data = await res.json();
 
-          grid.innerHTML = '';
+          grid.innerHTML = "";
 
-          if (data.status === 'success') {
-            data.kinder.forEach(kind => {
-              const btn = document.createElement('button');
-              btn.className = 'profile-card';
-              btn.setAttribute('role', 'listitem');
-              btn.setAttribute('data-name', kind.name);
-              btn.setAttribute('data-kinder-id', kind.id);
-              btn.setAttribute('aria-label', 'Profil ' + kind.name + ' wählen');
-              btn.addEventListener('click', () => selectProfile(btn));
+          if (data.status === "success") {
+            data.kinder.forEach((kind) => {
+              const btn = document.createElement("button");
+              btn.className = "profile-card";
+              btn.setAttribute("role", "listitem");
+              btn.setAttribute("data-name", kind.name);
+              btn.setAttribute("data-kinder-id", kind.id);
+              btn.setAttribute("aria-label", "Profil " + kind.name + " wählen");
+              btn.addEventListener("click", () => selectProfile(btn));
 
               const avatarHTML = kind.avatar
                 ? `<img src="/${kind.avatar}" alt="${kind.name}" loading="lazy" />`
@@ -74,11 +89,11 @@
           }
 
           // ✅ Als <a>-Tag damit der Link wirklich funktioniert
-          const addLink = document.createElement('a');
-          addLink.href = 'generate-profile.html';
-          addLink.className = 'profile-card';
-          addLink.setAttribute('role', 'listitem');
-          addLink.setAttribute('aria-label', 'Profil hinzufügen');
+          const addLink = document.createElement("a");
+          addLink.href = "generate-profile.html";
+          addLink.className = "profile-card";
+          addLink.setAttribute("role", "listitem");
+          addLink.setAttribute("aria-label", "Profil hinzufügen");
           addLink.innerHTML = `
             <div class="profile-avatar profile-avatar--add">
               <img src="img/hinzufuegen.svg" alt="" aria-hidden="true" />
@@ -86,16 +101,14 @@
             <span class="profile-name">Profil<br>hinzufügen</span>
           `;
           grid.appendChild(addLink);
-
         } catch (e) {
-          console.error('Profile laden fehlgeschlagen:', e);
-          grid.innerHTML = '<p style="color:red;padding:1rem;">Profile konnten nicht geladen werden.</p>';
+          console.error("Profile laden fehlgeschlagen:", e);
+          grid.innerHTML =
+            '<p style="color:red;padding:1rem;">Profile konnten nicht geladen werden.</p>';
         }
       }
 
       loadProfiles();
     </script>
-
-    
   </body>
 </html>

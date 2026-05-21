@@ -5,13 +5,6 @@ header('Content-Type: application/json');
 
 require_once '../system/config.php';
 
-// try {
-//     require_once '../system/config.php';
-// } catch (Exception $e) {
-//     echo json_encode(["status" => "error", "message" => $e->getMessage()]);
-//     exit;
-// }
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $data = json_decode(file_get_contents("php://input"), true);

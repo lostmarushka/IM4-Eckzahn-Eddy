@@ -1,6 +1,4 @@
 <?php
-require_once 'auth-check.php'; // falls vorhanden, sonst Zeile löschen
-
 header('Content-Type: application/json');
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
@@ -9,8 +7,8 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 }
 
 $body = json_decode(file_get_contents('php://input'), true);
-$id   = isset($body['id'])   ? (int) $body['id']              : 0;
-$name = isset($body['name']) ? trim($body['name'])             : '';
+$id   = isset($body['id'])   ? (int) $body['id']  : 0;
+$name = isset($body['name']) ? trim($body['name']) : '';
 
 if (!$id || $name === '') {
     echo json_encode(['status' => 'error', 'message' => 'Ungültige Eingabe.']);
@@ -23,18 +21,13 @@ if (mb_strlen($name) > 30) {
 }
 
 try {
-    require_once 'db.php'; // Datenbankverbindung ($pdo)
+    require_once('../system/config.php');
 
-    $stmt = $pdo->prepare('UPDATE kinder SET name = :name WHERE id = :id');
+    $stmt = $pdo->prepare('UPDATE kinder SET name = :name WHERE id = :id AND familie_id = 1');
     $stmt->execute([':name' => $name, ':id' => $id]);
-
-    if ($stmt->rowCount() === 0) {
-        echo json_encode(['status' => 'error', 'message' => 'Profil nicht gefunden.']);
-        exit;
-    }
 
     echo json_encode(['status' => 'success']);
 
 } catch (PDOException $e) {
-    echo json_encode(['status' => 'error', 'message' => 'Datenbankfehler.']);
+    echo json_encode(['status' => 'error', 'message' => $e->getMessage()]);
 }

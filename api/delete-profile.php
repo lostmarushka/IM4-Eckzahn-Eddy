@@ -1,6 +1,4 @@
 <?php
-require_once 'auth-check.php'; // falls vorhanden, sonst Zeile löschen
-
 header('Content-Type: application/json');
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
@@ -17,18 +15,19 @@ if (!$id) {
 }
 
 try {
-    require_once 'db.php'; // Datenbankverbindung ($pdo)
+    require_once('../system/config.php');
 
-    // Zuerst Avatar-Datei löschen, falls vorhanden
-    $stmt = $pdo->prepare('SELECT avatar FROM kinder WHERE id = :id');
+    // Avatar-Pfad holen
+    $stmt = $pdo->prepare('SELECT avatar FROM kinder WHERE id = :id AND familie_id = 1');
     $stmt->execute([':id' => $id]);
-    $row  = $stmt->fetch(PDO::FETCH_ASSOC);
+    $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
     if (!$row) {
         echo json_encode(['status' => 'error', 'message' => 'Profil nicht gefunden.']);
         exit;
     }
 
+    // Avatar-Datei löschen falls vorhanden
     if (!empty($row['avatar'])) {
         $avatarPath = __DIR__ . '/../' . $row['avatar'];
         if (file_exists($avatarPath)) {
@@ -36,12 +35,12 @@ try {
         }
     }
 
-    // Profil aus DB löschen
-    $stmt = $pdo->prepare('DELETE FROM kinder WHERE id = :id');
+    // Datensatz löschen
+    $stmt = $pdo->prepare('DELETE FROM kinder WHERE id = :id AND familie_id = 1');
     $stmt->execute([':id' => $id]);
 
     echo json_encode(['status' => 'success']);
 
 } catch (PDOException $e) {
-    echo json_encode(['status' => 'error', 'message' => 'Datenbankfehler.']);
+    echo json_encode(['status' => 'error', 'message' => $e->getMessage()]);
 }
