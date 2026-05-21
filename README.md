@@ -43,6 +43,11 @@ Eckzahn Eddy soll ein Produkt bzw. eine Webapp rund ums Zähneputzen sein in Kom
 | Kap. Touchsensor TTB223B | Erfasst Daten im Zahnbürstenkopf (Berührung mit Zähnen) |
 | 6DOF Lagesensor MPU6500 | Erfasst Daten von der Zahnbürste (ob sich Zahnbürste bewegt, Kind Zähne putzt) |
 
+| Verbindung/Protokoll | Funktion |
+| :--- | :--- |
+| WLAN | Verbindung des ESP32 mit Webserver |
+| HTTP (POST) | Sendet JSON-Daten vom ESP32 an den Server (load.php) |
+| SQL (MySQL) | Datenübertragung zwischen PHP und Datenbank |
 
   * *die verbundenen Sensoren und Aktoren*  
   * *die Programme (mit Dateinamen)*  
