@@ -27,7 +27,7 @@ $avatars = [
     'img/profile_emma.jpg',
     'img/profile_sophie.jpg',
     'img/profile_max.jpg',
-    'img/profile_zuefaellig.jpg',
+    'img/profile_zufaellig.jpg',
 ];
 
 $avatar = $avatars[array_rand($avatars)];

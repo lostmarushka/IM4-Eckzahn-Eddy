@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Profile bearbeiten</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cousine:ital,wght@0,400;0,700;1,400;1,700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/edit-profile.css" />
+  </head>
+
+  <body>
+    <main class="page-wrapper">
+      <section class="login-wrapper edit-profile-wrapper">
+
+        <header class="edit-profile-header">
+          <a href="choose-profile.html" class="circle-button" aria-label="Zurück">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+                 stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                 stroke-linejoin="round" aria-hidden="true">
+              <path d="M19 12H5M12 5l-7 7 7 7"/>
+            </svg>
+          </a>
+          <h1 class="edit-profile-title">Profile<br>bearbeiten</h1>
+        </header>
+
+        <div id="editAlert" class="edit-alert" role="alert" aria-live="polite"></div>
+
+        <div id="profileListContainer">
+          <div class="profile-list-skeleton" aria-hidden="true">
+            <div class="skeleton-item"></div>
+            <div class="skeleton-item"></div>
+            <div class="skeleton-item"></div>
+          </div>
+        </div>
+
+        <div class="choose-profile-actions">
+          <a href="protected.html" class="intro-button intro-button-secondary">
+            <span>← Zurück zur Übersicht</span>
+          </a>
+        </div>
+
+      </section>
+    </main>
+
+    <!-- Delete Confirm Modal -->
+    <div id="delete-modal" role="dialog" aria-modal="true"
+         aria-labelledby="deleteModalTitle" aria-describedby="deleteModalText">
+      <div class="delete-modal-box">
+
+        <div class="delete-modal-icon" aria-hidden="true">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none"
+               stroke="currentColor" stroke-width="2" stroke-linecap="round"
+               stroke-linejoin="round">
+            <polyline points="3 6 5 6 21 6"/>
+            <path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/>
+            <path d="M10 11v6M14 11v6"/>
+            <path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/>
+          </svg>
+        </div>
+
+        <h2 class="delete-modal-title" id="deleteModalTitle">Profil löschen?</h2>
+        <p class="delete-modal-text" id="deleteModalText">
+          Möchtest du das Profil <strong id="deleteModalName"></strong> wirklich löschen?
+          Alle Daten dieses Profils werden dauerhaft entfernt.
+        </p>
+
+        <div class="delete-modal-buttons">
+          <button class="delete-modal-btn-confirm" id="deleteConfirmBtn">
+            Ja, löschen
+          </button>
+          <button class="delete-modal-btn-cancel" id="deleteCancelBtn">
+            Abbrechen
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+    <script src="js/auth.js"></script>
+    <script src="js/edit-profile.js"></script>
+  </body>
+</html>
