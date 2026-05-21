@@ -6,12 +6,7 @@
 * **Team Physical Computing:** \[Marina Lampert, Laura Seger\]   
 * **Team WebApp:** \[Max Hutmacher, Saskia Lerf\]
  
- 
-* Welches Problem im Alltag von Eltern mit kleinen Kindern wird gelöst? 
-* Was ist der „Sinn und Zweck“ des Systems?
-
-\[Eckzahn Eddy soll ein Produkt bzw. eine Webapp rund ums Zähneputzen sein in Kombination mit einer Zahnbürste, die über ein Touch- und Bewegungssensor verfügt. Ziel ist es, Kinder spielerisch dazu zu motivieren, ihre Zähne besser und regelmässiger zu putzen.
-\]
+Eckzahn Eddy soll ein Produkt bzw. eine Webapp rund ums Zähneputzen sein in Kombination mit einer Zahnbürste, die über ein Touch- und Bewegungssensor verfügt. Ziel ist es, Kinder spielerisch dazu zu motivieren, ihre Zähne besser und regelmässiger zu putzen.
 
 ### UX & Konzeption
 
@@ -57,7 +52,7 @@
 
 * **Projektstruktur / Code-Struktur:** \[*Hinweis: Der Code selbst muss im Repository liegen und im Kopfbereich jeder Datei eine kurze Zusammenfassung enthalten.*\]  
 * **Datenschnittstelle: \[***zwischen WebApp und Physical Computing*\]  
-* **ERM:** \[![Alternativtext](img/ERM%20Eckzahn%20Eddy.png)\]  
+* **ERM:** ![Alternativtext](img/ERM%20Eckzahn%20Eddy.png) 
 * **Authentifizierung:** \[*Erklärung*\]
 
 ## Known bugs
