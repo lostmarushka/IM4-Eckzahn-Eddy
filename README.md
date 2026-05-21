@@ -55,6 +55,12 @@ Eckzahn Eddy soll ein Produkt bzw. eine Webapp rund ums Zähneputzen sein in Kom
 | load.php| Serverlogik: Empfängt Daten und schreibt sie in die Datenbank |
 | sensor-status.php | Serverlogik: Stellt gespeicherte Trinkdaten als JSON bereit |
 
+| Komponente Webapp | Funktion |
+| :--- | :--- |
+| index.html | Grundstruktur für Webseite |
+| style.php| Visuelles Styling der Webseite |
+| img | Statische Inhalte zur Darstellung |
+| img | Statische Inhalte zur Darstellung |
 
 * **Steckplan**
 ![Alternativtext](img/Steckplan.jpeg)
