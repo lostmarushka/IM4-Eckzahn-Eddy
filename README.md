@@ -142,24 +142,29 @@ Aus Zeitgründen haben wir zudem auf die Funktionen zur Anpassung der Profilbild
 ## Umsetzungsprozess
 
 * **Reflexion / Erfahrung / Lernfortschritt:**
+
 Physical Computing:
- 
+
 Zum ersten Mal kamen wir mit Physical Computing in Kontakt. In so kurzer Zeit und ohne Vorerfahrung eine Zahnbürste mit Sensoren auszustatten, war eine sehr spannende, aber auch intensive und teilweise anstrengende Erfahrung.
 Wenn alles wie geplant funktionierte, war die Freude entsprechend gross und sehr motivierend. Gleichzeitig gab es jedoch auch einige Tiefpunkte, da wir mit den Programmen und der gesamten Umgebung zum ersten Mal gearbeitet haben und Fehler oft nicht schnell oder selbstständig finden konnten.
 Wir sind überzeugt, dass solche Prozesse mit zunehmender Erfahrung deutlich effizienter und sicherer werden. Durch mehr Übung und einfaches Ausprobieren würde die Umsetzung in Zukunft sicherlich schneller und reibungsloser verlaufen.
 
-Webapp: 
+Webapp:
+ 
 Wir haben zum ersten Mal Figma Make in Kombination mit dem regulären Figma verwendet und dabei den gesamten Workflow kennengelernt. Auch den GitHub Connector für Perplexity haben wir erstmals im Coding-Prozess eingesetzt. Insgesamt haben wir damit den kompletten Workflow mit KI-Unterstützung zum ersten Mal ausprobiert.
 Zudem konnten wir einen besseren Einblick in das Zusammenspiel von PHP, JavaScript und HTML gewinnen, da beide Personen im Webapp-Team während dem 3. Semester im Ausland waren und deshalb das Modul IM3 nicht besucht haben. 
 
 * **Herausforderungen & Lösungen:** 
+
 Physical Computing: 
 
 Die erste Herausforderung bestand darin, geeignete Sensoren für unsere Zahnbürste auszuwählen. Zunächst haben wir lediglich einen Bewegungssensor in Betracht gezogen. Um jedoch zu verhindern, dass die Kinder die Zahnbürste nur schütteln, ohne tatsächlich zu putzen, entschieden wir uns zusätzlich für einen zweiten Sensor. Erst wenn beide Sensoren gleichzeitig aktiviert sind, werden die Daten aufgezeichnet.
 Als zweiten Sensor wählten wir einen Touchsensor. Dieser wurde mithilfe eines leitfähigen Kabels verlängert, sodass er im Bürstenkopf integriert werden konnte. Eine besondere Schwierigkeit bestand dabei darin, das ausgefranste Kabel so im Bürstenkopf zu verlegen, dass die Touch-Funktion zuverlässig erhalten bleibt.
 Heute funktionieren beide Sensoren grundsätzlich gut im Zusammenspiel von Bewegung und Berührung. Dennoch bleibt die Aktivierung des Touchsensors gelegentlich etwas unberechenbar, sodass es manchmal überraschend ist, ob er tatsächlich auslöst oder nicht.
 
-Webapp: Bei der Implementierung der Sensoren des Physical-Computing-Teams wurde versucht, eine Verbindung zwischen Hardware und Webapp herzustellen. Dabei bestand die Herausforderung darin, die Sensordaten korrekt in die bestehende Codebasis einzubinden und diese zuverlässig im System verfügbar zu machen. Gleichzeitig musste sichergestellt werden, dass die Struktur im Code trotz der vielen Dateien nicht verloren geht und die einzelnen Komponenten nachvollziehbar miteinander verknüpft bleiben. Dabei lag der Fokus vor allem auf der Fehleranalyse und dem schrittweisen Zusammenführen der unterschiedlichen Systeme.
+Webapp: 
+
+Bei der Implementierung der Sensoren des Physical-Computing-Teams wurde versucht, eine Verbindung zwischen Hardware und Webapp herzustellen. Dabei bestand die Herausforderung darin, die Sensordaten korrekt in die bestehende Codebasis einzubinden und diese zuverlässig im System verfügbar zu machen. Gleichzeitig musste sichergestellt werden, dass die Struktur im Code trotz der vielen Dateien nicht verloren geht und die einzelnen Komponenten nachvollziehbar miteinander verknüpft bleiben. Dabei lag der Fokus vor allem auf der Fehleranalyse und dem schrittweisen Zusammenführen der unterschiedlichen Systeme.
 
 * **KI-Einsatz:** Mit Hilfe von Figma Make konnten wir unseren Prototypen relativ schnell und effizient ausarbeiten.
 Auch der Einsatz von KI war für das Physical-Computing-Team unverzichtbar. Mithilfe von ChatGPT wurden die von den Dozierenden zur Verfügung gestellten Codes an unsere eigenen Anforderungen angepasst und entsprechend weiterentwickelt bzw. umgeschrieben.
