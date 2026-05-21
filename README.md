@@ -116,13 +116,24 @@ Zusätzlich werden besondere Ereignisse in der Entität „Events“ gespeichert
 
 ## Known bugs
 
-* Was funktioniert noch nicht einwandfrei?
-* Was ist uns aufgefallen bei der Entwicklung?  
-* Was könnte noch verbessert werden?
+* Was noch nicht einwandfrei funktioniert: 
+Leider können wir die Daten nur etwas zeitverzögert auf der Website anzeigen. Wenn das Kind aufhört die Zähne zu putzen (also beide Sensoren sind in diesem Zustand nicht mehr aktiv), dann bruacht es ein paar Sekunden auf der Website, bis der Timer stehen bleibt. Wir haben leider keine Live-Übertragung der Daten 
+* Was ist uns aufgefallen bei der Entwicklung:
+----
+
+* Was könnte noch verbessert werden:
+Um das Zahnputz-Erlebnis für Kinder noch spannender und motivierender zu gestalten, könnte künftig eine animierte Version von Eddy Eckzahn integriert werden. Aufgrund des begrenzten Zeitrahmens dieses Moduls konnte diese Funktion noch nicht umgesetzt werden.
+Die Idee dahinter wäre, dass Eddy während des Zähneputzens lebendig auf die Aktionen des Kindes reagiert. Beispielsweise könnten seine kleinen T-Rex-Arme mit der Putzdauer langsam wachsen, bis sie gross genug sind, um gemeinsam mit dem Kind die Zähne zu putzen. Hört das Kind vorzeitig auf, würden die Arme wieder schrumpfen und Eddy traurig reagieren. Wird jedoch die empfohlene Putzzeit von zwei Minuten erreicht, könnten verschiedene kleine Freudentänze oder Animationen abgespielt werden, um das Kind spielerisch zu belohnen.
+
 
 ## Umsetzungsprozess
 
-* **Reflexion / Erfahrung / Lernfortschritt:** *Was haben wir gelernt? Würden wir es nochmal genauso machen? Was war gut, was war schlecht?*  
-* **Herausforderungen & Lösungen:** \[*Verworfene Ansätze, Fehler, Umplanungen*\]  
+* **Reflexion / Erfahrung / Lernfortschritt:**
+Zum ersten Mal kamen wir mit Physical Computing in Kontakt. In so kurzer Zeit und ohne Vorerfahrung eine Zahnbürste mit Sensoren auszustatten, war eine sehr spannende, aber auch intensive und teilweise anstrengende Erfahrung.
+Wenn alles wie geplant funktionierte, war die Freude entsprechend gross und sehr motivierend. Gleichzeitig gab es jedoch auch einige Tiefpunkte, da wir mit den Programmen und der gesamten Umgebung zum ersten Mal gearbeitet haben und Fehler oft nicht schnell oder selbstständig finden konnten.
+Wir sind überzeugt, dass solche Prozesse mit zunehmender Erfahrung deutlich effizienter und sicherer werden. Durch mehr Übung und einfaches Ausprobieren würde die Umsetzung in Zukunft sicherlich schneller und reibungsloser verlaufen.
+
+* **Herausforderungen & Lösungen:** 
+
 * **KI-Einsatz:** *Dokumentation der verwendeten KI-Tools und deren Nutzen (KI ist nicht verboten)*  
 * **Fazit:** …
