@@ -101,7 +101,7 @@ Sobald der Upload abgeschlossen ist, öffnest du den **Serial Monitor** und wäh
 * **Projektstruktur / Code-Struktur:**
 Alle Codes und ihre Verlinkungen sind auf dem GitHub Repository einsehbar.  
 Hier ein Beispiel:  
-[stats-daily.js](stats-daily.js)
+[js/stats-daily.js](stats-daily.js) 
 
 * **Datenschnittstelle: \[***zwischen WebApp und Physical Computing*\]  
 * **ERM:** ![Alternativtext](img/ERM%20Eckzahn%20Eddy.png)
