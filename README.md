@@ -15,9 +15,6 @@ Eckzahn Eddy soll ein Produkt bzw. eine Webapp rund ums Zähneputzen sein in Kom
 * **Figma:** (https://www.figma.com/design/7dYuJ7zHd2DgF7CtyG6XbB/im4-eckzahn-eddy?m=auto&t=oUmAeBcnwc444ZSt-1)
 * **User Flow \+ Screen Flow**
 ![Alternativtext](img/Screen%20Flow.jpg)  
-* ggf. weitere Ergänzungen
-* *Welche Features waren angedacht?*
-* *Welche Features wurden nicht umgesetzt? (Warum)*
 
 ### Setup
 
@@ -38,8 +35,13 @@ Eckzahn Eddy soll ein Produkt bzw. eine Webapp rund ums Zähneputzen sein in Kom
 #### Bauanleitung Physical Computing
 
 * ***Was muss ich wie bauen, verbinden, installieren?***  
-* *ergänze: **Komponentenplan** (betrifft Physical Computing, vgl. Slides Kapitel 15): Schaubild enthält*  
-  * *die eingesetzten Komponenten*  
+* *ergänze: **Komponentenplan** (betrifft Physical Computing, vgl. Slides Kapitel 15): Schaubild enthält*
+| Komponente| Funktion | 
+| :--- | :---: | ---: |
+| Kap. Touchsensor TTB223B| Erfasst Daten im Zahnbürstenkopf (Berührung mit Zähnen)|
+| 6DOF Lagesensor MPU6500 | Erfasst Daten von der Zahnbürste (ob sich Zahnbürste bewegt, Kind Zähne putzt)|
+
+
   * *die verbundenen Sensoren und Aktoren*  
   * *die Programme (mit Dateinamen)*  
   * *die Kommunikationswege*  
