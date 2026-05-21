@@ -135,7 +135,6 @@ Leider können wir die Daten nur etwas zeitverzögert auf der Website anzeigen. 
 * **Was könnte noch verbessert werden**
 Um das Zahnputz-Erlebnis für Kinder noch spannender und motivierender zu gestalten, könnte künftig eine animierte Version von Eddy Eckzahn integriert werden. Aufgrund des begrenzten Zeitrahmens dieses Moduls konnte diese Funktion noch nicht umgesetzt werden.
 Die Idee dahinter wäre, dass Eddy während des Zähneputzens lebendig auf die Aktionen des Kindes reagiert. Beispielsweise könnten seine kleinen T-Rex-Arme mit der Putzdauer langsam wachsen, bis sie gross genug sind, um gemeinsam mit dem Kind die Zähne zu putzen. Hört das Kind vorzeitig auf, würden die Arme wieder schrumpfen und Eddy traurig reagieren. Wird jedoch die empfohlene Putzzeit von zwei Minuten erreicht, könnten verschiedene kleine Freudentänze oder Animationen abgespielt werden, um das Kind spielerisch zu belohnen.
-
 Aus Zeitgründen haben wir zudem auf die Funktionen zur Anpassung der Profilbild-Icons sowie zur Änderung der Namen bei den Profilen verzichtet. Stattdessen fügen wir nun neben dem Kinderprofil lediglich einen Löschbutton hinzu. In unserem Figma-Prototyp war ursprünglich auch vorgesehen, das Elternprofil löschen zu können. Auf diese Funktion verzichten wir jedoch ebenfalls aus Zeitgründen.
 
 
@@ -150,7 +149,7 @@ Wenn alles wie geplant funktionierte, war die Freude entsprechend gross und sehr
 Wir sind überzeugt, dass solche Prozesse mit zunehmender Erfahrung deutlich effizienter und sicherer werden. Durch mehr Übung und einfaches Ausprobieren würde die Umsetzung in Zukunft sicherlich schneller und reibungsloser verlaufen.
 
 Webapp:
- 
+
 Wir haben zum ersten Mal Figma Make in Kombination mit dem regulären Figma verwendet und dabei den gesamten Workflow kennengelernt. Auch den GitHub Connector für Perplexity haben wir erstmals im Coding-Prozess eingesetzt. Insgesamt haben wir damit den kompletten Workflow mit KI-Unterstützung zum ersten Mal ausprobiert.
 Zudem konnten wir einen besseren Einblick in das Zusammenspiel von PHP, JavaScript und HTML gewinnen, da beide Personen im Webapp-Team während dem 3. Semester im Ausland waren und deshalb das Modul IM3 nicht besucht haben. 
 
