@@ -10,6 +10,7 @@ if (!$kinder_id) { echo json_encode(['error' => 'Nicht eingeloggt']); exit; }
 $monday = date('Y-m-d', strtotime('monday this week'));
 $sunday = date('Y-m-d', strtotime('sunday this week'));
 
+// Sessions pro Tag
 $stmt = $pdo->prepare("
     SELECT 
         DAYOFWEEK(timestamp) AS dow,
@@ -36,11 +37,22 @@ $totalSessions = array_sum($weekData);
 $completedDays = count(array_filter($weekData, fn($v) => $v >= 3));
 $goalCompleted  = $completedDays >= 7;
 
+// Gesamtdauer der Woche in Minuten
+$stmt2 = $pdo->prepare("
+    SELECT SUM(dauer) as totalDauer
+    FROM events
+    WHERE kinder_id = ?
+      AND DATE(timestamp) BETWEEN ? AND ?
+");
+$stmt2->execute([$kinder_id, $monday, $sunday]);
+$dauerRow = $stmt2->fetch(PDO::FETCH_ASSOC);
+$minutes = round((int)$dauerRow['totalDauer'] / 60, 1);
+
 echo json_encode([
-    'sessions'    => $totalSessions,
-    'completed'   => $completedDays,
-    'minutes'     => 0,
+    'sessions'      => $totalSessions,
+    'completed'     => $completedDays,
+    'minutes'       => $minutes,
     'goalCompleted' => $goalCompleted,
-    'goalText'    => 'An 7 Tagen dreimal täglich putzen',
-    'weekData'    => $weekData  // [Mo, Di, Mi, Do, Fr, Sa, So]
+    'goalText'      => 'An 7 Tagen dreimal täglich putzen',
+    'weekData'      => $weekData  // [Mo, Di, Mi, Do, Fr, Sa, So]
 ]);
