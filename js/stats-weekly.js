@@ -1,3 +1,14 @@
+// js/stats-weekly.js
+// Lädt die Wochenstatistiken für das aktive Kindprofil.
+//
+// Ablauf:
+//   1. Profilname via get-active-profile.php laden und anzeigen.
+//   2. Wochendaten via stats-weekly.php abrufen
+//      (Sessions, abgeschlossene Tage, Gesamtdauer, Tagesdaten).
+//   3. KPI-Werte und Wochenziel-Checkbox ins HTML schreiben.
+//   4. Balkendiagramm mit Chart.js erstellen: X-Achse = Wochentage (Mo–So),
+//      Y-Achse = Anzahl Putzsessions pro Tag (max. 3).
+
 document.addEventListener('DOMContentLoaded', async () => {
 
     // 1. Profilname laden

@@ -1,5 +1,9 @@
-// choose-profile.js
-// Profil auswählen → kinder_id in Session speichern → weiter zu index.html
+// js/choose-profile.js
+// Wird aufgerufen, wenn der Benutzer auf ein Kindprofil klickt.
+// Speichert den Profilnamen im sessionStorage (für die Anzeige)
+// und sendet die kinder_id per POST an select-profile.php,
+// damit die Session serverseitig aktualisiert wird.
+// Danach wird zu index.html weitergeleitet.
 
 async function selectProfile(button) {
   const kinderId = button.getAttribute("data-kinder-id");

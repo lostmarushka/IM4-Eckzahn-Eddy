@@ -1,6 +1,12 @@
 <?php
 // api/get-active-profile.php
-// Gibt den Namen des aktiven Kindprofils aus der Session zurück
+// Gibt den Namen und die ID des aktuell aktiven Kindprofils zurück.
+// Die kinder_id wird aus der Session gelesen (gesetzt von select-profile.php)
+// und der zugehörige Name aus der Tabelle 'kinder' nachgeschlagen.
+// Antwort: { "status": "ok", "name": "...", "id": <int> }
+// Bei fehlendem Profil in der Session: name und id sind null.
+// Bei fehlendem Login: HTTP 401.
+
 session_start();
 require_once '../system/config.php';
 header('Content-Type: application/json');

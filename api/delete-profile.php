@@ -1,4 +1,12 @@
 <?php
+// api/delete-profile.php
+// Löscht ein Kindprofil aus der Datenbank.
+// Erwartet einen POST-Request mit JSON-Body: { "id": <int> }
+// Prüft zuerst, ob das Profil existiert, löscht ggf. die
+// zugehörige Avatar-Datei vom Server und entfernt dann den
+// Datensatz aus der Tabelle 'kinder'.
+// Gibt JSON zurück: { "status": "success" } oder Fehlermeldung.
+
 header('Content-Type: application/json');
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {

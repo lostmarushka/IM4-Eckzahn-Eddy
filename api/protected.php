@@ -1,5 +1,11 @@
 <?php
-// index.php (API that returns JSON about the logged-in user)
+// api/protected.php
+// Geschützter API-Endpunkt: prüft, ob eine gültige Benutzersession
+// vorhanden ist. Wird von auth.js und protected.js beim Seitenaufruf
+// abgefragt, um den Zugriff auf gesicherte Seiten zu steuern.
+// Bei gültiger Session: JSON mit user_id und E-Mail.
+// Bei fehlender Session: HTTP 401 + JSON-Fehlermeldung.
+
 session_start();
 
 if (!isset($_SESSION['user_id'])) {

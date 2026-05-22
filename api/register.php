@@ -1,5 +1,13 @@
 <?php
-// register.php
+// api/register.php
+// Registriert einen neuen Benutzer.
+// Erwartet einen POST-Request mit JSON-Body:
+//   { "name": "...", "email": "...", "password": "..." }
+// Prüft, ob die E-Mail bereits vergeben ist, hasht das Passwort
+// mit PASSWORD_DEFAULT und speichert den neuen Benutzer in der
+// Tabelle 'users'. Gibt { "status": "success" } oder eine
+// Fehlermeldung als JSON zurück.
+
 session_start();
 header('Content-Type: application/json');
 

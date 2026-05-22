@@ -1,5 +1,12 @@
 <?php
-// login.php
+// api/login.php
+// Verarbeitet den Login-Request vom Frontend (login.js).
+// Erwartet einen POST-Request mit JSON-Body: { "email": "...", "password": "..." }
+// Sucht den Benutzer in der Tabelle 'users', verifiziert das
+// gehashte Passwort mit password_verify() und speichert bei
+// Erfolg user_id und E-Mail in der Session.
+// Antwort: { "status": "success" } oder Fehlermeldung als JSON.
+
 ini_set('session.cookie_httponly', 1);
 // ini_set('session.cookie_secure', 1); // if using HTTPS
 session_start();

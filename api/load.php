@@ -1,4 +1,10 @@
 <?php
+// api/load.php
+// Empfängt Sensordaten vom ESP32 (oder vom Testformular sender.html)
+// per HTTP POST als JSON-Body: { "wert": <float>, "kinder_id": <int> }
+// Validiert die Eingabe, prüft auf Vollständigkeit und speichert
+// den Messwert zusammen mit der kinder_id in der Tabelle 'sensordata'.
+// Gibt "OK" bei Erfolg zurück, oder eine Fehlermeldung.
 
 require_once("../system/config.php");
 

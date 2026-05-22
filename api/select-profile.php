@@ -1,4 +1,12 @@
 <?php
+// api/select-profile.php
+// Setzt das aktive Kindprofil in der Session.
+// Wird von choose-profile.js aufgerufen, wenn der Benutzer
+// auf ein Profil klickt. Erwartet JSON-Body: { "kinder_id": <int> }
+// Speichert die kinder_id in $_SESSION, damit andere API-Endpoints
+// (z. B. stats-daily.php) wissen, für welches Kind Daten geliefert
+// werden sollen. Gibt { "status": "success" } zurück.
+
 session_start();
 header('Content-Type: application/json');
 

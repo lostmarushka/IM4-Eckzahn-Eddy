@@ -1,4 +1,8 @@
-// logout.js
+// js/logout.js
+// Verarbeitet den Logout-Button.
+// Sendet eine GET-Anfrage an logout.php, welche die Server-Session
+// beendet. Bei Erfolg wird zur Login-Seite weitergeleitet.
+
 document.getElementById("logoutBtn").addEventListener("click", async (e) => {
   // Prevent the default button behavior
   e.preventDefault();

@@ -1,6 +1,11 @@
 <?php
 // api/get-profiles.php
-// Gibt alle Kinder der Familie als JSON zurück (inkl. avatar)
+// Gibt alle Kindprofile der eingeloggten Familie als JSON zurück.
+// Liest die ID, den Namen und den Avatar-Pfad aller Einträge
+// in der Tabelle 'kinder' für die aktuelle familie_id.
+// Antwort: { "status": "success", "kinder": [ { id, name, avatar }, ... ] }
+// Bei fehlendem Login: HTTP 401.
+
 session_start();
 require_once '../system/config.php';
 header('Content-Type: application/json');

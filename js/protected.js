@@ -1,3 +1,9 @@
+// js/protected.js
+// Prüft beim Laden der Seite, ob eine gültige Session vorhanden ist.
+// Ruft protected.php ab und zeigt bei Erfolg E-Mail und User-ID
+// im HTML an. Bei 401 (nicht eingeloggt) wird zur Login-Seite
+// weitergeleitet. Wird auf geschützten Seiten eingebunden.
+
 async function checkAuth() {
   try {
     const response = await fetch("/api/protected.php", {

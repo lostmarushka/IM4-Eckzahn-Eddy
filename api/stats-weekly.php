@@ -1,4 +1,19 @@
 <?php
+// api/stats-weekly.php
+// Liefert die Wochenstatistiken für das aktive Kindprofil.
+// Liest die kinder_id aus der Session und fragt Events
+// von Montag bis Sonntag der aktuellen Woche ab.
+//
+// Enthaltene Daten:
+//   sessions      – Gesamtanzahl Sessions diese Woche
+//   completed     – Anzahl Tage mit mind. 3 Sessions (Tagesziel erfüllt)
+//   minutes       – Gesamtdauer aller Sessions als M:SS
+//   goalCompleted – true wenn an allen 7 Tagen das Tagesziel erreicht wurde
+//   goalText      – Beschreibung des Wochenziels
+//   weekData      – Array [Mo..So] mit Anzahl Sessions pro Tag (max. 3)
+//
+// MySQL DAYOFWEEK: 1=So, 2=Mo ... 7=Sa → wird auf 0=Mo ... 6=So umgerechnet.
+
 header('Content-Type: application/json');
 require_once("../system/config.php");
 

@@ -1,4 +1,10 @@
-// register.js
+// js/register.js
+// Verarbeitet das Registrierungsformular.
+// Liest Name, E-Mail und Passwort aus, sendet sie als JSON per POST
+// an register.php und leitet bei Erfolg zur Login-Seite weiter.
+// Bei einem Fehler (z. B. E-Mail bereits vergeben) wird eine
+// Fehlermeldung angezeigt.
+
 document
   .getElementById("registerForm")
   .addEventListener("submit", async (e) => {

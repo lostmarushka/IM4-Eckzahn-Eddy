@@ -1,3 +1,20 @@
+// js/edit-profile.js
+// Verwaltet die Profilbearbeitungs-Seite: Profile laden, umbenennen und löschen.
+//
+// Funktionen:
+//   loadProfiles()      – Lädt alle Profile der Familie via get-profiles.php
+//                         und rendert sie als Liste.
+//   buildListItem()     – Erstellt das HTML für ein einzelnes Profil-Listenelement
+//                         inkl. Avatar, Umbenennen-Formular und Löschen-Button.
+//   toggleEdit()        – Blendet das Umbenennen-Formular ein/aus.
+//   saveRename()        – Sendet den neuen Namen an rename-profile.php.
+//   openDeleteModal()   – Öffnet das Bestätigungs-Modal vor dem Löschen.
+//   closeDeleteModal()  – Schliesst das Bestätigungs-Modal.
+//   showAlert()         – Zeigt eine temporäre Erfolgs- oder Fehlermeldung.
+//
+// Das Modal kann über Klick ausserhalb, Escape-Taste oder den Abbrechen-Button
+// geschlossen werden. Bei Bestätigung wird delete-profile.php aufgerufen.
+
 // ── State ────────────────────────────────────────────────────────────
 let pendingDeleteId   = null;
 let pendingDeleteName = null;

@@ -1,7 +1,11 @@
 <?php
-// generate-profile.php
-// Verarbeitet das Formular aus generate-profile.html
-// und speichert ein neues Kind in der Datenbank.
+// api/choose-profile.php
+// Verarbeitet das Formular zum Erstellen eines neuen Kindprofils
+// (Formular aus generate-profile.html).
+// Prüft, ob der Benutzer eingeloggt ist (Session) und ob die
+// Anfrage per POST kam. Speichert den eingegebenen Kindnamen
+// in der Datenbank und leitet anschliessend zurück zu
+// choose-profile.html weiter.
 
 session_start();
 require_once '../system/config.php';

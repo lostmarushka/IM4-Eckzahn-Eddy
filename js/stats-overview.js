@@ -1,3 +1,15 @@
+// js/stats-overview.js
+// Lädt die Übersichtsstatistiken für das aktive Kindprofil.
+//
+// Ablauf:
+//   1. Profilname via get-active-profile.php laden und anzeigen.
+//   2. Übersichtsdaten via stats-overview.php abrufen
+//      (Wochenanzahl, Score, letzte 10 Aktivitäten).
+//   3. Wochenanzahl und Score ins HTML schreiben.
+//   4. Aktivitätsliste rendern: jede Session wird mit Zeitstempel,
+//      Dauer und Status (abgeschlossen / abgebrochen) dargestellt.
+//      Abgeschlossene Sessions erhalten ein Herz-Icon.
+
 document.addEventListener('DOMContentLoaded', async () => {
 
     // 1. Profilname laden

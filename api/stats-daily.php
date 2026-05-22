@@ -1,8 +1,21 @@
 <?php
+// api/stats-daily.php
+// Liefert die Tagesstatistiken für das aktive Kindprofil.
+// Liest die kinder_id aus der Session und fragt alle Events
+// des heutigen Tages aus der Tabelle 'events' ab.
+//
+// Berechnete Werte:
+//   sessions      – Anzahl Putzsessions heute
+//   completed     – 1 wenn mind. 2 Sessions erfasst wurden, sonst 0
+//   minutes       – Gesamtdauer in Minuten (gerundet)
+//   goalCompleted – true wenn mind. 3 Sessions heute
+//   goalText      – Beschreibung des Tagesziels
+//   brushingEvents– Array mit Stunde und normalisierter Dauer
+//                   (0–1, Basis: 120 Sek.) je Session
+
 header('Content-Type: application/json');
 require_once("../system/config.php");
 
-// kinder_id aus der Session holen (wie in deinen anderen API-Files)
 session_start();
 $kinder_id = $_SESSION['kinder_id'] ?? null;
 if (!$kinder_id) { echo json_encode(['error' => 'Nicht eingeloggt']); exit; }

@@ -1,4 +1,16 @@
 <?php
+// api/stats-overview.php
+// Liefert die Übersichtsstatistiken für das aktive Kindprofil.
+// Liest die kinder_id aus der Session.
+//
+// Enthaltene Daten:
+//   activities  – Die letzten 10 Putzsessions mit formatiertem Zeitstempel,
+//                 Dauer (M:SS) und Status (abgeschlossen wenn dauer >= 120 Sek.)
+//   weekTotal   – Gesamtanzahl Sessions seit Montag dieser Woche
+//   score       – Prozentualer Fortschritt (abgeschlossene Sessions / 21 Ziel-Sessions)
+//
+// Datum-Formatierung: "Heute, HH:MM Uhr" oder "TT. Mon., H:MM Uhr"
+
 header('Content-Type: application/json');
 require_once __DIR__ . '/../system/config.php';
 

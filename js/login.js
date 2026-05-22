@@ -1,4 +1,9 @@
-// login.js
+// js/login.js
+// Verarbeitet das Login-Formular.
+// Liest E-Mail und Passwort aus, sendet sie als JSON per POST
+// an login.php und leitet bei Erfolg zu choose-profile.html weiter.
+// Bei einem Fehler wird eine Fehlermeldung angezeigt.
+
 document.getElementById("loginForm").addEventListener("submit", async (e) => {
   e.preventDefault();
 

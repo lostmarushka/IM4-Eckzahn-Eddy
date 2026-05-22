@@ -1,5 +1,13 @@
 <?php
 // api/generate-profile.php
+// Erstellt ein neues Kindprofil für die eingeloggte Familie.
+// Erwartet einen POST-Request aus generate-profile.html mit
+// dem Feld 'childName'. Weist dem Profil automatisch ein
+// zufälliges Avatar-Bild aus dem img-Ordner zu und speichert
+// beides in der Tabelle 'kinder'.
+// Bei Erfolg: Weiterleitung zu generate-profile.html?success=1
+// Bei Fehler: Weiterleitung mit entsprechendem Error-Parameter.
+
 session_start();
 require_once '../system/config.php';
 

@@ -1,4 +1,11 @@
 <?php
+// api/rename-profile.php
+// Benennt ein Kindprofil um.
+// Erwartet einen POST-Request mit JSON-Body: { "id": <int>, "name": "..." }
+// Validiert ID und neuen Namen (max. 30 Zeichen), aktualisiert dann
+// den Eintrag in der Tabelle 'kinder'.
+// Gibt { "status": "success" } oder eine Fehlermeldung als JSON zurück.
+
 header('Content-Type: application/json');
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
