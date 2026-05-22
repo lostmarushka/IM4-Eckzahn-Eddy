@@ -24,7 +24,7 @@ foreach ($rows as $row) {
     $rowDate   = date('Y-m-d', $ts);
     $completed = (int)$row['dauer'] >= 120;
 
-    // Datum formatieren wie im Screenshot: "Heute" oder "28. Apr."
+    // Datum formatieren: "Heute" oder "28. Apr."
     if ($rowDate === $today) {
         $label = 'Heute, ' . date('H:i', $ts) . ' Uhr';
     } else {
@@ -53,8 +53,13 @@ $stmt2  = $pdo->prepare("
 $stmt2->execute([$kinder_id, $monday]);
 $week = $stmt2->fetch(PDO::FETCH_ASSOC);
 
+// Score: abgeschlossene Sessions / Wochenziel (3x täglich × 7 Tage = 21)
+$completedSessions = (int)$week['completed'];
+$ziel = 21;
+$score = min(100, (int)round(($completedSessions / $ziel) * 100));
+
 echo json_encode([
     'activities' => $activities,
     'weekTotal'  => (int)$week['total'],
-    'score'      => min(100, (int)$week['completed'] * 10),
+    'score'      => $score,
 ]);
