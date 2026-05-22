@@ -37,7 +37,7 @@ $totalSessions = array_sum($weekData);
 $completedDays = count(array_filter($weekData, fn($v) => $v >= 3));
 $goalCompleted  = $completedDays >= 7;
 
-// Gesamtdauer der Woche in Minuten
+// Gesamtdauer der Woche
 $stmt2 = $pdo->prepare("
     SELECT SUM(dauer) as totalDauer
     FROM events
@@ -46,13 +46,16 @@ $stmt2 = $pdo->prepare("
 ");
 $stmt2->execute([$kinder_id, $monday, $sunday]);
 $dauerRow = $stmt2->fetch(PDO::FETCH_ASSOC);
-$minutes = round((int)$dauerRow['totalDauer'] / 60, 1);
+
+// Dauer als M:SS formatieren
+$totalSek = (int)$dauerRow['totalDauer'];
+$minFormatted = floor($totalSek / 60) . ':' . str_pad($totalSek % 60, 2, '0', STR_PAD_LEFT);
 
 echo json_encode([
     'sessions'      => $totalSessions,
     'completed'     => $completedDays,
-    'minutes'       => $minutes,
+    'minutes'       => $minFormatted,
     'goalCompleted' => $goalCompleted,
-    'goalText'      => 'An 7 Tagen dreimal täglich putzen',
-    'weekData'      => $weekData  // [Mo, Di, Mi, Do, Fr, Sa, So]
+    'goalText'      => 'An 7 Tagen dreimal t\u00e4glich putzen',
+    'weekData'      => $weekData
 ]);
