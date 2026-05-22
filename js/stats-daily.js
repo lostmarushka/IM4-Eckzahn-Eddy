@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const chartData = new Array(24).fill(0);
 
     data.brushingEvents.forEach(({ hour }) => {
-        if (hour >= 0 && hour < 24) chartData[hour] = 1;
+        if (hour >= 0 && hour < 24) chartData[hour]++;
     });
 
     const canvas = document.querySelector('.js-chart-canvas');
