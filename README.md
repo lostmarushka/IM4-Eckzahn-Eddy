@@ -54,11 +54,13 @@ Datenbank auswählen → Importieren → system/db.sql hochladen
 4. *Wo muss ich die DB-Credentials eintragen?*
 Die Datei api/config.php ist absichtlich nicht im Repository (steht im .gitignore). Auf dem Server manuell erstellen:
 
+```php
 <?php
 define('DB_HOST', 'localhost');
 define('DB_NAME', 'dein_datenbankname');
 define('DB_USER', 'dein_benutzer');
 define('DB_PASS', 'dein_passwort');
+```
 
 5. *Wie rufe ich die WebApp auf?*
 Browser öffnen:
