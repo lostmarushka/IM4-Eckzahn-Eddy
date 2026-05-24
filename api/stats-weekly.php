@@ -71,6 +71,6 @@ echo json_encode([
     'completed'     => $completedDays,
     'minutes'       => $minFormatted,
     'goalCompleted' => $goalCompleted,
-    'goalText'      => 'An 7 Tagen dreimal t\u00e4glich putzen',
+    'goalText'      => 'An 7 Tagen dreimal täglich putzen',
     'weekData'      => $weekData
 ]);
