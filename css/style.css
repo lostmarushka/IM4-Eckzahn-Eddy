@@ -1311,7 +1311,7 @@ button { font: inherit; border: none; background: none; cursor: pointer; }
   color: #241b39;
 }
 
-/* Responsive */
+/* ── Success Page Responsive ── */
 @media (min-width: 768px) {
   .success-title {
     font-size: 4.2rem;
@@ -1326,10 +1326,15 @@ button { font: inherit; border: none; background: none; cursor: pointer; }
   }
 }
 
-/* ── Responsive ── */
+/* ══════════════════════════════════════════
+   RESPONSIVE — Grid-System über alle Seiten
+   Breakpoints: 480 · 768 · 900 · 1024 · 1280 · 1440
+   ══════════════════════════════════════════ */
+
+/* ── 480px ── */
 @media (min-width: 480px) {
   :root {
-    --content-width: 360px;
+    --content-width: 440px;
     --title-size: 2.1rem;
     --intro-image-width: 205px;
     --timer-size: 340px;
@@ -1337,10 +1342,12 @@ button { font: inherit; border: none; background: none; cursor: pointer; }
   .intro-heading-wrapper { max-width: 265px; }
 }
 
+/* ── 768px (Tablet) ── */
 @media (min-width: 768px) {
   :root {
-    --content-width: 440px;
+    --content-width: 600px;
     --page-padding-top: 80px;
+    --page-padding-x: 24px;
     --title-size: 2.2rem;
     --label-size: 1.05rem;
     --input-size: 1.05rem;
@@ -1357,8 +1364,34 @@ button { font: inherit; border: none; background: none; cursor: pointer; }
   .intro-card-wrapper { padding: 32px 28px 28px; }
   .brushing-title-wrapper .title-wrapper { font-size: 2.2rem; }
   .brushing-image { width: 165px; }
+
+  /* Stats: 2-Spalten-Grid für Cards */
+  .stats-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: var(--space-md);
+    row-gap: var(--space-md);
+    align-items: start;
+  }
+  /* Header-Zeile bleibt immer full-width */
+  .brushing-header-wrapper,
+  .stats-tabs-wrapper {
+    grid-column: 1 / -1;
+  }
+  /* Score-Card und Goal-Card full-width */
+  .stats-card:has(.stats-score-display),
+  .stats-card:has(.stats-goal-card) {
+    grid-column: 1 / -1;
+  }
+  /* Week-Grid: 2 Spalten nebeneinander */
+  .stats-week-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  /* Overview-Metriken mehr Luft */
+  .stats-metric-value { font-size: 2.2rem; }
 }
 
+/* ── 900px (Brushing Desktop-Layout) ── */
 @media (min-width: 900px) {
   .page-wrapper-brushing { padding-top: 88px; padding-bottom: 64px; }
 
@@ -1371,31 +1404,57 @@ button { font: inherit; border: none; background: none; cursor: pointer; }
     width: 100%;
     justify-self: center;
   }
-
   .timer-wrapper    { justify-self: end; align-self: center; }
-
   .brushing-character-wrapper { justify-self: start; align-self: center; row-gap: 12px; }
   .speech-bubble-wrapper { max-width: 168px; padding: 16px 18px; }
   .speech-bubble-text { font-size: 1rem; }
-
   .brushing-actions-wrapper { width: 100%; max-width: 460px; justify-self: center; margin-top: 0; }
   .intro-button { min-height: 48px; font-size: 0.95rem; }
 }
 
+/* ── 1024px (Desktop) ── */
 @media (min-width: 1024px) {
   :root {
-    --content-width: 480px;
+    --content-width: 860px;
     --page-padding-x: 32px;
     --title-size: 2.4rem;
     --zahn-size: 22px;
     --intro-image-width: 235px;
     --timer-size: 500px;
   }
+
+  /* Stats: 3-Spalten-Grid */
+  .stats-wrapper {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+  /* Score-Card full-width */
+  .stats-card:has(.stats-score-display) {
+    grid-column: 1 / -1;
+  }
+  /* Goal-Card 2/3 breit */
+  .stats-card:has(.stats-goal-card) {
+    grid-column: span 2;
+  }
+  /* Week-Grid: alle 4 Tiles nebeneinander */
+  .stats-week-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .stats-metric-value { font-size: 2.4rem; }
+  .stats-score-value  { font-size: 5.5rem; }
 }
 
+/* ── 1280px ── */
+@media (min-width: 1280px) {
+  :root {
+    --content-width: 1000px;
+  }
+  .stats-score-value { font-size: 6rem; }
+}
+
+/* ── 1440px ── */
 @media (min-width: 1440px) {
   :root {
-    --content-width: 520px;
+    --content-width: 1060px;
     --title-size: 2.6rem;
     --zahn-size: 24px;
     --intro-image-width: 250px;
