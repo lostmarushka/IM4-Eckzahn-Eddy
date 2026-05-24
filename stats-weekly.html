@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Weekly Stats – Eckzahn Eddy</title>
+  <title>Wochenstatistik – Eckzahn Eddy</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cousine:wght@400;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
@@ -30,13 +30,13 @@
         <button class="stats-tab" role="tab" aria-selected="false"
           onclick="location.href='stats-overview.html'">Übersicht</button>
         <button class="stats-tab" role="tab" aria-selected="false"
-          onclick="location.href='stats-daily.html'">Daily</button>
-        <button class="stats-tab stats-tab--active" role="tab" aria-selected="true">Weekly</button>
+          onclick="location.href='stats-daily.html'">Heute</button>
+        <button class="stats-tab stats-tab--active" role="tab" aria-selected="true">Woche</button>
       </div>
 
       <!-- Overview Card -->
       <section class="stats-card" aria-label="Übersicht">
-        <h2 class="stats-card-title">This Week's Overview</h2>
+        <h2 class="stats-card-title">Diese Woche</h2>
         <div class="stats-overview-grid">
 
           <div class="stats-metric-cell">
@@ -46,7 +46,7 @@
               </svg>
             </div>
             <span class="stats-metric-value js-stat-sessions">–</span>
-            <span class="stats-metric-label">Sessions</span>
+            <span class="stats-metric-label">Mal geputzt</span>
           </div>
 
           <div class="stats-metric-divider" aria-hidden="true"></div>
@@ -58,7 +58,7 @@
               </svg>
             </div>
             <span class="stats-metric-value js-stat-completed">–</span>
-            <span class="stats-metric-label">Completed</span>
+            <span class="stats-metric-label">Tage geschafft</span>
           </div>
 
           <div class="stats-metric-divider" aria-hidden="true"></div>
@@ -77,17 +77,17 @@
       </section>
 
       <!-- Chart Card -->
-      <section class="stats-card" aria-label="Brushing Times">
-        <h2 class="stats-card-title">Brushing Times This Week</h2>
+      <section class="stats-card" aria-label="Putzzeiten diese Woche">
+        <h2 class="stats-card-title">Putzzeiten diese Woche</h2>
         <div class="stats-chart-wrapper">
-          <canvas class="js-chart-canvas" aria-label="Brushing Times Chart" role="img"></canvas>
+          <canvas class="js-chart-canvas" aria-label="Diagramm Putzzeiten Woche" role="img"></canvas>
         </div>
       </section>
 
       <!-- Goal Card -->
-      <section class="stats-card stats-goal-card" aria-label="Goal">
+      <section class="stats-card stats-goal-card" aria-label="Wochenziel">
         <div class="stats-goal-content">
-          <h2 class="stats-card-title">Weekly Goal</h2>
+          <h2 class="stats-card-title">Wochenziel</h2>
           <p class="stats-goal-text js-goal-text">–</p>
         </div>
         <label class="stats-goal-checkbox-wrapper" aria-label="Ziel erreicht">

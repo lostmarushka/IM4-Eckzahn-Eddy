@@ -1,13 +1,6 @@
 // js/stats-daily.js
 // Lädt die Tagesstatistiken für das aktive Kindprofil und
 // zeigt sie auf der Tages-Statistik-Seite an.
-//
-// Ablauf:
-//   1. Profilname via get-active-profile.php laden und anzeigen.
-//   2. Tagesdaten via stats-daily.php abrufen (Sessions, Minuten, Ziel).
-//   3. KPI-Werte (Anzahl Sessions, abgeschlossen, Minuten) ins HTML schreiben.
-//   4. Liniendiagramm mit Chart.js erstellen: X-Achse = Tagesstunden (0–23),
-//      Y-Achse = Anzahl Putzsessions pro Stunde.
 
 document.addEventListener('DOMContentLoaded', async () => {
 
@@ -68,7 +61,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                     border: { color: 'transparent' },
                     title: {
                         display: true,
-                        text: 'Tageszeit',
+                        text: 'Uhrzeit',
                         color: 'rgba(255,255,255,0.5)',
                         font: { size: 11, family: 'Inter' }
                     }

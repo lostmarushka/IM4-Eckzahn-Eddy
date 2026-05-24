@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 backgroundColor: 'rgba(159, 227, 176, 0.85)',
                 borderColor: '#9fe3b0',
                 borderWidth: 0,
-                borderRadius: 8,           // abgerundete Balken wie im Sample
+                borderRadius: 8,
                 borderSkipped: false,
             }]
         },
