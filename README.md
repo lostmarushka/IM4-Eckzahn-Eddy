@@ -24,7 +24,7 @@ Hier erhältst du einen Einblick in unseren geplanten User Flow und die gedachte
 Wenn du nun neugierig geworden bist, kannst du über die folgenden Links sowohl unsere Website besuchen als auch ein Video zur Nutzung der Website in Kombination mit der Zahnbürste ansehen:
 
 * **WebApp:** (https://eckzahneddy.marina-lampert.ch/login.html)  
-* **Video-Dokumentation:** [Link zum Video auf Youtube](http://link.zum.video) 
+* **Video-Dokumentation:** Link in interner Google Tabelle abgelegt (keine Veröffentlichung)
 
 #### Installationsanleitung WebApp
 
