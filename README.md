@@ -28,7 +28,7 @@ Wenn du nun neugierig geworden bist, kannst du über die folgenden Links sowohl 
 
 #### Installationsanleitung WebApp
 
-***verständliche** Schritt-für-Schritt-Anleitung für Aussenstehende, um das Projekt zu klonen und auf einem eigenen Server zu installieren*
+ **Schritt-für-Schritt-Anleitung für Aussenstehende:**
 
 1. *Was benötige ich an Infrastruktur?*
 - Einen Webserver mit PHP-Unterstützung (z.B. Hosttech, Cyon, XAMPP lokal)
@@ -37,7 +37,7 @@ Wenn du nun neugierig geworden bist, kannst du über die folgenden Links sowohl 
 
 2. *Was muss ich auf meinem Webserver installieren?* 
 Nichts installieren. Einfach die Dateien hochladen. Der Server braucht nur:
-- PHP 8.x (mit mysqli)
+- PHP 8.x (mit mysql)
 - MySQL 5.7+ oder MariaDB
 
 Danach kann unser GitHub Repository geklont werden:
