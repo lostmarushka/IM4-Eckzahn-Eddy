@@ -30,16 +30,59 @@ Wenn du nun neugierig geworden bist, kannst du über die folgenden Links sowohl 
 
 ***verständliche** Schritt-für-Schritt-Anleitung für Aussenstehende, um das Projekt zu klonen und auf einem eigenen Server zu installieren*
 
-1. *Was benötige ich an Infrastruktur?*  
-2. *Was muss ich auf meinem Webserver installieren?*  
-3. *Wie kann ich die Datenbank importieren?*  
-4. *Wo muss ich die DB-Credentials eintragen?*  
-5. *…*  
+1. *Was benötige ich an Infrastruktur?*
+- Einen Webserver mit PHP-Unterstützung (z.B. Hosttech, Cyon, XAMPP lokal)
+- Eine MySQL-Datenbank
+- Eine Domain oder lokale URL mit HTTPS (damit der ESP32 Daten senden kann)
+
+2. *Was muss ich auf meinem Webserver installieren?* 
+Nichts installieren. Einfach die Dateien hochladen. Der Server braucht nur:
+- PHP 8.x (mit mysqli)
+- MySQL 5.7+ oder MariaDB
+
+Danach kann unser GitHub Repository geklont werden:
+
+Bash Command:
+git clone https://github.com/lostmarushka/IM4-Eckzahn-Eddy.git
+
+Dann alle Dateien in den öffentlichen Ordner des Servers kopieren (public_html/ oder htdocs/).
+
+3. *Wie kann ich die Datenbank importieren?* 
+Neue Datenbank anlegen, dann importieren per PhpMyAdmin:
+Datenbank auswählen → Importieren → system/db.sql hochladen
+
+4. *Wo muss ich die DB-Credentials eintragen?*
+Die Datei api/config.php ist absichtlich nicht im Repository (steht im .gitignore). Auf dem Server manuell erstellen:
+
+<?php
+define('DB_HOST', 'localhost');
+define('DB_NAME', 'dein_datenbankname');
+define('DB_USER', 'dein_benutzer');
+define('DB_PASS', 'dein_passwort');
+
+5. *Wie rufe ich die WebApp auf?*
+Browser öffnen:
+
+https://eckzahneddy.marina-lampert.ch/index.html
+Account registrieren → Familie anlegen → Kindprofile erstellen → fertig.
+
 6. *Wie nehme ich das physische Artefakt in Betrieb?*
+
+const char* ssid      = "DEIN_WLAN_NAME";
+const char* password  = "DEIN_WLAN_PASSWORT";
+const char* serverUrl = "https://deine-domain.ch/api/load.php";
+
+1. Arduino IDE öffnen
+2. Im Board Manager ESP32C6 Dev Module hinzufügen
+3. Richtigen Port auswählen
+4. Code auf den ESP32 hochladen
+5. Serial Monitor öffnen → Sensoren kalibrieren sich automatisch
+6. Zahnbürste in Betrieb nehmen → Daten fliessen direkt in die Datenbank
+
 
 #### Bauanleitung Physical Computing
 
-Du möchtest nun Eddy Eckzahn selber nachbauen? Wir zeigen dir wie es geht:) 
+Du möchtest nun Eddy Eckzahn selber nachbauen? Wir zeigen dir wie es geht:
 
  Du brauchst folgende Sachen:
 
@@ -127,14 +170,19 @@ Zusätzlich werden besondere Ereignisse in der Entität „Events“ gespeichert
 ## Known bugs
 
 * **Was noch nicht einwandfrei funktioniert** 
-Leider können wir die Daten nur etwas zeitverzögert auf der Website anzeigen. Wenn das Kind aufhört die Zähne zu putzen (also beide Sensoren sind in diesem Zustand nicht mehr aktiv), dann bruacht es ein paar Sekunden auf der Website, bis der Timer stehen bleibt. Wir haben leider keine Live-Übertragung der Daten 
+Leider können wir die Daten nur etwas zeitverzögert auf der Website anzeigen. Wenn das Kind aufhört die Zähne zu putzen (also beide Sensoren sind in diesem Zustand nicht mehr aktiv), dann braucht es ein paar Sekunden auf der Website, bis der Timer stehen bleibt. 100% live kann das aber ja auch gar nicht funktionieren. Vielleicht könnte man die Verzögerungszeit aber noch etwas optimieren.
+
+Die Familien_ID wurde auf 1 gehardcodet. Das heisst konkret: Es gibt nur eine Familie und alle Kinder gehören dieser Familie an. Auch bei neu erstellen Familien gehören die bereits vordefinierten Kinder der Familie 1 der neuen Familie direkt an. Jeder eingeloggte User sieht die Kinderprofile aller anderen User. Das ist natürlich noch falsch. Die Logik, die familie_id des eingeloggten Users aus der DB zu lesen, wurde aus Zeitgründen noch nicht implementiert.
 
 
 * **Was könnte noch verbessert werden**
 Um das Zahnputz-Erlebnis für Kinder noch spannender und motivierender zu gestalten, könnte künftig eine animierte Version von Eddy Eckzahn integriert werden. Aufgrund des begrenzten Zeitrahmens dieses Moduls konnte diese Funktion noch nicht umgesetzt werden.
-Die Idee dahinter wäre, dass Eddy während des Zähneputzens lebendig auf die Aktionen des Kindes reagiert. Beispielsweise könnten seine kleinen T-Rex-Arme mit der Putzdauer langsam wachsen, bis sie gross genug sind, um gemeinsam mit dem Kind die Zähne zu putzen. Hört das Kind vorzeitig auf, würden die Arme wieder schrumpfen und Eddy traurig reagieren. Wird jedoch die empfohlene Putzzeit von zwei Minuten erreicht, könnten verschiedene kleine Freudentänze oder Animationen abgespielt werden, um das Kind spielerisch zu belohnen.
-Aus Zeitgründen haben wir zudem auf die Funktionen zur Anpassung der Profilbild-Icons sowie zur Änderung der Namen bei den Profilen verzichtet. Stattdessen fügen wir nun neben dem Kinderprofil lediglich einen Löschbutton hinzu. In unserem Figma-Prototyp war ursprünglich auch vorgesehen, das Elternprofil löschen zu können. Auf diese Funktion verzichten wir jedoch ebenfalls aus Zeitgründen.
 
+Die Idee dahinter wäre, dass Eddy während des Zähneputzens lebendig auf die Aktionen des Kindes reagiert. Beispielsweise könnten seine kleinen T-Rex-Arme mit der Putzdauer langsam wachsen, bis sie gross genug sind, um gemeinsam mit dem Kind die Zähne zu putzen. Hört das Kind vorzeitig auf, würden die Arme wieder schrumpfen und Eddy traurig reagieren. Wird jedoch die empfohlene Putzzeit von zwei Minuten erreicht, könnten verschiedene kleine Freudentänze oder Animationen abgespielt werden, um das Kind spielerisch zu belohnen.
+
+Aus Zeitgründen habe ich zudem auf die Profilübersichtsseite verzichtet. Dabei fehlen nun die Anpassungseinstellungen des Elternprofils (Löschen & Namen ändern). Stattdessen habe ich die Lösch und Editierfunktionen der Kinderprofile direkt bei der Kinderprofilauswahl nach dem Login implementiert. Das ist zwar etwas weniger umfangreich als geplant, zeigt aber dass ich mich mit den Einstellungsbedürfnissen der User durchaus auseinandergesetzt habe.
+
+Zukünftig könnte man auch eine Vergleichsstatistikseite für die Eltern bauen um auf einen Blick alle Daten der Kinder einzusehen. Wir haben das jetzt weggelassen, weil wir der Meinung sind, dass diese Vergleiche den Kindern vielleicht sogar schaden könnte. Man wird im Leben ja sonst schon oft verglichen. Vielleicht ist das also in der Erziehung noch nicht notwendig. 
 
 ## Umsetzungsprozess
 
@@ -149,7 +197,9 @@ Wir sind überzeugt, dass solche Prozesse mit zunehmender Erfahrung deutlich eff
 Webapp:
 
 Wir haben zum ersten Mal Figma Make in Kombination mit dem regulären Figma verwendet und dabei den gesamten Workflow kennengelernt. Auch den GitHub Connector für Perplexity haben wir erstmals im Coding-Prozess eingesetzt. Insgesamt haben wir damit den kompletten Workflow mit KI-Unterstützung zum ersten Mal ausprobiert.
-Zudem konnten wir einen besseren Einblick in das Zusammenspiel von PHP, JavaScript und HTML gewinnen, da beide Personen im Webapp-Team während dem 3. Semester im Ausland waren und deshalb das Modul IM3 nicht besucht haben. 
+Zudem konnten wir einen besseren Einblick in das Zusammenspiel von PHP, JavaScript und HTML gewinnen, da beide Personen im Webapp-Team während dem 3. Semester im Ausland waren und deshalb das Modul IM3 nicht besucht haben.
+
+Der Zeitrahmen war aber wirklich ziemlich eng. 
 
 * **Herausforderungen & Lösungen:** 
 
@@ -161,10 +211,11 @@ Heute funktionieren beide Sensoren grundsätzlich gut im Zusammenspiel von Beweg
 
 Webapp: 
 
-Bei der Implementierung der Sensoren des Physical-Computing-Teams wurde versucht, eine Verbindung zwischen Hardware und Webapp herzustellen. Dabei bestand die Herausforderung darin, die Sensordaten korrekt in die bestehende Codebasis einzubinden und diese zuverlässig im System verfügbar zu machen. Gleichzeitig musste sichergestellt werden, dass die Struktur im Code trotz der vielen Dateien nicht verloren geht und die einzelnen Komponenten nachvollziehbar miteinander verknüpft bleiben. Dabei lag der Fokus vor allem auf der Fehleranalyse und dem schrittweisen Zusammenführen der unterschiedlichen Systeme.
+Bei der Implementierung der Sensoren des Physical-Computing-Teams wurde versucht, eine Verbindung zwischen Hardware und Webapp herzustellen. Dabei bestand die Herausforderung darin, die Sensordaten korrekt in die bestehende Codebasis einzubinden und diese zuverlässig in der WebApp verfügbar zu machen. Ich denke da vor allem an die Einbindung des Timers die ich zuerst versucht habe mit einer Videoeinbindung zu lösen. Die Animation gelang dann aber durch Empfehlung von Nick schlussendlich mit CSS (keine Ladezeiten und einfacher für Start & Stopp durch Triggerung der Sensordaten). Es war schwierig mit den vielen php und javascript files den Überblick zu behalten und strukturiert zu arbeiten. Dabei lag der Fokus vor allem auf der Fehleranalyse und dem schrittweisen Zusammenführen der unterschiedlichen Sprachen.
 
-* **KI-Einsatz:** Mit Hilfe von Figma Make konnten wir unseren Prototypen relativ schnell und effizient ausarbeiten.
-Auch der Einsatz von KI war für das Physical-Computing-Team unverzichtbar. Mithilfe von ChatGPT wurden die von den Dozierenden zur Verfügung gestellten Codes an unsere eigenen Anforderungen angepasst und entsprechend weiterentwickelt bzw. umgeschrieben.
+* **KI-Einsatz:** Mit Hilfe von Figma Make konnten wir unseren Prototypen relativ schnell und effizient ausarbeiten. Das UX Design konnten wir dann teilweise mit Claude umsetzen, wobei Anpassungen natürlich nötig waren. Kleinere Anpassungen konnte ich zuverlässig mit KI lösen wobei grössere Veränderungen oft neue Probleme mit sich brachten.
+
+Auch für das Physical-Computing-Team war KI unverzichtbar. Mithilfe von ChatGPT wurden die von den Dozierenden zur Verfügung gestellten Codes an unsere eigenen Anforderungen angepasst und entsprechend weiterentwickelt bzw. umgeschrieben.
  
 * **Fazit:** Das Projekt bot uns einen spannenden Einblick in die Welt der interaktiven Medien. Besonders interessant war es, nicht nur digital am Laptop zu arbeiten, sondern auch physisch etwas mit den eigenen Händen zu bauen und dieses mit der digitalen Welt zu verbinden. Leider war die Zeit im Modul sehr begrenzt, wodurch vieles eher oberflächlich behandelt werden musste und zudem stark auf den Einsatz von KI zurückgegriffen wurde.
 Trotz dieser Einschränkungen sind wir mit dem Ergebnis zufrieden und hoffen, dass Eddy Eckzahn vielen Kindern Freude beim Zähneputzen bereiten wird.
